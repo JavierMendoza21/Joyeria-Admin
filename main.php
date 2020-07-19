@@ -1,0 +1,389 @@
+<?php
+require 'sessionIniciada.php';
+$IMGUSER = substr($IMGUSER, 3);
+
+?>
+
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Enlaces de la barra de navegación izquierda -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                </li>
+            </ul>
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <a class="nav-link effectoHover" data-toggle="" href="vendedores/editarMiUsuario.php?id=<?= $IDUSER ?>&acc=editar">
+                    <i class="fas fa-cogs"></i>
+                </a>
+                <a class="nav-link effectoHover" data-toggle="" href="cerrarSesion.php">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="main.php" class="brand-link">
+                <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Rodey</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="<?= $IMGUSER ?>" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block"><?php echo $NOMBREUSER ?></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2 <?= '' ?>">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <!-- Add icons to the links using the .nav-icon class
+                             with font-awesome or any other icon font library -->
+                        <li class="nav-item">
+                            <a href="main.php" class="nav-link active">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>
+                                    Dashboard
+
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>
+                                    Usuarios
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="vendedores/vendedores.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver usuarios</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="vendedores/agregarVendedor.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar usuario</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-money-bill-alt nav-icon"></i>
+                                <p>
+                                    Ventas
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="ventas/ventas.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver ventas</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar Ventas</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="ion ion-bag nav-icon"></i>
+                                <p>
+                                    Productos
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="productos/productos.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver productos</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="productos/nuevoProducto.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar producto</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="fas fa-boxes nav-icon"></i>
+                                <p>
+                                    Categorias
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="categorias/categorias.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver categorias</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="categorias/agregarCategoria.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar categorias</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+
+                            <h1 class="m-0 text-dark">Dashboard</h1>
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="main.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="main.php">Dashboard</a></li>
+                            </ol>
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <!-- Small boxes (Stat box) -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>150</h3>
+
+                                    <p>Productos del inventario</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="ion ion-bag"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">
+                                    Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+
+                                    <p>Ventas</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="far fa-money-bill-alt"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <!-- ./col -->
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <?php
+                                    include 'conexiones/conexion.php';
+                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
+                                    $result = $conexion->query($sql);
+                                    $contador = 0;
+                                    $mostrar = mysqli_fetch_array($result)
+
+                                    ?>
+                                    <h3><?php echo $mostrar['total'] ?></h3>
+
+                                    <p>Usuarios</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="far fa-user"></i>
+                                </div>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <?php
+                                    include 'conexiones/conexion.php';
+                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
+                                    $result = $conexion->query($sql);
+                                    $contador = 0;
+                                    $mostrar = mysqli_fetch_array($result)
+
+                                    ?>
+                                    <h3><?php echo $mostrar['total'] ?></h3>
+
+                                    <p>Categorias</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-secondary">
+                                <div class="inner">
+                                    <?php
+                                    include 'conexiones/conexion.php';
+                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
+                                    $result = $conexion->query($sql);
+                                    $contador = 0;
+                                    $mostrar = mysqli_fetch_array($result)
+
+                                    ?>
+                                    <h3><?php echo $mostrar['total'] ?></h3>
+
+                                    <p>Paquetes</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-primary">
+                                <div class="inner">
+                                    <?php
+                                    include 'conexiones/conexion.php';
+                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
+                                    $result = $conexion->query($sql);
+                                    $contador = 0;
+                                    $mostrar = mysqli_fetch_array($result)
+
+                                    ?>
+                                    <h3><?php echo $mostrar['total'] ?></h3>
+
+                                    <p>Ganancias</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- /.row -->
+                    <!-- Main row -->
+                    <div class="row">
+
+                    </div>
+                    <!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!--                 /.content-wrapper -->
+        <footer class=" main-footer ">
+            <strong>Copyright &copy; 2020 <a href="#">AdminLTE.io</a>.</strong> Todos los derecho reservados.
+            <div class=" float-right d-none d-sm-inline-block ">
+                <b>Version</b> 3.0.5
+
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class=" control-sidebar control-sidebar-dark ">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+
+    <!-- jQuery -->
+    <script src=" plugins/jquery/jquery.min.js "></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src=" plugins/jquery-ui/jquery-ui.min.js "></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- AdminLTE App -->
+    <script src=" dist/js/adminlte.js "></script>
+
+
+</body>
+
+</html>
