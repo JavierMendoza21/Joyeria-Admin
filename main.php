@@ -164,6 +164,29 @@ $IMGUSER = substr($IMGUSER, 3);
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                                <i class="ion ion-bag nav-icon"></i>
+                                <p>
+                                    Paquetes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="paquetes/paquetes.php" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver paquetes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar paquete</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-boxes nav-icon"></i>

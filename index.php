@@ -30,17 +30,17 @@ if (!empty($_SESSION['idusuario'])) {
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        img {
-            max-width: 100%;
-            width: 100%;
-            height: 100%;
-            max-height: 100%;
-        }
+    img {
+        max-width: 100%;
+        width: 100%;
+        height: 100%;
+        max-height: 100%;
+    }
 
-        .login-logo img {
-            width: 150px;
-            border-radius: 50%;
-        }
+    .login-logo img {
+        width: 150px;
+        border-radius: 50%;
+    }
     </style>
 </head>
 
@@ -55,7 +55,8 @@ if (!empty($_SESSION['idusuario'])) {
                         </div>
                         <div class="card-body">
                             <div class="input-group mb-3 justify-content-center">
-                                <img src="img/logo.png" alt="" class="img-fluid w-50 h-50 img-thumbnail" style="border-radius: 50%;">
+                                <img src="img/logo.png" alt="" class="img-fluid w-50 h-50 img-thumbnail"
+                                    style="border-radius: 50%;">
                             </div>
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
@@ -72,7 +73,8 @@ if (!empty($_SESSION['idusuario'])) {
 
                             <div class="form-group mb-3">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1" value="option1">
+                                    <input class="custom-control-input" type="checkbox" id="customCheckbox1"
+                                        value="option1">
                                     <label for="customCheckbox1" class="custom-control-label">Recordar</label>
                                 </div>
                             </div>
@@ -85,7 +87,11 @@ if (!empty($_SESSION['idusuario'])) {
 
                         </div>
                         <div class="card-footer text-center">
-                            <button type="submit" class="btn btn-lg btn-primary w-50"><i class="fas fa-sign-in-alt"></i></button>
+                            <button type="submit" class="btn btn-lg btn-primary w-50 ">
+                                <div class="d-flex justify-content-around align-items-center">
+                                    <p class="m-0 p-0">Ingresar</p> <i class="fas fa-sign-in-alt"></i>
+                                </div>
+                            </button>
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -102,14 +108,13 @@ if (!empty($_SESSION['idusuario'])) {
     <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- AdminLTE App -->
     <script src="dist/js/adminlte.min.js"></script>
-    <!-- bs-custom-file-input -->
-    <script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            bsCustomFileInput.init();
-        });
+    $(document).ready(function() {
+        bsCustomFileInput.init();
+    });
     </script>
 </body>
 

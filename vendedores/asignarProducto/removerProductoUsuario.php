@@ -1,5 +1,6 @@
 <?php
 include '../../sessionIniciada.php';
+echo 'entre';
 if (
     isset($_GET['id']) && $_GET['id'] != ''
     && isset($_GET['idProducto']) && $_GET['idProducto'] != ''

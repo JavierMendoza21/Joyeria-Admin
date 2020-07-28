@@ -137,8 +137,8 @@ include '../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
                                 <i class="ion ion-bag nav-icon"></i>
                                 <p>
                                     Productos
@@ -147,7 +147,7 @@ include '../sessionIniciada.php';
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="productos.php" class="nav-link active">
+                                    <a href="../productos/productos.php" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver productos</p>
                                     </a>
@@ -160,17 +160,17 @@ include '../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
                                 <i class="ion ion-bag nav-icon"></i>
                                 <p>
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../paquetes/paquetes.php" class="nav-link ">
+                            <ul class="nav nav-treeview ">
+                                <li class="nav-item active">
+                                    <a href="../paquetes/paquetes.php" class="nav-link active">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver paquetes</p>
                                     </a>
@@ -183,8 +183,8 @@ include '../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
                                 <i class="fas fa-boxes nav-icon"></i>
                                 <p>
                                     Categorias
@@ -221,14 +221,14 @@ include '../sessionIniciada.php';
                     <div class="row mb-2">
                         <div class="col-sm-6">
 
-                            <h1 class="m-0 text-dark">Productos</h1>
+                            <h1 class="m-0 text-dark">Paquetes</h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="../main.php">Dashboard</a></li>
-                                <li class="breadcrumb-item disabled"><a href="productos.php">Ver productos</a></li>
+                                <li class="breadcrumb-item disabled"><a href="paquetes.php">Ver paquetes</a></li>
                             </ol>
 
                         </div>
@@ -246,75 +246,15 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="nuevoProducto.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
-                                    class="ion ion-bag nav-icon"></i> Agregar producto</a>
+                            <a href="accionesPaquetes/agregarPaquete.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
+                                    class="fas fa-cubes"></i> Agregar paquete</a>
                         </div>
                     </div>
-                    <?php
-                    include '../conexiones/conexion.php';
-                    $sql = "CALL select_tabla_productos()";
-                    $resultado = $conexion->query($sql);
-                    $conexion->close();
-                    ?>
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div
-                                    class="card-body w-100 px-2                                                                                                                                                                                                              ">
-                                    <table id="example2"
-                                        class=" table-hover table-responsive table table-striped table-bordered text-center">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Categoria</th>
-                                                <th>Descripcion</th>
-                                                <th>Precio</th>
-                                                <th>Stock</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            $img = "";
-                                            while ($mostrar = mysqli_fetch_array($resultado)) {
-                                                $img = $mostrar['img'];
-                                                if ($img == '') {
-                                                    $img = 'producto_default.png';
-                                                }
-                                            ?>
-                                            <tr>
-                                                <td><img src="../img_productos/<?= $img ?>" class="img-rounded" alt=""
-                                                        width="80"></td>
-                                                <td><?php echo $mostrar['categoria'] ?></td>
-                                                <td><?php echo $mostrar['descripcion'] ?></td>
-                                                <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                <td><span
-                                                        class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group btn-group mt-3">
-                                                        <a href="accionesProducto/actualizarProducto.php?id=<?= $mostrar['id_producto'] ?>"
-                                                            class="btn btn-outline-primary"><i
-                                                                class="fas fa-edit"></i></a>
-                                                        <a class="btn btn-outline-danger"
-                                                            href="accionesProducto/eliminarProducto.php?id=<?= $mostrar['id_producto'] ?>"><i
-                                                                class="fas fa-trash-alt"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Categoria</th>
-                                                <th>Descripcion</th>
-                                                <th>Precio</th>
-                                                <th>Stock</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
+                                <div class="card-body">
+
                                 </div>
                             </div>
                         </div>

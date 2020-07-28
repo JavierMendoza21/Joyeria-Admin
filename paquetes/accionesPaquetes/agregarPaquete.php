@@ -1,13 +1,40 @@
 <?php
 include '../../sessionIniciada.php';
-$message = -1;
-//Accion inicial///
-if (!isset($_GET['id']) || $_GET['id'] == '') {
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'vendedores/vendedores.php';
-    header("Location: http://$host/Admin_joyeria/$extra");
-    die();
+include '../../conexiones/conexion.php';
+
+    $total=0;
+    $sql="SELECT count(*) as 'total' FROM Joyeria.paquetes_venta";
+    $resultado=$conexion->query($sql);
+    
+    $mostrar=mysqli_fetch_array($resultado);
+    $total=$mostrar['total'];
+
+if(isset($_GET['idrem']) && $_GET['idrem']!=''){
+    $sqlInsert="CALL eliminarProductoTemporal(".$_GET['idrem'].",".$_SESSION['idusuario'].")";
+    $resultadoSQL=$conexion->query($sqlInsert);
+    echo $conexion->error;
+}
+
+if(isset($_GET['idp']) && $_GET['idp']!='' &&
+    isset($_POST['valor']) && $_POST['valor']!=''){
+    $sqlInsert="CALL agregarProductoTemporal(".$_GET['idp'].",".$_POST['valor'].",".$_SESSION['idusuario'].")";
+    $resultadoSQL=$conexion->query($sqlInsert);
+    echo $conexion->error;
+
+
+    //echo 'se inserto el producto';
+}
+
+function getProducto($id){
+    include '../../conexiones/conexion.php';
+    $rest=$conexion->query("select idProducto,img_producto as 'img',descripcion as 'descripcion',
+    costo_venta as 'costo', categoria_kf as 'categoria' from producto where idProducto=$id");
+    //$conexion->close();
+    return mysqli_fetch_array($rest);
+}
+
+function concluirPaquete(){
+    
 }
 
 ?>
@@ -35,7 +62,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
 
     <style>
     tr th {
-        width:calc(100% / 8);   
+        width: calc(100% / 8);
     }
     </style>
 </head>
@@ -203,15 +230,12 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <?php
-                            include '../../conexiones/conexion.php';
-                            $sql = "select * from usuarios where idusuarios=" . $_GET['id'];
-                            $res = $conexion->query($sql);
-                            $conexion->close();
-                            $mostrarCambio = mysqli_fetch_array($res);
+                            <?php 
+                            /**Hola mundo */
+                            
                             ?>
-                            <h1>Usuario : <strong> <?php echo $mostrarCambio['nombre'] ?></strong> </h1>
-
+                            <h1 class="m-0 text-dark">Agregar paquete
+                            </h1>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -219,9 +243,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                 <li class="breadcrumb-item"><a href="../../main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="../../main.php">Dashboard</a></li>
                                 <li class="breadcrumb-item"><a href="../vendedores.php">Ver usuario</a></li>
-
                             </ol>
-
                         </div>
                         <!-- /.col -->
                     </div>
@@ -239,7 +261,8 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                         <div class="col-12">
                             <div class="card card-primary card-default ">
                                 <div class="card-header">
-                                    <h3 class="card-title">Productos del usuario</h3>
+                                    <h3 class="card-title">Productos del paquete :
+                                        <strong><?php echo $mostrar['total']+1;?></strong></h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                                 class="fas fa-minus"></i></button>
@@ -249,91 +272,83 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <?php
-                                include '../../conexiones/conexion.php';
-                                $sql = "CALL productosUsuario(" . $_GET['id'] . ")";
-                                $resultado = $conexion->query($sql);
-                                $conexion->close();
-                                ?>
+
                                 <div class="card-body">
-                                    <div class="mb-3 text-center">
-                                        <img src="../<?= $mostrarCambio['imgUsuario'] ?>" class="img-circle elevation-2"
-                                            width="115" alt="<?= $mostrarCambio['imgUsuario'] ?>">
-                                    </div>
                                     <div class="row mb-5 justify-content-center">
                                         <div class="col-12">
                                             <table id="example2"
                                                 class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
-                                                <thead class="">
+                                                <thead id="cabecera" class="">
                                                     <tr class="">
-                                                        <th class=""></th>
-                                                        <th>Categoria</th>
+                                                        <th>Imagen</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Stock</th>
-                                                        <th>Agregar cantidad</th>
+                                                        <th>Cantidad</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="tabla">
                                                     <?php
-                                                    $img = "";
-                                                    while ($mostrar = mysqli_fetch_array($resultado)) {
-                                                        $img = $mostrar['img'];
-                                                        if ($img == '') {
-                                                            $img = 'producto_default.png';
-                                                        }
+                                                        //include '../../conexiones/conexion.php';
+                                                        $sqltabla="select * from lista_productos_temporal where idUser=".$_SESSION['idusuario'];
+                                                        $resultTabla=$conexion->query($sqltabla);
+                                                        //$most=mysqli_fetch_array($resultTabla);
+                                                        
+                                                        if($resultTabla){
+                                                            if(mysqli_num_rows($resultTabla)>=1){
+                                                                while($most=mysqli_fetch_array($resultTabla)){
+                                                                    $valor=$most['cantidad_T'];
+                                                                    $most=getProducto($most['idproducto']);
+                                                                    echo '<tr>'.
+                                                                    '<td>'.'<img src="../../img_productos/'.$most["img"].'" alt="'.$most["img"].'" class="img-rounded" alt="" width="80">'.'</td>'.
+                                                                    '<td>'.$most['descripcion'].'</td>'.
+                                                                    '<td>'.$most['costo'].'</td>'.
+                                                                    '<td>'.$valor.'</td>'.
+                                                                    '<td>'.
+                                                                    '<form action="agregarPaquete.php?idrem='.$most["idProducto"].'" autocomplete="off" method="POST">'.
+                                                                    '<div class="btn-group">'.
+                                                                    '<input type="submit" class="btn btn-outline-danger" value="Eliminar">'.
+                                                                    '</div>'.
+                                                                    '</form>'.
+                                                                    '</td>'.
+                                                                    '</tr>';
+                                                                }
+                                                            }
+                                                        }  
                                                     ?>
-                                                    <tr>
-                                                        <td><img src="../../img_productos/<?= $img ?>"
-                                                                class="img-rounded" alt="" width="80"></td>
-                                                        <td><?php echo $mostrar['categoria'] ?></td>
-                                                        <td><?php echo $mostrar['descripcion'] ?></td>
-                                                        <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                        <td><span
-                                                                class="badge mt-4 <?= ($mostrar['stock'] < 10) ? "badge-danger" : (($mostrar['stock'] < 20) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
-                                                        </td>
-                                                        <form
-                                                            action="removerProductoUsuario.php?id=<?= $_GET['id'] ?>&idProducto=<?= $mostrar['id_producto'] ?>"
-                                                            autocomplete="off" method="POST">
-                                                            <td>
-                                                                <div class="form-group mt-3">
-                                                                    <input id="" name="valor"
-                                                                        max="<?= $mostrar['stock'] ?>" min='0' value="0"
-                                                                        class="form-control" type="number" name="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group btn-group mt-3">
-                                                                    <button type="submit"
-                                                                        class="btn btn-outline-danger"><i
-                                                                            class="fas fa-minus-circle"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </form>
-                                                    </tr>
-                                                    <?php }
-                                                    ?>
+
+                                                        
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
-                                                        <th></th>
-                                                        <th>Categoria</th>
+                                                        <th>Imagen</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Stock</th>
-                                                        <th>Agregar cantidad</th>
+                                                        <th>Cantidad</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
                                         </div>
-                                        <div class="col-12">
-
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
+                                <div class="card-footer d-sm-block d-md-flex text-center justify-content-between">
+                                    <h2 class="mt-2 ">Total : <strong id="total">0</strong></h2>
+                                    <form action="" class="text-center">
+                                        <div class="form-group mt-3">
+                                            <label for="" class="h4 mr-1">Precio: </label>
+                                            <input type="number" placeholder="Precio del paquete" require>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button class=" btn btn-outline-success  ">Agregar
+                                                paquete</button>
+                                            <button class=" btn btn-outline-danger  ">Cancelar</button>
+                                        </div>
+                                    </form>
+
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -352,10 +367,10 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <?php
-                                include '../../conexiones/conexion.php';
+                                //include '../../conexiones/conexion.php';
                                 $sql = "CALL select_tabla_productos()";
                                 $resultado = $conexion->query($sql);
-                                $conexion->close();
+                                //$conexion->close();
                                 ?>
                                 <div class="card-body">
 
@@ -369,11 +384,11 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                         <th>Categoria</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Stock</th>
                                                         <th>Agregar cantidad</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
+
                                                 <tbody>
                                                     <?php
                                                     $img = "";
@@ -389,53 +404,41 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                                 class="img-rounded" alt="" width="80"></td>
                                                         <td><?php echo $mostrar['categoria'] ?></td>
                                                         <td><?php echo $mostrar['descripcion'] ?></td>
-                                                        <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                        <td><span
-                                                                class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                        <td><strong><?php echo '$ ' . $mostrar['costo'] ?></strong>
                                                         </td>
                                                         <form
-                                                            action="asignarProductoUsuario.php?id=<?= $_GET['id'] ?>&idProducto=<?= $mostrar['id_producto'] ?>"
+                                                            action="agregarPaquete.php?idp=<?=$mostrar['id_producto']?>"
                                                             autocomplete="off" method="POST">
                                                             <td>
                                                                 <div class="form-group mt-3">
-                                                                    <input id="" name="valor"
+                                                                    <input id="valor" name="valor"
                                                                         max="<?= $mostrar['stock'] ?>" min='0' value="0"
                                                                         class="form-control" type="number" name="">
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group mt-3">
-                                                                    <button type="submit"
-                                                                        class="btn btn-outline-success"><i
+                                                                    <button class="btn btn-outline-success"><i
                                                                             class="fas fa-plus-circle"></i></button>
                                                                 </div>
                                                             </td>
                                                         </form>
-
                                                     </tr>
                                                     <?php }
                                                     ?>
                                                 </tbody>
+
                                                 <tfoot>
                                                     <tr>
                                                         <th></th>
                                                         <th>Categoria</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Stock</th>
                                                         <th>Agregar cantidad</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </tfoot>
                                             </table>
-                                        </div>
-                                        <div class="col-12">
-
-                                        </div>
-                                    </div>
-                                    <div class="row mb-5 justify-content-center">
-                                        <div class="col-12">
-
                                         </div>
                                     </div>
                                 </div>
@@ -496,15 +499,12 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
     <script src=" ../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../../dist/js/adminlte.js "></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src=" ../../dist/js/pages/dashboard.js "></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src=" ../../dist/js/demo.js "></script>
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="lista.js"></script>
     <script>
     $.extend(true, $.fn.dataTable.defaults, {
         "searching": true,
@@ -532,17 +532,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
         });
     });
     </script>
-    <script>
-    $(function() {
-        //Initialize Select2 Elements
-        $('.select2').select2()
 
-        //Initialize Select2 Elements
-        $('.select2bs4').select2({
-            theme: 'bootstrap4'
-        })
-    })
-    </script>
 </body>
 
 </html>
