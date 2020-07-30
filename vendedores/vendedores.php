@@ -186,8 +186,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                         </li>
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link ">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
+                            <i class="fas fa-cubes mx-1"></i>
+                                <p class="ml-1">
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
                                 </p>

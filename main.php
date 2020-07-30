@@ -166,7 +166,7 @@ $IMGUSER = substr($IMGUSER, 3);
                         </li>
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link ">
-                                <i class="ion ion-bag nav-icon"></i>
+                                <i class="fas fa-cubes mx-1"></i>
                                 <p>
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>

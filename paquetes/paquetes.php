@@ -246,8 +246,8 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="accionesPaquetes/agregarPaquete.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
-                                    class="fas fa-cubes"></i> Agregar paquete</a>
+                            <a href="accionesPaquetes/agregarPaquete.php" class="col-lg-3 col-md-4 d-block btn btn-success">
+                            <i class="fas fa-cubes"></i> Agregar paquete</a>
                         </div>
                     </div>
                     <div class="row">

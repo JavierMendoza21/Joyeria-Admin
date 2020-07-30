@@ -68,7 +68,8 @@ if (!empty($_SESSION['idusuario'])) {
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                                 </div>
-                                <input type="password" name="pass" class="form-control" placeholder="Contrseña">
+                                <input type="password" id="pass" name="pass" class="form-control" placeholder="Contrseña">
+                                <button type="button" id="btnpass" onclick="cambio()" class="btn border-bottom bg-gradient-light"><i class="fas fa-eye"></i></button>
                             </div>
 
                             <div class="form-group mb-3">
@@ -111,6 +112,9 @@ if (!empty($_SESSION['idusuario'])) {
 
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+
+
+    <script src="vendedores/comprobarCampos.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
         bsCustomFileInput.init();
