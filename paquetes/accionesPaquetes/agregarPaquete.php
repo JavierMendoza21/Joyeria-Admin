@@ -20,9 +20,36 @@ if(isset($_GET['idp']) && $_GET['idp']!='' &&
     $sqlInsert="CALL agregarProductoTemporal(".$_GET['idp'].",".$_POST['valor'].",".$_SESSION['idusuario'].")";
     $resultadoSQL=$conexion->query($sqlInsert);
     echo $conexion->error;
-
-
     //echo 'se inserto el producto';
+}
+
+if(isset($_GET['acc'])&&$_GET['acc']!=''){
+    $accion=$_GET['acc'];
+
+    if($accion=='add'){
+        //echo 'Costo : '.$_POST['costoFinal'];
+        if(isset($_POST['costoFinal']) 
+        &&$_POST['costoFinal']!=''){
+            $sqlCrearPaquete="CALL crearPaquete(".$_SESSION['idusuario'].",".$_POST['costoFinal'].")";
+            $conexion->query($sqlCrearPaquete);
+        }
+        
+    }else if($accion=='mov'){
+        //se cancela y se regresa al menu de paquetes
+        $sqlEliminar="CALL eliminarProductosTemporal(".$_SESSION['idusuario'].");";
+        $conexion->query($sqlEliminar);
+        //$conexion->close();
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'paquetes/paquetes.php';
+        header("Location: http://$host/Admin_joyeria/$extra");
+        //echo "http://$host/Admin_joyeria/$extra";
+    }else{
+        $host  = $_SERVER['HTTP_HOST'];
+        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+        $extra = 'paquetes/paquetes.php';
+        header("Location: http://$host/Admin_joyeria/$extra");
+    }
 }
 
 function getProducto($id){
@@ -193,6 +220,29 @@ function concluirPaquete(){
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link active">
+                                <i class="ion ion-bag nav-icon"></i>
+                                <p>
+                                    Paquetes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview ">
+                                <li class="nav-item active">
+                                    <a href="../paquetes/paquetes.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver paquetes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="accionesPaquetes/agregarPaquete.php" class="nav-link active">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar paquete</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-boxes nav-icon"></i>
@@ -242,7 +292,7 @@ function concluirPaquete(){
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../../main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="../../main.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="../vendedores.php">Ver usuario</a></li>
+                                <li class="breadcrumb-item"><a href="../paquetes.php">Ver paquetes</a></li>
                             </ol>
                         </div>
                         <!-- /.col -->
@@ -262,7 +312,8 @@ function concluirPaquete(){
                             <div class="card card-primary card-default ">
                                 <div class="card-header">
                                     <h3 class="card-title">Productos del paquete :
-                                        <strong><?php echo $mostrar['total']+1;?></strong></h3>
+
+                                        <strong><?php echo $mostrar['total'];?></strong></h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                                 class="fas fa-minus"></i></button>
@@ -317,7 +368,7 @@ function concluirPaquete(){
                                                         }  
                                                     ?>
 
-                                                        
+
                                                 </tbody>
                                                 <tfoot>
                                                     <tr>
@@ -333,17 +384,31 @@ function concluirPaquete(){
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
+                                <?php
+                                    include '../../conexiones/conexion.php';
+                                    $sqlCosto="CALL costoRealPaquete(".$_SESSION['idusuario'].")";
+                                    $resCosto=$conexion->query($sqlCosto);
+                                    //echo mysqli_num_rows($resCosto). 'Filas ';
+                                    $res=mysqli_fetch_array($resCosto);
+                                    
+                                ?>
                                 <div class="card-footer d-sm-block d-md-flex text-center justify-content-between">
-                                    <h2 class="mt-2 ">Total : <strong id="total">0</strong></h2>
-                                    <form action="" class="text-center">
+                                    <h2 class="mt-2 ">Total : <strong><?php 
+                                    setlocale(LC_MONETARY, 'es_MX');
+                                    echo money_format('%i', $res['cantidad']);
+                                   // echo $res['cantidad']?></strong></h2>
+                                    <form action="agregarPaquete.php?acc=add" autocomplete="off" method="POST"
+                                        class="text-center">
                                         <div class="form-group mt-3">
                                             <label for="" class="h4 mr-1">Precio: </label>
-                                            <input type="number" placeholder="Precio del paquete" require>
+                                            <input type="number" name="costoFinal" placeholder="Precio del paquete"
+                                                require>
                                         </div>
                                         <div class="btn-group">
                                             <button class=" btn btn-outline-success  ">Agregar
                                                 paquete</button>
-                                            <button class=" btn btn-outline-danger  ">Cancelar</button>
+                                            <a href="agregarPaquete.php?acc=mov"
+                                                class=" btn btn-outline-danger">Cancelar</a>
                                         </div>
                                     </form>
 
@@ -367,7 +432,7 @@ function concluirPaquete(){
                                 <!-- /.card-header -->
                                 <!-- form start -->
                                 <?php
-                                //include '../../conexiones/conexion.php';
+                                include '../../conexiones/conexion.php';
                                 $sql = "CALL select_tabla_productos()";
                                 $resultado = $conexion->query($sql);
                                 //$conexion->close();
@@ -460,7 +525,9 @@ function concluirPaquete(){
 
             </div>
         </footer>
-
+        <?php
+            $conexion->close();
+        ?>
         <!-- Control Sidebar -->
         <aside class=" control-sidebar control-sidebar-dark ">Dashboard
             <!-- Control sidebar content goes here -->

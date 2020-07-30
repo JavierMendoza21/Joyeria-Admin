@@ -297,14 +297,11 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
-    <!-- overlayScrollbars -->
+   <!-- overlayScrollbars -->
     <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src=" ../dist/js/demo.js "></script>
+
 
     <script src="validar.js"></script>
 

@@ -159,3 +159,18 @@ function comprobar() {
     console.log("True");
     return true;
 }
+
+function cambio() {
+    //console.log("Entre");
+    pass = document.getElementById("pass");
+    btn = document.getElementById("btnpass");
+    if (pass.type == 'password') {
+        pass.type = 'text'
+        btn.innerHTML = "<i class='fas fa-eye-slash'></i>";
+        //console.log("text");
+    } else {
+        pass.type = 'password'
+        btn.innerHTML = "<i class='fas fa-eye'></i>";
+        //console.log("password");
+    }
+}

@@ -169,6 +169,7 @@ if (
             }
         }
     </style>
+    
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -445,7 +446,10 @@ if (
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Contraseña</label>
+                                                        <div class="d-flex">
                                                         <input  type="password" name="pass" value="<?= $mostrarCambio['contraseña'] ?>" id="pass" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" require>
+                                                        <button type="button" id="btnpass" onclick="cambio()" class="btn"><i class="fas fa-eye"></i></button>
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -572,10 +576,7 @@ if (
     <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src=" ../dist/js/pages/dashboard.js "></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src=" ../dist/js/demo.js "></script>
+    
     <!-- bs-custom-file-input -->
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="comprobarCampos.js"></script>
