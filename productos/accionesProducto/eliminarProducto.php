@@ -1,3 +1,4 @@
+</script>
 <?php
 include '../../sessionIniciada.php';
 if (!empty($_GET['id']) && $_GET['id'] != '') {

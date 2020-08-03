@@ -222,7 +222,7 @@ function concluirPaquete(){
                         </li>
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
-                                <i class="ion ion-bag nav-icon"></i>
+                            <i class="fas fa-cubes mx-1"></i>
                                 <p>
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
@@ -400,8 +400,8 @@ function concluirPaquete(){
                                     <form action="agregarPaquete.php?acc=add" autocomplete="off" method="POST"
                                         class="text-center">
                                         <div class="form-group mt-3">
-                                            <label for="" class="h4 mr-1">Precio: </label>
-                                            <input type="number" name="costoFinal" placeholder="Precio del paquete"
+                                            <label for="" class="h4 mr-1">Descuento % </label>
+                                            <input type="number" name="costoFinal" placeholder="Ejemplo: 10%"
                                                 require>
                                         </div>
                                         <div class="btn-group">

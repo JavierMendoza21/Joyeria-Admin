@@ -162,7 +162,7 @@ include '../sessionIniciada.php';
                         </li>
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
-                                <i class="ion ion-bag nav-icon"></i>
+                                <i class="fas fa-cubes mx-1"></i>
                                 <p>
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
@@ -246,18 +246,38 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="accionesPaquetes/agregarPaquete.php" class="col-lg-3 col-md-4 d-block btn btn-success">
-                            <i class="fas fa-cubes"></i> Agregar paquete</a>
+                            <a href="accionesPaquetes/agregarPaquete.php"
+                                class="col-lg-3 col-md-4 d-block btn btn-success">
+                                <i class="fas fa-cubes"></i> Agregar paquete</a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
+                    <div class="row justify-content-center mt-5">
+                        <div class="col-md-5 col-sm-12">
+                            <!-- small box -->
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3 class="text-left ml-2">15<sup style="font-size: 20px">%</sup></h3>
+
+                                    <ul class="h5 text-left">
+                                        <li>
+                                            <p class="my-0"> 1 Aretes</p>
+                                        </li>
+                                        <li>
+                                            <p class="my-0"> 2 Collar de diamantes</p>
+                                        </li>
+                                    </ul>
+                                    <div class="text-center">
+                                        <strong class="h1 text-bold">$1500</strong></div>
 
                                 </div>
+                                <div class="icon">
+                                    <i class="fas fa-cubes mx-1"></i>
+                                </div>
+                                <a href="#" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
                 <!-- /.container-fluid -->

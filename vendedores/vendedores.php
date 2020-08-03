@@ -71,7 +71,6 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                
                 <a class="nav-link effectoHover" data-toggle="" href="../cerrarSesion.php">
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
@@ -283,7 +282,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body w-100 px-2">
-                                    <table id="example2" class="w-100 table-hover table-sm table table-bordered table-striped table-responsive">
+                                    <table id="example2" class="w-100 text-center table-hover table-sm table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
@@ -362,7 +361,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                                                         <div class="btn-group" role="toolbar" aria-label="Toolbar with button groups">
                                                             <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=editar" class="btn btn-outline-info"><i class="fas fa-eye"></i></a>
                                                             <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=eliminar" class="btn btn-outline-danger <?= ($IDUSER == $mostrar['idusuarios']) ? 'disabled ' : ''; ?>"><i class="fas fa-trash-alt"></i></a>
-                                                            <a href="asignarProducto/masProducto.php?id=<?= $mostrar['idusuarios'] ?>" class="btn btn-outline-primary"><i class="fas fa-clipboard-list"></i></a>
+                                                            <a href="asignarProducto/masProducto.php?id=<?= $mostrar['idusuarios'] ?>" class="btn  btn-outline-primary <?= ($mostrar['estado'] == 1) ? '' : ' disabled'; ?>"><i class="fas fa-clipboard-list"></i></a>
                                                         </div>
                                                     </td>
                                             </tr>
@@ -430,7 +429,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-    
+    <script src="../alertifyjs/alertify.js"></script>
     
 
     <!-- DataTables -->

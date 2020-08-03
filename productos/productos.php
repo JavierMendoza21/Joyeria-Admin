@@ -162,8 +162,8 @@ include '../sessionIniciada.php';
                         </li>
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link ">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
+                                <i class="fas fa-cubes mx-1"></i>
+                                <p class="ml-1">
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
@@ -296,6 +296,7 @@ include '../sessionIniciada.php';
                                                         <a href="accionesProducto/actualizarProducto.php?id=<?= $mostrar['id_producto'] ?>"
                                                             class="btn btn-outline-primary"><i
                                                                 class="fas fa-edit"></i></a>
+                                                                
                                                         <a class="btn btn-outline-danger"
                                                             href="accionesProducto/eliminarProducto.php?id=<?= $mostrar['id_producto'] ?>"><i
                                                                 class="fas fa-trash-alt"></i></a>

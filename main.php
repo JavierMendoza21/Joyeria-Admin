@@ -167,7 +167,7 @@ $IMGUSER = substr($IMGUSER, 3);
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link ">
                                 <i class="fas fa-cubes mx-1"></i>
-                                <p>
+                                <p class="ml-1">
                                     Paquetes
                                     <i class="fas fa-angle-left right"></i>
                                 </p>

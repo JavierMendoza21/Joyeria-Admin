@@ -168,6 +168,13 @@ if (
                 flex-basis: calc(50% - 1rem);
             }
         }
+        .effectoHover {
+            color: #e1e1e1;
+        }
+
+        .effectoHover:hover {
+            color: black;
+        }
     </style>
     
 </head>
@@ -186,7 +193,7 @@ if (
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link" style="color: #e1e1e1;" data-toggle="" href="../cerrarSesion.php">
+                <a class="nav-link effectoHover"  data-toggle="" href="../cerrarSesion.php">
                     <i class="fas fa-sign-out-alt"></i>
                 </a>
             </ul>
@@ -333,6 +340,7 @@ if (
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
+                    
                             <?php
                             $ACCION = "";
                             if (isset($_GET['acc']) && $_GET['acc'] != '') {
@@ -352,7 +360,7 @@ if (
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="../main.php">Dashboard</a></li>
-                                <li class="breadcrumb-item"><a href="vendedores.php">Ver usuario</a></li>
+                                
 
                             </ol>
 
