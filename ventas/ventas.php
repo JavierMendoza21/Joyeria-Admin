@@ -17,18 +17,10 @@ include '../sessionIniciada.php';
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="../plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -158,6 +150,29 @@ include '../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                                <i class="fas fa-cubes mx-1"></i>
+                                <p class="ml-1">
+                                    Paquetes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="../paquetes/paquetes.php" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver paquetes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../paquetes/paquetes.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar paquete</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-boxes nav-icon"></i>
@@ -221,7 +236,7 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="nuevoProducto.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i class="ion ion-bag nav-icon"></i> Agregar producto</a>
+                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i class="ion ion-bag nav-icon"></i> Nueva venta</a>
                         </div>
                     </div>
                     <?php
@@ -315,24 +330,8 @@ include '../sessionIniciada.php';
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- ChartJS -->
-    <script src=" ../plugins/chart.js/Chart.min.js "></script>
-    <!-- Sparkline -->
-    <script src=" ../plugins/sparklines/sparkline.js "></script>
-    <!-- JQVMap -->
-    <script src=" ../plugins/jqvmap/jquery.vmap.min.js "></script>
-    <script src=" ../plugins/jqvmap/maps/jquery.vmap.usa.js "></script>
-    <!-- jQuery Knob Chart -->
-    <script src=" ../plugins/jquery-knob/jquery.knob.min.js "></script>
-    <!-- daterangepicker -->
-    <script src=" ../plugins/moment/moment.min.js "></script>
-    <script src=" ../plugins/daterangepicker/daterangepicker.js "></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
-    <!-- Summernote -->
-    <script src=" ../plugins/summernote/summernote-bs4.min.js "></script>
-    <!-- overlayScrollbars -->
-    <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

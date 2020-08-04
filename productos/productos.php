@@ -170,7 +170,7 @@ include '../sessionIniciada.php';
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="nuevoProducto.php" class="nav-link">
+                                    <a href="../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar paquete</p>
                                     </a>

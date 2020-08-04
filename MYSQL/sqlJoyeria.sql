@@ -4,7 +4,7 @@ USE `Joyeria`;
 --
 -- Host: localhost    Database: Joyeria
 -- ------------------------------------------------------
--- Server version	8.0.21
+-- Server version	8.0.21-0ubuntu0.20.04.3
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `Paquetes` (
   KEY `idpaquete_idx` (`idpaquete`),
   KEY `fk_usuario_idx` (`idusuario`),
   CONSTRAINT `fk_usuario` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `Paquetes` (
 
 LOCK TABLES `Paquetes` WRITE;
 /*!40000 ALTER TABLE `Paquetes` DISABLE KEYS */;
-INSERT INTO `Paquetes` VALUES (4,8,'2020-07-29 05:58:43',10802,234.34,0),(5,8,'2020-07-29 05:59:07',10802,234.34,0),(6,8,'2020-07-29 06:06:49',10802,234.34,0),(7,8,'2020-07-29 06:14:52',10802,234.34,0),(8,8,'2020-07-29 22:10:02',10802,10000,0),(9,8,'2020-07-29 22:18:19',5381,5000,0),(11,8,'2020-08-01 05:38:41',5381,5381,0),(12,8,'2020-08-01 05:39:50',6602,660.2,0),(13,8,'2020-08-01 05:43:52',7664,6897.6,0),(14,8,'2020-08-01 05:52:05',3989,3590.1,10);
+INSERT INTO `Paquetes` VALUES (18,8,'2020-08-03 03:04:30',68878,61990.2,10),(19,8,'2020-08-03 08:53:38',5760,5472,5),(20,8,'2020-08-03 12:06:05',800,760,5);
 /*!40000 ALTER TABLE `Paquetes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,6 +97,35 @@ INSERT INTO `categoria_usuario` VALUES (1,'Admin'),(2,'Vendedor'),(3,'Especial')
 UNLOCK TABLES;
 
 --
+-- Table structure for table `clientes`
+--
+
+DROP TABLE IF EXISTS `clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `clientes` (
+  `idclientes` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  `apellido` varchar(50) NOT NULL,
+  `idvendedor` int NOT NULL,
+  `numeroT` varchar(15) DEFAULT NULL,
+  `numeroC` varchar(15) DEFAULT NULL,
+  `correo` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`idclientes`),
+  CONSTRAINT `fk_vendedor` FOREIGN KEY (`idclientes`) REFERENCES `usuarios` (`idusuarios`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='El funcionamiento de esta tabla es llevar el registro de los clientes de cada vendedor, con el fin de poder llevar el registro de ventas a credito.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `clientes`
+--
+
+LOCK TABLES `clientes` WRITE;
+/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `lista_productos_temporal`
 --
 
@@ -120,6 +149,7 @@ CREATE TABLE `lista_productos_temporal` (
 
 LOCK TABLES `lista_productos_temporal` WRITE;
 /*!40000 ALTER TABLE `lista_productos_temporal` DISABLE KEYS */;
+INSERT INTO `lista_productos_temporal` VALUES (1,1,8);
 /*!40000 ALTER TABLE `lista_productos_temporal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +173,7 @@ CREATE TABLE `paquetes_venta` (
 
 LOCK TABLES `paquetes_venta` WRITE;
 /*!40000 ALTER TABLE `paquetes_venta` DISABLE KEYS */;
-INSERT INTO `paquetes_venta` VALUES (7,2,2),(7,1,2),(7,3,2),(8,2,2),(8,1,2),(8,3,2),(9,1,1),(9,2,1),(11,1,1),(11,2,1),(12,1,2),(12,5,2),(13,4,2),(13,8,3),(14,1,1),(14,5,1),(14,8,1);
+INSERT INTO `paquetes_venta` VALUES (18,7,1),(19,2,2),(20,5,1);
 /*!40000 ALTER TABLE `paquetes_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,7 +195,7 @@ CREATE TABLE `producto` (
   PRIMARY KEY (`idProducto`),
   KEY `fk_producto_categoria_idx` (`categoria_kf`),
   CONSTRAINT `fk_producto_categoria` FOREIGN KEY (`categoria_kf`) REFERENCES `categoria_producto` (`idcategoria_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +204,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,8,'Aretes de oro',1801,2501,50,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(2,1,'Arracadas de oro blanco',1500,2880,60,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(3,3,'jhvijkvjhvk',10,20,30,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(4,1,'Aretes de oro blanco arabes ',1500,2800,190,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(5,1,'Aretes para la lengua de plata',500,800,70,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(6,1,'jbkjbiubui',1,1,35,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(7,2,'cambio',267,68878,78,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(8,2,'cambio2',267,688,686787,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(9,2,'Aretes arabes',1500,2000,90,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(11,3,'nsajkbkjb',987,1000,100,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(12,1,'Arete 195',100,180,21,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg');
+INSERT INTO `producto` VALUES (1,8,'Aretes de oro',1801,2501,50,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(2,1,'Arracadas de oro blanco',1500,2880,60,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(3,3,'jhvijkvjhvk',10,20,30,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(4,1,'Aretes de oro blanco arabes ',1500,2800,190,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(5,1,'Aretes para la lengua de plata',500,800,70,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(6,1,'jbkjbiubui',1,1,35,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(7,2,'cambio',267,68878,78,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(8,2,'cambio2',267,688,686787,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(9,2,'Aretes arabes',1500,2000,90,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(11,3,'nsajkbkjb',987,1000,100,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(12,1,'Arete 195',100,180,21,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(17,2,'jbgiuhiuh',1000,5000,300,'producto_default.png'),(18,2,'ultimop',256,1280,300,'producto_default.png');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -565,6 +595,42 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `eliminarProductoPaquete` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarProductoPaquete`(
+in idprod int,
+idpaq int)
+BEGIN
+	SET SQL_SAFE_UPDATES=0;
+	DELETE FROM paquetes_venta
+	WHERE idproducto=idprod and idpaquete=idpaq;
+    /*Precio del paquete*/
+    set @original= (select sum(cantidad_T * costo_venta) from paquetes_venta
+	inner join producto on producto.idProducto=paquetes_venta.idproducto 
+	where paquetes_venta.idpaquete =idpaq);
+    /*Se optiene el descuento*/
+    set @descu=(select porcentaje from Paquetes where idpaquete=idpaq);
+    
+    /*Se actualiza el precio del paquete, despues de eliminar el producto del paquete*/
+    UPDATE Paquetes
+	SET	precioOriginal = @original,
+	precioVenta = @original-(@original*@descu/100)
+	WHERE idpaquete = idpaq;
+    
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `eliminarProductosTemporal` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -729,6 +795,29 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `getIDCategoria`(
 in cat int)
 BEGIN
 	select categoria_usuario from categoria_usuario where idcategoria_usuario=cat;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getPaquetes` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPaquetes`(in _idpaquete int)
+BEGIN
+	SELECT descripcion,cantidad_T
+	FROM Joyeria.Paquetes
+	inner join paquetes_venta on paquetes_venta.idpaquete = Paquetes.idpaquete
+	inner join producto on paquetes_venta.idproducto=producto.idProducto
+	where Paquetes.idpaquete=_idpaquete;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1002,4 +1091,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-01  9:05:08
+-- Dump completed on 2020-08-04  5:45:44
