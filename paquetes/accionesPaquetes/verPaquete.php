@@ -2,70 +2,55 @@
 include '../../sessionIniciada.php';
 include '../../conexiones/conexion.php';
 
-    $total=0;
-    $sql="SELECT count(*) as 'total' FROM Joyeria.Paquetes";
-    $resultado=$conexion->query($sql);
-    
-    $mostrar=mysqli_fetch_array($resultado);
-    $total=$mostrar['total'];
+$total = 0;
+$sql = "SELECT count(*) as 'total' FROM Joyeria.Paquetes";
+$resultado = $conexion->query($sql);
 
-if(isset($_GET['idrem']) && $_GET['idrem']!=''){
-    $sqlInsert="CALL eliminarProductoPaquete(".$_GET['idp'].",".$_GET['idrem'].")";
-    $resultadoSQL=$conexion->query($sqlInsert);
-    echo $conexion->error;
-}
-
-if(isset($_GET['idp']) && $_GET['idp']!='' &&
-    isset($_POST['valor']) && $_POST['valor']!=''){
-    $sqlInsert="CALL agregarProductoTemporal(".$_GET['idp'].",".$_POST['valor'].",".$_SESSION['idusuario'].")";
-    $resultadoSQL=$conexion->query($sqlInsert);
-    echo $conexion->error;
-    //echo 'se inserto el producto';
+$mostrar = mysqli_fetch_array($resultado);
+$total = $mostrar['total'];
+/** Verifica que la variable GET venga **/
+if (!isset($_GET['idp']) && $_GET['idp'] == '' ){
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'paquetes/accionesPaquetes/agregarPaquete.php';
-    header("Location: http://$host/Admin_joyeria/$extra");
+    $extra = 'Admin_joyeria/paquetes/paquetes.php';
+    header("Location: http://$host/$extra");
+}
+/** Verifica que el paquete exista**/
+if (isset($_GET['idp']) && $_GET['idp'] != '' ){
+    $sqldel="select count(*) as 'total' from Paquetes where idpaquete=".$_GET['idp'];
+    $rest=$conexion->query($sqldel);
+    if(mysqli_fetch_array($rest)['total']==0){
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'Admin_joyeria/paquetes/paquetes.php';
+    header("Location: http://$host/$extra");
+    }   
 }
 
-if(isset($_GET['acc'])&&$_GET['acc']!=''){
-    $accion=$_GET['acc'];
-
-    if($accion=='add'){
-        //echo 'Costo : '.$_POST['costoFinal'];
-        if(isset($_POST['costoFinal']) 
-        &&$_POST['costoFinal']!=''){
-            $sqlCrearPaquete="CALL crearPaquete(".$_SESSION['idusuario'].",".$_POST['costoFinal'].")";
-            $conexion->query($sqlCrearPaquete);
-        }
-        
-    }else if($accion=='mov'){
-        //se cancela y se regresa al menu de paquetes
-        $sqlEliminar="CALL eliminarProductosTemporal(".$_SESSION['idusuario'].");";
-        $conexion->query($sqlEliminar);
-        //$conexion->close();
-        $host  = $_SERVER['HTTP_HOST'];
-        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        $extra = 'paquetes/paquetes.php';
-        header("Location: http://$host/Admin_joyeria/$extra");
-        //echo "http://$host/Admin_joyeria/$extra";
-    }else{
-        $host  = $_SERVER['HTTP_HOST'];
-        $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        $extra = 'paquetes/paquetes.php';
-        header("Location: http://$host/Admin_joyeria/$extra");
-    }
+if(isset($_GET['idrem'])&&$_GET['idrem']!=''){
+    $sqlDELETE="CALL eliminarProductoPaquete(".$_GET['idrem'].",".$_GET['idp'].")";
+    $conexion->query($sqlDELETE);
 }
 
-function getProducto($id){
+if (isset($_GET['acc']) && $_GET['acc'] != '') {
+    $sqldel="CALL eliminarPaquete(".$_GET['idp'].")";
+    $conexion->query($sqldel);
+
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'Admin_joyeria/paquetes/paquetes.php';
+    header("Location: http://$host/$extra");
+    //echo 'Se elimino '.$_GET['idp'];
+}
+
+
+function getProducto($id)
+{
     include '../../conexiones/conexion.php';
-    $rest=$conexion->query("select idProducto,img_producto as 'img',descripcion as 'descripcion',
+    $rest = $conexion->query("select idProducto,img_producto as 'img',descripcion as 'descripcion',
     costo_venta as 'costo', categoria_kf as 'categoria' from producto where idProducto=$id");
     //$conexion->close();
     return mysqli_fetch_array($rest);
-}
-
-function concluirPaquete(){
-    
 }
 
 ?>
@@ -82,12 +67,9 @@ function concluirPaquete(){
     <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
     <!-- Theme style -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="../../plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -224,8 +206,8 @@ function concluirPaquete(){
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
                                 <i class="fas fa-cubes mx-1"></i>
                                 <p>
                                     Paquetes
@@ -233,14 +215,14 @@ function concluirPaquete(){
                                 </p>
                             </a>
                             <ul class="nav nav-treeview ">
-                                <li class="nav-item active">
+                                <li class="nav-item ">
                                     <a href="../paquetes.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver paquetes</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="agregarPaquete.php" class="nav-link active">
+                                    <a href="agregarPaquete.php" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar paquete</p>
                                     </a>
@@ -284,11 +266,7 @@ function concluirPaquete(){
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <?php 
-                            /**Hola mundo */
-                            
-                            ?>
-                            <h1 class="m-0 text-dark">Agregar paquete
+                            <h1 class="m-0 text-dark">Paquete <?php echo '#'.$_GET['idp']?>
                             </h1>
                         </div>
                         <!-- /.col -->
@@ -317,7 +295,7 @@ function concluirPaquete(){
                                 <div class="card-header">
                                     <h3 class="card-title">Productos del paquete :
 
-                                        <strong><?php echo $mostrar['total']+1;?></strong></h3>
+                                        <strong><?php echo $_GET['idp']; ?></strong></h3>
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
                                                 class="fas fa-minus"></i></button>
@@ -329,7 +307,7 @@ function concluirPaquete(){
                                 <!-- form start -->
 
                                 <div class="card-body">
-                                    <div class="row mb-5 justify-content-center">
+                                    <div class="row  justify-content-center">
                                         <div class="col-12">
                                             <table id="example2"
                                                 class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
@@ -344,32 +322,36 @@ function concluirPaquete(){
                                                 </thead>
                                                 <tbody id="tabla">
                                                     <?php
-                                                        //include '../../conexiones/conexion.php';
-                                                        $sqltabla="select * from lista_productos_temporal where idUser=".$_SESSION['idusuario'];
-                                                        $resultTabla=$conexion->query($sqltabla);
-                                                        //$most=mysqli_fetch_array($resultTabla);
-                                                        
-                                                        if($resultTabla){
-                                                            if(mysqli_num_rows($resultTabla)>=1){
-                                                                while($most=mysqli_fetch_array($resultTabla)){
-                                                                    $valor=$most['cantidad_T'];
-                                                                    $most=getProducto($most['idproducto']);
-                                                                    echo '<tr>'.
-                                                                    '<td>'.'<img src="../../img_productos/'.$most["img"].'" alt="'.$most["img"].'" class="img-rounded" alt="" width="80">'.'</td>'.
-                                                                    '<td>'.$most['descripcion'].'</td>'.
-                                                                    '<td>'.$most['costo'].'</td>'.
-                                                                    '<td>'.$valor.'</td>'.
-                                                                    '<td>'.
-                                                                    '<form action="agregarPaquete.php?idrem='.$most["idProducto"].'" autocomplete="off" method="POST">'.
-                                                                    '<div class="btn-group">'.
-                                                                    '<input type="submit" class="btn btn-outline-danger" value="Eliminar">'.
-                                                                    '</div>'.
-                                                                    '</form>'.
-                                                                    '</td>'.
+                                                    //include '../../conexiones/conexion.php';
+                                                    $sqltabla = "SELECT paquetes_venta.idproducto,descripcion,cantidad_T,img_producto as 'img', costo_venta as 'costo'
+                                                        FROM Joyeria.Paquetes
+                                                        inner join paquetes_venta on paquetes_venta.idpaquete = Paquetes.idpaquete
+                                                        inner join producto on paquetes_venta.idproducto=producto.idProducto
+                                                        where Paquetes.idpaquete=" . $_GET['idp'];
+                                                    $resultTabla = $conexion->query($sqltabla);
+                                                    //$most=mysqli_fetch_array($resultTabla);
+
+                                                    if ($resultTabla) {
+                                                        if (mysqli_num_rows($resultTabla) >= 1) {
+                                                            while ($most = mysqli_fetch_array($resultTabla)) {
+                                                                $valor = $most['cantidad_T'];
+                                                                $most = getProducto($most['idproducto']);
+                                                                echo '<tr>' .
+                                                                    '<td>' . '<img src="../../img_productos/' . $most["img"] . '" alt="' . $most["img"] . '" class="img-rounded" alt="" width="80">' . '</td>' .
+                                                                    '<td>' . $most['descripcion'] . '</td>' .
+                                                                    '<td>' . $most['costo'] . '</td>' .
+                                                                    '<td>' . $valor . '</td>' .
+                                                                    '<td>' .
+                                                                    '<form action="verPaquete.php?idrem=' . $most["idProducto"] . '&idp='.$_GET['idp'].'" autocomplete="off" method="POST">' .
+                                                                    '<div class="btn-group">' .
+                                                                    '<input type="submit" class="btn btn-outline-danger mt-3" value="Eliminar">' .
+                                                                    '</div>' .
+                                                                    '</form>' .
+                                                                    '</td>' .
                                                                     '</tr>';
-                                                                }
                                                             }
-                                                        }  
+                                                        }
+                                                    }
                                                     ?>
 
 
@@ -389,28 +371,26 @@ function concluirPaquete(){
                                 </div>
                                 <!-- /.card-body -->
                                 <?php
-                                    include '../../conexiones/conexion.php';
-                                    $sqlCosto="CALL costoRealPaquete(".$_SESSION['idusuario'].")";
-                                    $resCosto=$conexion->query($sqlCosto);
-                                    //echo mysqli_num_rows($resCosto). 'Filas ';
-                                    $res=mysqli_fetch_array($resCosto);
-                                    
+                                include '../../conexiones/conexion.php';
+                                $sqlCosto = "select * from Paquetes where idpaquete=".$_GET['idp'];
+                                $resCosto = $conexion->query($sqlCosto);
+                                //echo mysqli_num_rows($resCosto). 'Filas ';
+                                $res = mysqli_fetch_array($resCosto);
+
                                 ?>
-                                <div class="card-footer d-sm-block d-md-flex text-center justify-content-between">
-                                    <h2 class="mt-2 ">Total : <strong><?php 
-                                    echo "$".$res['cantidad']?></strong></h2>
-                                    <form action="agregarPaquete.php?acc=add" autocomplete="off" method="POST"
-                                        class="text-center">
-                                        <div class="form-group-lg">
-                                            <label for="" class="h4 mr-1">Descuento :</label>
-                                            <input type="number" class="" name="costoFinal" min="0" max="100"
-                                                placeholder="%" require>
-                                        </div>
+                                <div class="card-footer d-sm-block d-md-flex  text-center justify-content-between">
+                                    <div class="card-text text-left">
+                                        <h4>De : <strong> <?php echo "$".$res['precioOriginal'];?></strong> A <strong><?php echo "$".$res['precioVenta'];?></strong></h4>
+                                        
+                                    </div>
+                                    <form action="verPaquete.php?acc=del&idp=<?=$_GET['idp'];?>" autocomplete="off"
+                                        method="POST" class="text-center mt-3">
+
                                         <div class="btn-group">
-                                            <button class=" btn btn-outline-success  ">Agregar
-                                                paquete</button>
-                                            <a href="agregarPaquete.php?acc=mov"
-                                                class=" btn btn-outline-danger">Cancelar</a>
+                                            <a href="../paquetes.php" class=" btn btn-warning btn-lg">Regresar</a>
+
+                                            <button class=" btn btn-danger btn-lg">Eliminar</button>
+
                                         </div>
                                     </form>
 
@@ -419,101 +399,7 @@ function concluirPaquete(){
                             </div>
                         </div>
                     </div>
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <div class="card card-primary card-default ">
-                                <div class="card-header">
-                                    <h3 class="card-title">Agregar productos al paquete</h3>
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i
-                                                class="fas fa-minus"></i></button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i
-                                                class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <?php
-                                include '../../conexiones/conexion.php';
-                                $sql = "CALL select_tabla_productos()";
-                                $resultado = $conexion->query($sql);
-                                //$conexion->close();
-                                ?>
-                                <div class="card-body">
 
-                                    <div class="row mb-5 justify-content-center">
-                                        <div class="col-12">
-                                            <table id="example1"
-                                                class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>Categoria</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Precio</th>
-                                                        <th>Agregar cantidad</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    <?php
-                                                    $img = "";
-
-                                                    while ($mostrar = mysqli_fetch_array($resultado)) {
-                                                        $img = $mostrar['img'];
-                                                        if ($img == '') {
-                                                            $img = 'producto_default.png';
-                                                        }
-                                                    ?>
-                                                    <tr>
-                                                        <td><img src="../../img_productos/<?= $img ?>"
-                                                                class="img-rounded" alt="" width="80"></td>
-                                                        <td><?php echo $mostrar['categoria'] ?></td>
-                                                        <td><?php echo $mostrar['descripcion'] ?></td>
-                                                        <td><strong><?php echo '$ ' . $mostrar['costo'] ?></strong>
-                                                        </td>
-                                                        <form
-                                                            action="agregarPaquete.php?idp=<?=$mostrar['id_producto']?>"
-                                                            autocomplete="off" method="POST">
-                                                            <td>
-                                                                <div class="form-group mt-3">
-                                                                    <input id="valor" name="valor"
-                                                                        max="<?= $mostrar['stock'] ?>" min='0' value="0"
-                                                                        class="form-control" type="number" name="">
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="btn-group btn-group mt-3">
-                                                                    <button class="btn btn-outline-success"><i
-                                                                            class="fas fa-plus-circle"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </form>
-                                                    </tr>
-                                                    <?php }
-                                                    ?>
-                                                </tbody>
-
-                                                <tfoot>
-                                                    <tr>
-                                                        <th></th>
-                                                        <th>Categoria</th>
-                                                        <th>Descripcion</th>
-                                                        <th>Precio</th>
-                                                        <th>Agregar cantidad</th>
-                                                        <th>Acciones</th>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
                 <!-- /.container-fluid -->
             </section>
@@ -528,8 +414,13 @@ function concluirPaquete(){
             </div>
         </footer>
         <?php
-            $conexion->close();
+        $conexion->close();
         ?>
+        <!-- Control Sidebar -->
+        <aside class=" control-sidebar control-sidebar-dark ">Dashboard
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 
@@ -557,17 +448,7 @@ function concluirPaquete(){
         "ordering": true
     });
     $(function() {
-
         $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
-        });
-        $('#example1').DataTable({
             "paging": true,
             "lengthChange": true,
             "searching": true,

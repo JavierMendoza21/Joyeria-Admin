@@ -31,7 +31,22 @@ include '../sessionIniciada.php';
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <style>
+        .card {
+            min-height: 350px;
 
+        }
+
+        .card-body {
+            position: relative;
+        }
+
+        .card p {
+            position: absolute;
+            bottom: 20px;
+            left: 30%;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -59,8 +74,7 @@ include '../sessionIniciada.php';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -78,8 +92,7 @@ include '../sessionIniciada.php';
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -246,44 +259,56 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="accionesPaquetes/agregarPaquete.php"
-                                class="col-lg-3 col-md-4 d-block btn btn-success">
-                                <i class="fas fa-cubes"></i> Agregar paquete</a>
+                            <a href="accionesPaquetes/agregarPaquete.php" class="col-lg-3 col-md-4 d-block btn btn-success">
+                                <i cl|ass="fas fa-cubes"></i> Agregar paquete</a>
                         </div>
                     </div>
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-md-5 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3 class="text-left ml-2">15<sup style="font-size: 20px">%</sup></h3>
+                    <div class="row justify-content-center ">
+                        <?php
+                        include '../conexiones/conexion.php';
+                        $sqlPaquetes = "SELECT idpaquete,porcentaje,precioVenta FROM 
+                        Joyeria.Paquetes;";
+                        $resPaquetes = $conexion->query($sqlPaquetes);
 
-                                    <ul class="h5 text-left">
-                                        <li>
-                                            <p class="my-0"> 1 Aretes</p>
-                                        </li>
-                                        <li>
-                                            <p class="my-0"> 2 Collar de diamantes</p>
-                                        </li>
+                        while ($mostrar = mysqli_fetch_array($resPaquetes)) {
+                            include '../conexiones/conexion.php';
+                            $sqlgetPaquete = 'call getPaquetes(' . $mostrar['idpaquete'] . ');';
+                            $packList = $conexion->query($sqlgetPaquete);
+
+                            $lista = "";
+                            while ($mtp = mysqli_fetch_array($packList)) {
+                                $lista .= "<li>";
+                                $lista .= $mtp['cantidad_T'] . " " . $mtp['descripcion'];
+                                $lista .= "</li>";
+                            }
+                            //echo "<br>Mi lista ".$lista;
+                            echo '<div class="col-lg-4 col-sm-8 col-md-6">
+                            <div class="card card-light">
+                                <div class="card-header d-flex justify-content-between">
+                                    <h3 class="text-left">Descuento de ' . $mostrar['porcentaje'] . ' <sup style="font-size: 20px">%</sup> </h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul>
+                                        ' . $lista . '
                                     </ul>
-                                    <div class="text-center">
-                                        <strong class="h1 text-bold">$1500</strong></div>
-
+                                <p class="card-text text-center h1"><strong >$' . $mostrar['precioVenta'] . '</strong></p>
                                 </div>
-                                <div class="icon">
-                                    <i class="fas fa-cubes mx-1"></i>
+                                <div class="card-footer text-muted">
+                                    <a href="accionesPaquetes/verPaquete.php?idp=' . $mostrar['idpaquete'] . '" class="btn btn-primary btn-block"><strong   class="h3">Ver</strong></a>
                                 </div>
-                                <a href="#" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
-                        </div>
-                        
+                        </div>';
+                        }
+                        ?>
                     </div>
+                    <!-- /.container-fluid -->
+                    <!-- /.content -->
                 </div>
-                <!-- /.container-fluid -->
-                <!-- /.content -->
+                <!--                 /.content-wrapper -->
+
+                <!-- /.control-sidebar -->
         </div>
-        <!--                 /.content-wrapper -->
+        <!-- ./wrapper -->
         <footer class=" main-footer ">
             <strong>Copyright &copy; 2020 <a href="#">AdminLTE.io</a>.</strong> Todos los derecho reservados.
             <div class=" float-right d-none d-sm-inline-block ">
@@ -296,53 +321,49 @@ include '../sessionIniciada.php';
         <aside class=" control-sidebar control-sidebar-dark ">Dashboard
             <!-- Control sidebar content goes here -->
         </aside>
-        <!-- /.control-sidebar -->
-    </div>
-    <!-- ./wrapper -->
+        <!-- jQuery -->
+        <script src=" ../plugins/jquery/jquery.min.js "></script>
+        <!-- jQuery UI 1.11.4 -->
+        <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        <script>
+            $.widget.bridge('uibutton', $.ui.button)
+        </script>
+        <!-- Bootstrap 4 -->
+        <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+        <!-- jQuery Knob Chart -->
+        <script src=" ../plugins/jquery-knob/jquery.knob.min.js "></script>
+        <!-- Summernote -->
+        <script src=" ../plugins/summernote/summernote-bs4.min.js "></script>
+        <!-- overlayScrollbars -->
+        <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
+        <!-- AdminLTE App -->
+        <script src=" ../dist/js/adminlte.js "></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src=" ../dist/js/demo.js "></script>
+        <!-- DataTables -->
+        <script src="../plugins/datatables/jquery.dataTables.js"></script>
+        <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script>
+            $.extend(true, $.fn.dataTable.defaults, {
+                "searching": true,
+                "ordering": true
+            });
+            $(function() {
 
-    <!-- jQuery -->
-    <script src=" ../plugins/jquery/jquery.min.js "></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-    $.widget.bridge('uibutton', $.ui.button)
-    </script>
-    <!-- Bootstrap 4 -->
-    <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- jQuery Knob Chart -->
-    <script src=" ../plugins/jquery-knob/jquery.knob.min.js "></script>
-    <!-- Summernote -->
-    <script src=" ../plugins/summernote/summernote-bs4.min.js "></script>
-    <!-- overlayScrollbars -->
-    <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
-    <!-- AdminLTE App -->
-    <script src=" ../dist/js/adminlte.js "></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src=" ../dist/js/demo.js "></script>
-    <!-- DataTables -->
-    <script src="../plugins/datatables/jquery.dataTables.js"></script>
-    <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script>
-    $.extend(true, $.fn.dataTable.defaults, {
-        "searching": true,
-        "ordering": true
-    });
-    $(function() {
-
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
-        });
-    });
-    </script>
+                $('#example2').DataTable({
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": true,
+                    "responsive": false,
+                });
+            });
+        </script>
 </body>
 
 </html>
