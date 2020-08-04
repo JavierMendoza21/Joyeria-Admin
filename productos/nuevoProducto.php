@@ -326,7 +326,7 @@ if (
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="../main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="../main.php">Dashboard</a></li>
-                                <li class="breadcrumb-item disabled"><a href="vendedores.php">Ver productos</a></li>
+                                <li class="breadcrumb-item disabled"><a href="productos.php">Ver productos</a></li>
                             </ol>
 
                         </div>
@@ -370,14 +370,14 @@ if (
                                         </div>
                                         <div class="dividir">
                                             <div class="form-group">
-                                                <label for="costoVenta">Costo de compra</label>
-                                                <input type="number" min="0" name="costoCompra" class="form-control" id="costoCompra" placeholder="Costo de compra" require>
+                                                <label for="costoCompra">Costo de compra</label>
+                                                <input type="number" min="0" onblur="compruebaValidoEntero()" name="costoCompra" class="form-control "  id="costoCompra" placeholder="Costo de compra" require>
                                                 <div class="invalid-feedback" id="msjValidCostoCompra">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Costo de venta</label>
-                                                <input type="number" min="0" name="costoVenta" class="form-control" id="costoVenta" placeholder="Costo de venta" require>
+                                                <input type="number" min="0" name="costoVenta" class="form-control" id="costoVenta" readonly placeholder="Costo de venta" require>
                                                 <div class="invalid-feedback" id="msjValidCostoVenta">
                                                 </div>
                                             </div>
@@ -388,8 +388,6 @@ if (
                                             include '../conexiones/conexion.php';
                                             $sql = "SELECT * FROM Joyeria.categoria_producto";
                                             $result = $conexion->query($sql);
-
-
                                             ?>
 
 
@@ -454,7 +452,7 @@ if (
     </script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-  
+
     <!-- bs-custom-file-input -->
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- Select2 -->
@@ -475,6 +473,39 @@ if (
                 theme: 'bootstrap4'
             })
         })
+
+        function validarEntero(valor) {
+            //intento convertir a entero. 
+            //si era un entero no le afecta, si no lo era lo intenta convertir 
+            valor = parseFloat(valor);
+
+            //Compruebo si es un valor numérico 
+            if (isNaN(valor)) {
+                //entonces (no es numero) devuelvo el valor cadena vacia 
+                return ""
+            } else {
+                //En caso contrario (Si era un número) devuelvo el valor 
+                return valor
+            }
+        }
+
+        function compruebaValidoEntero() {
+            inp = document.getElementById("costoCompra");
+            var enteroValidado = validarEntero(inp.value);
+            if (enteroValidado == "") {
+                //si era la cadena vacía es que no era válido. Lo aviso 
+                //alert("Debe escribir un entero!");
+                //selecciono el texto 
+                inp.select();
+                //coloco otra vez el foco 
+                inp.focus();
+                inp.value = "";
+            } else{
+                inpVenta=document.getElementById("costoVenta");
+                inpVenta.value=enteroValidado*5;
+            }
+                //inp.value = enteroValidado;
+        }
     </script>
 </body>
 

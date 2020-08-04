@@ -1,5 +1,5 @@
 <?php
-
+include '../../sessionIniciada.php';
 if (
     isset($_POST['descripcion']) || $_POST['descripcion'] == '' &&
     isset($_POST['costoCompra']) || $_POST['costoCompra'] == '' &&
@@ -8,9 +8,7 @@ if (
     isset($_POST['stock']) || $_POST['stock'] == '' &&
     isset($_POST['categoria'][0]) || $_POST['categoria'][0] != 0 
 ) {
-
     $img = "";
-    echo $_FILES['imagen']['tmp_name'] . '<br>';
     if ((isset($_FILES['imagen'])) && ($_FILES['imagen'] != '') && !empty($_FILES['imagen']['tmp_name'])) {
         switch ($_FILES['imagen']['error']) {
             case UPLOAD_ERR_OK:
@@ -31,11 +29,9 @@ if (
                 echo $_FILES['imagen']['error'];
                 throw new RuntimeException('Unknown errors.');
         }
-
         if ($_FILES['imagen']['size'] > 8000000) {
             throw new RuntimeException('Exceeded filesize limit.');
         }
-
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         if (false === $ext = array_search(
             $finfo->file($_FILES['imagen']['tmp_name']),
@@ -64,25 +60,18 @@ if (
     } else {
         $img = 'producto_default.png';
     }
-
-    echo '<br>';
-
     include '../../conexiones/conexion.php';
-
     $descripcion = $_POST['descripcion'];
     $costoCompra = $_POST['costoCompra'];
     $costoVenta = $_POST['costoVenta'];
     $stock = $_POST['stock'];
     $categoria = $_POST['categoria'];
-
     $sql = "CALL nuevo_producto(" . $categoria . ",'" . $descripcion . "'," . $costoCompra . "," . $costoVenta . "," . $stock . ",'" . $img . "')";
     $conexion->query($sql);
     $conexion->close();
-
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     $extra = 'productos/nuevoProducto.php';
     header("Location: http://$host/Admin_joyeria/$extra");
-    //echo 'http://$host/Admin_joyeria/'.$extra;
 } else {
 }

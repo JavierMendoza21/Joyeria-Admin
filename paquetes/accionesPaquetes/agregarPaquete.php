@@ -407,10 +407,10 @@ function concluirPaquete(){
                                                 placeholder="%" require>
                                         </div>
                                         <div class="btn-group">
-                                            <button class=" btn btn-outline-success  ">Agregar
+                                            <button class=" btn btn-success  ">Agregar
                                                 paquete</button>
                                             <a href="agregarPaquete.php?acc=mov"
-                                                class=" btn btn-outline-danger">Cancelar</a>
+                                                class=" btn btn-danger">Cancelar</a>
                                         </div>
                                     </form>
 
