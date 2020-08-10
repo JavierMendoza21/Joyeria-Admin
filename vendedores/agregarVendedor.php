@@ -405,8 +405,11 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Contraseña</label>
-                                                    <input type="password" name="pass" id="pass" class="form-control" placeholder="Contraseña" require>
-                                                    <div class="valid-feedback" id="msjValidContraseña">
+                                                    <div class="d-flex">
+                                                    <input type="password" name="pass" id="pass" class="form-control" id="exampleInputPassword1" placeholder="Usuario" require>
+                                                    <button type="button" id="btnpass" onclick="cambio()" class="btn border-bottom bg-gradient-light"><i class="fas fa-eye"></i></button>
+                                                    
+                                                    </div><div class="valid-feedback" id="msjValidContraseña">
                                                     </div>
                                                 </div>
                                             </div>
@@ -478,18 +481,6 @@
         </script>
         <!-- Bootstrap 4 -->
         <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-        <!-- ChartJS -->
-        <script src=" ../plugins/chart.js/Chart.min.js "></script>
-        <!-- Sparkline -->
-        <script src=" ../plugins/sparklines/sparkline.js "></script>
-        <!-- JQVMap -->
-        <script src=" ../plugins/jqvmap/jquery.vmap.min.js "></script>
-        <script src=" ../plugins/jqvmap/maps/jquery.vmap.usa.js "></script>
-        <!-- jQuery Knob Chart -->
-        <script src=" ../plugins/jquery-knob/jquery.knob.min.js "></script>
-        <!-- daterangepicker -->
-        <script src=" ../plugins/moment/moment.min.js "></script>
-        <script src=" ../plugins/daterangepicker/daterangepicker.js "></script>
         <!-- Tempusdominus Bootstrap 4 -->
         <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
         <!-- Summernote -->
@@ -502,6 +493,7 @@
         <script src=" ../dist/js/demo.js "></script>
         <!-- bs-custom-file-input -->
         <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+        <script src="comprobarCampos.js"></script>
         <script src="comprobarCampos.js"></script>
         <script type="text/javascript">
             $(document).ready(function() {

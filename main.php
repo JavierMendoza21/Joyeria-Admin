@@ -21,18 +21,10 @@ $IMGUSER = substr($IMGUSER, 3);
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <!-- summernote -->
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
@@ -51,7 +43,8 @@ $IMGUSER = substr($IMGUSER, 3);
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link effectoHover" data-toggle="" href="vendedores/editarMiUsuario.php?id=<?= $IDUSER ?>&acc=editar">
+                <a class="nav-link effectoHover" data-toggle=""
+                    href="vendedores/editarMiUsuario.php?id=<?= $IDUSER ?>&acc=editar">
                     <i class="fas fa-cogs"></i>
                 </a>
                 <a class="nav-link effectoHover" data-toggle="" href="cerrarSesion.php">
@@ -65,7 +58,8 @@ $IMGUSER = substr($IMGUSER, 3);
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="main.php" class="brand-link">
-                <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -83,7 +77,8 @@ $IMGUSER = substr($IMGUSER, 3);
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2 <?= '' ?>">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -134,7 +129,7 @@ $IMGUSER = substr($IMGUSER, 3);
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="ventas/accionesVenta/nuevaVenta.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar Ventas</p>
                                     </a>
@@ -275,7 +270,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                 <div class="icon">
                                     <i class="far fa-money-bill-alt"></i>
                                 </div>
-                                <a href="#" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="#" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <!-- ./col -->
@@ -298,7 +294,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                 <div class="icon">
                                     <i class="far fa-user"></i>
                                 </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -320,7 +317,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                 <div class="icon">
                                     <i class="fas fa-boxes"></i>
                                 </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -342,7 +340,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                 <div class="icon">
                                     <i class="fas fa-box"></i>
                                 </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-md-4 col-sm-12">
@@ -364,7 +363,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                 <div class="icon">
                                     <i class="fas fa-chart-line"></i>
                                 </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i class="fas fa-arrow-circle-right"></i></a>
+                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
+                                        class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
 
@@ -386,11 +386,6 @@ $IMGUSER = substr($IMGUSER, 3);
 
             </div>
         </footer>
-
-        <!-- Control Sidebar -->
-        <aside class=" control-sidebar control-sidebar-dark ">
-            <!-- Control sidebar content goes here -->
-        </aside>
         <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
@@ -401,10 +396,16 @@ $IMGUSER = substr($IMGUSER, 3);
     <script src=" plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
+    <!-- Bootstrap 4 -->
+    <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" dist/js/adminlte.js "></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src=" ../dist/js/demo.js "></script>
+    <!-- overlayScrollbars -->
+    <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
 
 
 </body>

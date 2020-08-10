@@ -88,6 +88,14 @@ if (
     $conexion->query($sql);
     $conexion->close();
 
+    include '../../conexiones/conexion.php';
+    $sqlPaquetes="SELECT idpaquete FROM Joyeria.Paquetes; ";
+    $resultado=$conexion->query($sqlPaquetes);
+    while($IDS=mysqli_fetch_array($resultado)){
+        $sqlmodificar="CALL actualizarCostoPaquete(".$id.",".$IDS['idpaquete'].")";
+        $conexion->query($sqlmodificar);
+    }
+
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     $extra = 'productos/productos.php';

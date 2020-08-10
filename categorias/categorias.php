@@ -53,6 +53,14 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <style>
+        tbody tr{
+            min-width: 100%;
+        }
+        tbody tr td{
+            min-width: calc(100% / 2);
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -259,8 +267,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             <section class="content">
                 <div class="container-fluid">
                     <!-- Main row -->
-                    <div class="row">
-                        <div class="col">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
                             <a href="agregarCategoria.php" class="col-lg-3 col-md-4 d-block btn btn-success mb-2"><i class="fas fa-boxes"></i> Agregar categoria</a>
                         </div>
                     </div>
@@ -270,8 +278,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
 
                             <div class="card">
 

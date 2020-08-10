@@ -124,7 +124,7 @@ include '../sessionIniciada.php';
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../ventas/accionesVenta/nuevaVenta.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar Ventas</p>
                                     </a>

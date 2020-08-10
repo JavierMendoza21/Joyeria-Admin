@@ -136,7 +136,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../ventas/ventas.php" class="nav-link">
+                                    <a href="../../ventas/accionesVenta/nuevaVenta.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar Ventas</p>
                                     </a>
@@ -257,8 +257,16 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                 ?>
                                 <div class="card-body">
                                     <div class="mb-3 text-center">
-                                        <img src="../<?= $mostrarCambio['imgUsuario'] ?>" class="img-circle elevation-2"
-                                            width="115" alt="<?= $mostrarCambio['imgUsuario'] ?>">
+                                        <?php
+                                        $imagenUser="";
+                                        if($mostrarCambio['imgUsuario']=='user-default.jpg'){
+                                            $imagenUser="../../uploads/".$mostrarCambio['imgUsuario'];
+                                        }else{
+                                            $imagenUser="../".$mostrarCambio['imgUsuario'];
+                                        }
+                                        ?>
+                                        <img src="<?= $imagenUser ?>" class="img-circle elevation-2"
+                                            width="115" alt="<?= $imagenUser ?>">
                                     </div>
                                     <div class="row mb-5 justify-content-center">
                                         <div class="col-12">

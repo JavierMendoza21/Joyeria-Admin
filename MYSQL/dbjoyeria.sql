@@ -4,7 +4,7 @@ USE `Joyeria`;
 --
 -- Host: localhost    Database: Joyeria
 -- ------------------------------------------------------
--- Server version	8.0.21-0ubuntu0.20.04.3
+-- Server version	8.0.21-0ubuntu0.20.04.4
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `Paquetes` (
   KEY `idpaquete_idx` (`idpaquete`),
   KEY `fk_usuario_idx` (`idusuario`),
   CONSTRAINT `fk_usuario` FOREIGN KEY (`idusuario`) REFERENCES `usuarios` (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,8 +44,31 @@ CREATE TABLE `Paquetes` (
 
 LOCK TABLES `Paquetes` WRITE;
 /*!40000 ALTER TABLE `Paquetes` DISABLE KEYS */;
-INSERT INTO `Paquetes` VALUES (18,8,'2020-08-03 03:04:30',68878,61990.2,10),(19,8,'2020-08-03 08:53:38',5760,5472,5),(20,8,'2020-08-03 12:06:05',800,760,5);
+INSERT INTO `Paquetes` VALUES (1,8,'2020-08-06 07:52:41',4800,4560,5),(2,53,'2020-08-06 07:58:51',77478,73604.1,5),(3,8,'2020-08-06 20:41:54',7288,6194.8,15),(4,8,'2020-08-07 17:54:19',80478,64382.4,20),(5,8,'2020-08-07 17:54:59',10480,9222.4,12);
 /*!40000 ALTER TABLE `Paquetes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `carrito`
+--
+
+DROP TABLE IF EXISTS `carrito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `carrito` (
+  `idusuario` int NOT NULL,
+  `idproducto` int NOT NULL,
+  `cantidadP` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `carrito`
+--
+
+LOCK TABLES `carrito` WRITE;
+/*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
+/*!40000 ALTER TABLE `carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -97,35 +120,6 @@ INSERT INTO `categoria_usuario` VALUES (1,'Admin'),(2,'Vendedor'),(3,'Especial')
 UNLOCK TABLES;
 
 --
--- Table structure for table `clientes`
---
-
-DROP TABLE IF EXISTS `clientes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `clientes` (
-  `idclientes` int NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(50) NOT NULL,
-  `apellido` varchar(50) NOT NULL,
-  `idvendedor` int NOT NULL,
-  `numeroT` varchar(15) DEFAULT NULL,
-  `numeroC` varchar(15) DEFAULT NULL,
-  `correo` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idclientes`),
-  CONSTRAINT `fk_vendedor` FOREIGN KEY (`idclientes`) REFERENCES `usuarios` (`idusuarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='El funcionamiento de esta tabla es llevar el registro de los clientes de cada vendedor, con el fin de poder llevar el registro de ventas a credito.';
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `clientes`
---
-
-LOCK TABLES `clientes` WRITE;
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `lista_productos_temporal`
 --
 
@@ -149,7 +143,6 @@ CREATE TABLE `lista_productos_temporal` (
 
 LOCK TABLES `lista_productos_temporal` WRITE;
 /*!40000 ALTER TABLE `lista_productos_temporal` DISABLE KEYS */;
-INSERT INTO `lista_productos_temporal` VALUES (1,1,8);
 /*!40000 ALTER TABLE `lista_productos_temporal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -163,7 +156,9 @@ DROP TABLE IF EXISTS `paquetes_venta`;
 CREATE TABLE `paquetes_venta` (
   `idpaquete` int NOT NULL,
   `idproducto` int NOT NULL,
-  `cantidad_T` int NOT NULL
+  `cantidad_T` int NOT NULL,
+  KEY `idpaquete` (`idpaquete`),
+  KEY `idproducto` (`idproducto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -173,7 +168,7 @@ CREATE TABLE `paquetes_venta` (
 
 LOCK TABLES `paquetes_venta` WRITE;
 /*!40000 ALTER TABLE `paquetes_venta` DISABLE KEYS */;
-INSERT INTO `paquetes_venta` VALUES (18,7,1),(19,2,2),(20,5,1);
+INSERT INTO `paquetes_venta` VALUES (1,1,1),(1,3,2),(2,1,2),(2,7,1),(2,11,1),(3,4,1),(3,1,1),(3,8,1),(4,1,2),(4,9,2),(4,7,1),(5,1,2),(5,2,1);
 /*!40000 ALTER TABLE `paquetes_venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +199,7 @@ CREATE TABLE `producto` (
 
 LOCK TABLES `producto` WRITE;
 /*!40000 ALTER TABLE `producto` DISABLE KEYS */;
-INSERT INTO `producto` VALUES (1,8,'Aretes de oro',1801,2501,50,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(2,1,'Arracadas de oro blanco',1500,2880,60,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(3,3,'jhvijkvjhvk',10,20,30,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(4,1,'Aretes de oro blanco arabes ',1500,2800,190,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(5,1,'Aretes para la lengua de plata',500,800,70,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(6,1,'jbkjbiubui',1,1,35,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(7,2,'cambio',267,68878,78,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(8,2,'cambio2',267,688,686787,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(9,2,'Aretes arabes',1500,2000,90,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(11,3,'nsajkbkjb',987,1000,100,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(12,1,'Arete 195',100,180,21,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(17,2,'jbgiuhiuh',1000,5000,300,'producto_default.png'),(18,2,'ultimop',256,1280,300,'producto_default.png');
+INSERT INTO `producto` VALUES (1,8,'Aretes de oro',1801,3800,25,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(2,1,'Arracadas de oro blanco',1500,2880,60,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(3,3,'OtroProducto',100,500,30,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(4,1,'Aretes de oro blanco arabes ',1500,2800,140,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(5,1,'Aretes para la lengua de plata',500,800,70,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(6,1,'jbkjbiubui',200,1000,35,'c474e4bcb6d2b84d591ae093a26a13422ee89530.jpg'),(7,2,'cambio',267,68878,73,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(8,2,'cambio2',267,688,686682,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(9,2,'Aretes arabes',1500,2000,67,'3883c933c87eaafc77045d74844f55f415cfb8b3.jpg'),(11,3,'nsajkbkjb',987,1000,100,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(12,1,'Arete 195',100,180,21,'5c9c7d6561333d8c84ce36aff6daff451b2e8977.jpg'),(17,2,'jbgiuhiuh',1000,5000,300,'producto_default.png'),(18,2,'ultimop',256,1280,300,'producto_default.png');
 /*!40000 ALTER TABLE `producto` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -256,7 +251,7 @@ CREATE TABLE `stockUsuario` (
 
 LOCK TABLES `stockUsuario` WRITE;
 /*!40000 ALTER TABLE `stockUsuario` DISABLE KEYS */;
-INSERT INTO `stockUsuario` VALUES (8,1,70),(8,2,80),(8,3,40),(8,4,35),(8,5,60),(8,6,11),(41,4,5),(41,2,10),(41,1,5),(8,9,10),(42,1,5),(42,2,30),(42,7,10),(58,1,10),(58,2,20),(58,3,100),(58,6,5);
+INSERT INTO `stockUsuario` VALUES (8,1,90),(8,2,80),(8,3,40),(8,4,40),(8,5,60),(8,6,11),(41,4,5),(41,2,10),(41,1,5),(8,9,10),(42,1,5),(42,2,30),(42,7,10),(58,1,10),(58,2,20),(58,3,100),(58,6,5),(8,8,5),(53,1,5),(53,7,5),(53,4,45),(53,8,100),(53,9,23);
 /*!40000 ALTER TABLE `stockUsuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,13 +287,48 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (8,'Javier Alexis','Mendoza','Garcia','7828281183','jamg1819@gmail.com','Poza rica ver.',1,'Admin','Admin1234','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1),(41,'Usuario modificado','hjbjhhjglkjjh','gjhgjkhgj','hghjghjghjhgjh','ghjgjh@jjddbj.com','jhajhhbqhehqoiiefho',1,'Usuario','2f4ee895d45feb94d1e8f21298428c7ed43ccba7','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(42,'Otro usuario','Apellido','bkjbsfkjbka','bkjsdbfjkbfjk','bjbjkbjdk@jbjbhjbhfqfq.com','obdib',1,'usuariovendedor','usuariovendedor','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',2),(43,'dsfbnkjabgakjb','bkjabdkjadbk','bkjvbajkbaj','kjbkjabjkf','jkakjfn@nakjnfkaj.com','knlknlkfnq',0,'nkjDBKJBKJBW','e510a38100b1ef62df1887853cb0c079de6bbca9','user-default.jpg',2),(44,'skansfjkabkjbkbhbhj','haljkhajhfjkh','jhlkahfkjahñj','278478478742','jkkjhddkj@sjakh.com','',1,'kJHDHJKH','2f660b7d842813af4dab12d4842725a270d83811','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(45,'wFJKBFKBJBlkvjh','jhvjhvjhvjh','vjvljhvhv','jlhvjvjhjlv','jhvjhvjhvhjv@BKJBDJ.nkn','jhbhvjavsljva',0,'kjvhgvkhjvhjv','62a6401377520aebe8548fe3cfe3002f2e635223','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',3),(46,'jkffebkwgbkjjvwhvjhv','hjvj','vjhvjvjhvj','hvjvjhvjhv','jhvjvjhvj@lsnlknsa.nj','lbvlkbjhvbh',1,'hvjhvjvjvjhjhv','5568c8ed3790591ed88c8599e1b9c5e0fffa1784','user-default.jpg',2),(50,'afbqjefvq,e fjq jh','vlhbsflhvnjb','hjvbljavhjv','hjvljvajhfvajl','vljavhjLwdbk@kbjbdkjb.com','jkdvkñjñvfjlivhjqbvqfh',0,'jbdlHVJHVdj','235d42b33e0877ad8099bd397921fda9b52524d9','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(51,'sabjjsvvjhvhjvljv','jhvjvjvjhvjvjlv','jhvjvlhvljhv','jvjlvvljvhjv','hvljvvshjv@jsbjh.co','Actualizacion de direccion',0,'bkbacshcal','6d6917cc7820a529a05e56f81469d7f0c5d7cfbc','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',2),(52,'Daniel','uchiha','eder','7828281183','correoDaniel@gmail.com','Direccion de daniel',1,'daniel1','0716b9029d0818cbabd7c69aa55d01c877982b54','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',2),(53,'UsuarioCorreo','UsuarioCorreo','UsuarioCorreo','782000000','166P0492@itspozarica.edu.mx',',bdnlnflqknefeqnflk',1,'useremail','useremail','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1),(57,'Alexis','Alarcon','Alm','7821143993','alexisalarconalm@gmail.com','Pachuca Hidalgo',1,'AlexisAlarcon','alexis','../uploads/6d0af66942db779c9967cf842b60ea9d33a18589.jpg',1),(58,'Perla','Peralta','J','7821143993','perlaj@gmail.com','Calle jade Colonia Actopan Poza rica, Ver.',1,'PerlaPeralta','perla26','../uploads/5c6bd5b53379cb3c1baeca29e028dc1c8d869315.jpg',2),(59,'UsuarioNuevoAdmin','UsuarioNuevoAdmin','UsuarioNuevoAdmin','575758786','UsuarioNuevoAdmin@gmail.com','UsuarioNuevoAdmin',1,'UsuarioNuevoAdmin','UsuarioNuevoAdmin','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1);
+INSERT INTO `usuarios` VALUES (8,'Javier Alexis','Mendoza','Garcia','7828281183','jamg1819@gmail.com','Poza rica ver.',1,'Admin','Admin1234','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1),(41,'Usuario modificado','hjbjhhjglkjjh','gjhgjkhgj','hghjghjghjhgjh','ghjgjh@jjddbj.com','jhajhhbqhehqoiiefho',1,'Usuario','2f4ee895d45feb94d1e8f21298428c7ed43ccba7','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(42,'Otro usuario','Apellido','bkjbsfkjbka','bkjsdbfjkbfjk','bjbjkbjdk@jbjbhjbhfqfq.com','obdib',1,'usuariovendedor','usuariovendedor','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',2),(43,'dsfbnkjabgakjb','bkjabdkjadbk','bkjvbajkbaj','kjbkjabjkf','jkakjfn@nakjnfkaj.com','knlknlkfnq',1,'nkjDBKJBKJBW','e510a38100b1ef62df1887853cb0c079de6bbca9','user-default.jpg',2),(44,'skansfjkabkjbkbhbhj','haljkhajhfjkh','jhlkahfkjahñj','278478478742','jkkjhddkj@sjakh.com','',1,'kJHDHJKH','2f660b7d842813af4dab12d4842725a270d83811','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(45,'wFJKBFKBJBlkvjh','jhvjhvjhvjh','vjvljhvhv','jlhvjvjhjlv','jhvjhvjhvhjv@BKJBDJ.nkn','jhbhvjavsljva',0,'kjvhgvkhjvhjv','62a6401377520aebe8548fe3cfe3002f2e635223','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',3),(46,'jkffebkwgbkjjvwhvjhv','hjvj','vjhvjvjhvj','hvjvjhvjhv','jhvjvjhvj@lsnlknsa.nj','lbvlkbjhvbh',1,'hvjhvjvjvjhjhv','5568c8ed3790591ed88c8599e1b9c5e0fffa1784','user-default.jpg',2),(50,'afbqjefvq,e fjq jh','vlhbsflhvnjb','hjvbljavhjv','hjvljvajhfvajl','vljavhjLwdbk@kbjbdkjb.com','jkdvkñjñvfjlivhjqbvqfh',0,'jbdlHVJHVdj','235d42b33e0877ad8099bd397921fda9b52524d9','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',1),(51,'sabjjsvvjhvhjvljv','jhvjvjvjhvjvjlv','jhvjvlhvljhv','jvjlvvljvhjv','hvljvvshjv@jsbjh.co','Actualizacion de direccion',0,'bkbacshcal','6d6917cc7820a529a05e56f81469d7f0c5d7cfbc','../uploads/bb0d62180bd9a4e6d33b4d582970ea379ebc3349.jpg',2),(52,'Daniel','uchiha','eder','7828281183','correoDaniel@gmail.com','Direccion de daniel',1,'daniel1','0716b9029d0818cbabd7c69aa55d01c877982b54','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',2),(53,'UsuarioCorreo','UsuarioCorreo','UsuarioCorreo','782000000','166P0492@itspozarica.edu.mx',',bdnlnflqknefeqnflk',1,'useremail','useremail','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1),(57,'Alexis','Alarcon','Alm','7821143993','alexisalarconalm@gmail.com','Pachuca Hidalgo',1,'AlexisAlarcon','alexis','../uploads/6d0af66942db779c9967cf842b60ea9d33a18589.jpg',1),(58,'Perla','Peralta','J','7821143993','perlaj@gmail.com','Calle jade Colonia Actopan Poza rica, Ver.',1,'PerlaPeralta','perla26','../uploads/5c6bd5b53379cb3c1baeca29e028dc1c8d869315.jpg',2),(59,'UsuarioNuevoAdmin','UsuarioNuevoAdmin','UsuarioNuevoAdmin','575758786','UsuarioNuevoAdmin@gmail.com','UsuarioNuevoAdmin',1,'UsuarioNuevoAdmin','UsuarioNuevoAdmin','../uploads/0142d04266cef9498d696a8c2f2e32896d1b6d95.jpg',1);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'Joyeria'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `actualizarCostoPaquete` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `actualizarCostoPaquete`(
+in idprod int,
+idpaq int)
+BEGIN
+	SET SQL_SAFE_UPDATES=0;
+	/*DELETE FROM paquetes_venta
+	WHERE idproducto=idprod and idpaquete=idpaq;*/
+    /*Precio del paquete*/
+    set @original= (select sum(cantidad_T * costo_venta) from paquetes_venta
+	inner join producto on producto.idProducto=paquetes_venta.idproducto 
+	where paquetes_venta.idpaquete =idpaq);
+    /*Se optiene el descuento*/
+    set @descu=(select porcentaje from Paquetes where idpaquete=idpaq);
+    
+    /*Se actualiza el precio del paquete, despues de eliminar el producto del paquete*/
+    UPDATE Paquetes
+	SET	precioOriginal = @original,
+	precioVenta = @original-(@original*@descu/100)
+	WHERE idpaquete = idpaq;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `actualizarProducto` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -349,6 +379,54 @@ BEGIN
 	`categoria` = categoriaP
 	WHERE `idcategoria_producto` = id;
 
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `addCarritoProducto` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `addCarritoProducto`(
+in idproducto_ int,
+idusuario_ int)
+BEGIN
+	set @existe=0;
+	set @existe=(select count(*) from stockUsuario where idProducto =idproducto_ and cantidadProducto>0
+    and idUsuario=idusuario_);
+    if(@existe > 0)
+    then
+		set @existeP=0;
+		set @existeP=(select count(*) from carrito where idproducto =idproducto_
+        and idusuario=idusuario_);
+        
+        if(@existeP>0)
+        then
+			/*Se actualiza*/
+            set @cantidad=0;
+			set @cantidad=(select cantidadP from carrito where idproducto =idproducto_
+			and idusuario=idusuario_);
+            
+            UPDATE carrito SET cantidadP  = @cantidad+1
+			WHERE idusuario=idusuario_ and idproducto=idproducto_;
+
+        else
+			/*Se inserta*/
+            INSERT INTO carrito(`idusuario`,`idproducto`,`cantidadP`)VALUES
+			(idusuario_,idproducto_,1);
+
+        end if;
+        
+    end if;
+    
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -781,6 +859,34 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `getCountProductosPaquete` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getCountProductosPaquete`(in
+idpaquete_ int,
+idusuario_ int)
+BEGIN
+	set @total=(select count(*) as 'total' from 
+    paquetes_venta where paquetes_venta.idpaquete=idpaquete_);
+    
+	select *,@total as 'total' from paquetes_venta inner join stockUsuario 
+	on stockUsuario.idProducto=paquetes_venta.idproducto
+	where paquetes_venta.cantidad_T <= stockUsuario.cantidadProducto 
+	and paquetes_venta.idproducto = stockUsuario.idProducto and stockUsuario.idUsuario=idusuario_
+	and paquetes_venta.idpaquete=idpaquete_ order by paquetes_venta.idpaquete;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `getIDCategoria` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1006,6 +1112,31 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `select_productos_usuario` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_productos_usuario`(
+in iduser int)
+BEGIN
+	select producto.idProducto as 'id_producto',categoria,descripcion,costo_venta as 'costo',
+	cantidadProducto as 'stock',img_producto as 'img'
+	from stockUsuario inner join producto 
+	on producto.idProducto=stockUsuario.idProducto 
+	inner join categoria_producto on categoria_producto.idcategoria_producto=producto.categoria_kf
+	where stockUsuario.idUsuario=iduser;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `select_tabla_productos` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -1091,4 +1222,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-08-04  5:45:44
+-- Dump completed on 2020-08-08  7:04:13
