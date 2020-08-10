@@ -117,20 +117,26 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
         <style>
-            .dividir * {
-                display: block;
+        .estilo {
+            background-color: #e1e1e1;
+            border-radius: 15px;
+            padding: 1rem;
+        }
+
+        .dividir * {
+            display: block;
+        }
+
+        @media (min-width: 700px) {
+            .dividir {
+                display: flex;
+                justify-content: space-between;
             }
 
-            @media (min-width: 700px) {
-                .dividir {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                .dividir .form-group {
-                    flex-basis: calc(50% - 1rem);
-                }
+            .dividir .form-group {
+                flex-basis: calc(50% - 1rem);
             }
+        }
         </style>
     </head>
 
@@ -142,7 +148,8 @@
                 <!-- Enlaces de la barra de navegación izquierda -->
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+                        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
+                                class="fas fa-bars"></i></a>
                     </li>
                 </ul>
 
@@ -159,7 +166,8 @@
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="../main.php" class="brand-link">
-                    <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                    <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                        style="opacity: .8">
                     <span class="brand-text font-weight-light">Rodey</span>
                 </a>
 
@@ -177,7 +185,8 @@
 
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                            data-accordion="false">
                             <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                             <li class="nav-item">
@@ -259,28 +268,28 @@
                                 </ul>
                             </li>
                             <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
-                            <i class="fas fa-cubes mx-1"></i>
-                                <p class="ml-1">
-                                    Paquetes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../paquetes/paquetes.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver paquetes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar paquete</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                                <a href="#" class="nav-link ">
+                                    <i class="fas fa-cubes mx-1"></i>
+                                    <p class="ml-1">
+                                        Paquetes
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="../paquetes/paquetes.php" class="nav-link ">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Ver paquetes</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Agregar paquete</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="fas fa-boxes nav-icon"></i>
@@ -344,7 +353,8 @@
                         <!-- Main row -->
                         <div class="row justify-content-center d-none" id="contenedor_msj">
                             <div class="col-sm-5 col-md-6">
-                                <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-hidden="true">
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                                    aria-hidden="true">
                                     <strong>Aviso:</strong>
                                     <p class="mb-0" id="msj"></p>
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -360,24 +370,30 @@
                                     <div class="card-header">
                                         <h3 class="card-title">Datos del usuario</h3>
                                     </div>
-                                    <form role="form" class="" action="agregarVendedor.php" autocomplete="off" onsubmit="return comprobar()" method="post" enctype="multipart/form-data">
+                                    <form role="form" class="" action="agregarVendedor.php" autocomplete="off"
+                                        onsubmit="return comprobar()" method="post" enctype="multipart/form-data">
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="nombreVendedor">Nombre del usuario</label>
-                                                <input type="text" name="nombre" id="nombre" class="form-control" id="nombreVendedor" placeholder="Nombre" require>
+                                                <input type="text" name="nombre" id="nombre" class="estilo form-control"
+                                                    id="nombreVendedor" placeholder="Nombre" require>
                                                 <div class="invalid-feedback" id="msjValidname">
                                                 </div>
                                             </div>
                                             <div class="dividir">
                                                 <div class="form-group">
                                                     <label for="apellidoP">Apellido paterno</label>
-                                                    <input type="text" name="apellidoP" id="apellidoP" class="form-control" id="apellidoP" placeholder="Apellido paterno" require>
+                                                    <input type="text" name="apellidoP" id="apellidoP"
+                                                        class="estilo form-control" id="apellidoP"
+                                                        placeholder="Apellido paterno" require>
                                                     <div class="valid-feedback" id="msjValidapellidoP">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="apellidoM">Apellido materno</label>
-                                                    <input type="text" name="apellidoM" id="apellidoM" class="form-control" id="apellidoM" placeholder="Apellido materno" require>
+                                                    <input type="text" name="apellidoM" id="apellidoM"
+                                                        class="estilo form-control" id="apellidoM"
+                                                        placeholder="Apellido materno" require>
                                                     <div class="valid-feedback" id="msjValidapellidoM">
                                                     </div>
                                                 </div>
@@ -385,13 +401,15 @@
                                             <div class="dividir">
                                                 <div class="form-group">
                                                     <label for="numeroC">Numero de celular</label>
-                                                    <input type="tel" name="numeroC" id="numeroC" class="form-control" id="numeroC" placeholder="Telefono celular" require>
+                                                    <input type="tel" name="numeroC" id="numeroC" class="estilo form-control"
+                                                        id="numeroC" placeholder="Telefono celular" require>
                                                     <div class="valid-feedback" id="msjValidnumC">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Correo electronico</label>
-                                                    <input type="email" name="email" id="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail" require>
+                                                    <input type="email" name="email" id="email" class="estilo form-control"
+                                                        id="exampleInputEmail1" placeholder="E-mail" require>
                                                     <div class="valid-feedback" id="msjValidEmail">
                                                     </div>
                                                 </div>
@@ -399,17 +417,23 @@
                                             <div class="dividir">
                                                 <div class="form-group">
                                                     <label for="user">Usuario</label>
-                                                    <input type="text" name="user" id="user" class="form-control" id="user" placeholder="Usuario" require>
+                                                    <input type="text" name="user" id="user" class="estilo form-control"
+                                                        id="user" placeholder="Usuario" require>
                                                     <div class="valid-feedback" id="msjValidUsuario">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1">Contraseña</label>
                                                     <div class="d-flex">
-                                                    <input type="password" name="pass" id="pass" class="form-control" id="exampleInputPassword1" placeholder="Usuario" require>
-                                                    <button type="button" id="btnpass" onclick="cambio()" class="btn border-bottom bg-gradient-light"><i class="fas fa-eye"></i></button>
-                                                    
-                                                    </div><div class="valid-feedback" id="msjValidContraseña">
+                                                        <input type="password" name="pass" id="pass"
+                                                            class="estilo form-control" id="exampleInputPassword1"
+                                                            placeholder="Usuario" require>
+                                                        <button type="button" id="btnpass" onclick="cambio()"
+                                                            class="btn border-bottom bg-gradient-light"><i
+                                                                class="fas fa-eye"></i></button>
+
+                                                    </div>
+                                                    <div class="valid-feedback" id="msjValidContraseña">
                                                     </div>
                                                 </div>
                                             </div>
@@ -421,10 +445,12 @@
                                             ?>
                                             <div class="form-group">
                                                 <label>Seleciona una categoria</label>
-                                                <select class="form-control" name="categoria[]" id="categoria" require>
-                                                    <option disabled selected value="0">Selecciona una categoria</option>
+                                                <select class=" form-control" name="categoria[]" id="categoria" require>
+                                                    <option disabled selected value="0">Selecciona una categoria
+                                                    </option>
                                                     <?php while ($mostrar = mysqli_fetch_array($result)) { ?>
-                                                        <option value="<?= $mostrar['idcategoria_usuario']; ?>"><?php echo $mostrar['categoria_usuario']; ?></option>
+                                                    <option value="<?= $mostrar['idcategoria_usuario']; ?>">
+                                                        <?php echo $mostrar['categoria_usuario']; ?></option>
                                                     <?php
                                                     }
                                                     ?>
@@ -435,18 +461,23 @@
 
                                             <div class="form-group">
                                                 <label for="direccion">Direccion completa</label>
-                                                <textarea name="direccion" id="direccion" class="form-control"></textarea>
+                                                <textarea name="direccion" id="direccion"
+                                                    class="form-control  estilo"></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Entrada de archivo</label>
                                                 <div class="custom-file">
-                                                    <input type="file" lang="es" class="custom-file-input" id="imagen" name="imagen" accept="image/png, image/jpeg">
-                                                    <label class="custom-file-label" for="imagen">Elija el archivo</label>
+                                                    <input type="file" lang="es" class="custom-file-input" id="imagen"
+                                                        name="imagen" accept="image/png, image/jpeg">
+                                                    <label class="custom-file-label" for="imagen">Elija el
+                                                        archivo</label>
                                                 </div>
                                             </div>
-                                        </div>  
+                                        </div>
                                         <div class="card-footer text-center d-flex justify-content-center">
-                                            <button id="enviar" onclick="return comprobar()" type="submit" value="Agregar usuario" class=" cambiar-tamanio  btn btn-primary btn-lg ">Agregar</button>
+                                            <button id="enviar" onclick="return comprobar()" type="submit"
+                                                value="Agregar usuario"
+                                                class=" cambiar-tamanio  btn btn-primary btn-lg ">Agregar</button>
                                             <a href="vendedores.php" class=" btn btn-danger btn-lg">Cancelar</a>
                                         </div>
                                     </form>
@@ -477,7 +508,7 @@
         <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
         <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
         <script>
-            $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
         </script>
         <!-- Bootstrap 4 -->
         <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -496,9 +527,9 @@
         <script src="comprobarCampos.js"></script>
         <script src="comprobarCampos.js"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
-                bsCustomFileInput.init();
-            });
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
         </script>
 
     </body>

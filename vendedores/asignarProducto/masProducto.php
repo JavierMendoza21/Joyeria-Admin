@@ -34,8 +34,15 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
+    .estilo {
+        background-color: #e1e1e1;
+        border-radius: 15px;
+        padding: 1rem;
+        min-width: 100px;
+    }
+
     tr th {
-        width:calc(100% / 8);   
+        width: calc(100% / 8);
     }
     </style>
 </head>
@@ -166,6 +173,29 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                                <i class="fas fa-cubes mx-1"></i>
+                                <p class="ml-1">
+                                    Paquetes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="../../paquetes/paquetes.php" class="nav-link ">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver paquetes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar paquete</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="fas fa-boxes nav-icon"></i>
@@ -265,8 +295,8 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                             $imagenUser="../".$mostrarCambio['imgUsuario'];
                                         }
                                         ?>
-                                        <img src="<?= $imagenUser ?>" class="img-circle elevation-2"
-                                            width="115" alt="<?= $imagenUser ?>">
+                                        <img src="<?= $imagenUser ?>" class="img-circle elevation-2" width="115"
+                                            alt="<?= $imagenUser ?>">
                                     </div>
                                     <div class="row mb-5 justify-content-center">
                                         <div class="col-12">
@@ -295,11 +325,21 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                     <tr>
                                                         <td><img src="../../img_productos/<?= $img ?>"
                                                                 class="img-rounded" alt="" width="80"></td>
-                                                        <td><?php echo $mostrar['categoria'] ?></td>
-                                                        <td><?php echo $mostrar['descripcion'] ?></td>
-                                                        <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                        <td><span
-                                                                class="badge mt-4 <?= ($mostrar['stock'] < 10) ? "badge-danger" : (($mostrar['stock'] < 20) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                        <td>
+                                                            <p class="mt-3 h5"><?php echo $mostrar['categoria'] ?></p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="mt-3 h5"><?php echo $mostrar['descripcion'] ?></p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="mt-3 h5">
+                                                                <strong><?php echo '$' . $mostrar['costo'] ?></strong>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="mt-3 h5"><span
+                                                                    class="badge mt-4 p-2 <?= ($mostrar['stock'] < 10) ? "badge-danger" : (($mostrar['stock'] < 20) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                            </p>
                                                         </td>
                                                         <form
                                                             action="removerProductoUsuario.php?id=<?= $_GET['id'] ?>&idProducto=<?= $mostrar['id_producto'] ?>"
@@ -308,13 +348,14 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                                 <div class="form-group mt-3">
                                                                     <input id="" name="valor"
                                                                         max="<?= $mostrar['stock'] ?>" min='0' value="0"
-                                                                        class="form-control" type="number" name="">
+                                                                        class="form-control estilo" type="number"
+                                                                        name="">
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group mt-3">
                                                                     <button type="submit"
-                                                                        class="btn btn-outline-danger"><i
+                                                                        class="btn btn-lg btn-outline-danger"><i
                                                                             class="fas fa-minus-circle"></i></button>
                                                                 </div>
                                                             </td>
@@ -395,11 +436,20 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                     <tr>
                                                         <td><img src="../../img_productos/<?= $img ?>"
                                                                 class="img-rounded" alt="" width="80"></td>
-                                                        <td><?php echo $mostrar['categoria'] ?></td>
-                                                        <td><?php echo $mostrar['descripcion'] ?></td>
-                                                        <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                        <td><span
-                                                                class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                        <td>
+                                                            <p class="h5 mt-3"><?php echo $mostrar['categoria'] ?></p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="h5 mt-3"><?php echo $mostrar['descripcion'] ?></p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="h5 mt-3"><strong><?php echo '$' . $mostrar['costo'] ?></strong>
+                                                            </p>
+                                                        </td>
+                                                        <td>
+                                                            <p class="h5 mt-3"><span
+                                                                    class="badge p-2 mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                            </p>
                                                         </td>
                                                         <form
                                                             action="asignarProductoUsuario.php?id=<?= $_GET['id'] ?>&idProducto=<?= $mostrar['id_producto'] ?>"
@@ -408,13 +458,14 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                                 <div class="form-group mt-3">
                                                                     <input id="" name="valor"
                                                                         max="<?= $mostrar['stock'] ?>" min='0' value="0"
-                                                                        class="form-control" type="number" name="">
+                                                                        class="form-control estilo" type="number"
+                                                                        name="">
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="btn-group btn-group mt-3">
                                                                     <button type="submit"
-                                                                        class="btn btn-outline-success"><i
+                                                                        class="btn btn-lg btn-outline-success"><i
                                                                             class="fas fa-plus-circle"></i></button>
                                                                 </div>
                                                             </td>

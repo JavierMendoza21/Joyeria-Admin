@@ -154,6 +154,11 @@ if (
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
+        .estilo {
+            background-color: #e1e1e1;
+            border-radius: 15px;
+            padding: 1rem;
+        }
         .dividir * {
             display: block;
         }
@@ -416,36 +421,36 @@ if (
 
                                                 <div class="form-group">
                                                     <label for="nombreVendedor">Nombre del vendedor</label>
-                                                    <input disabled type="text" name="nombre" value="<?= $mostrarCambio['nombre'] ?>" id="nombre" class="form-control" id="nombreVendedor" placeholder="Nombre" require>
+                                                    <input disabled type="text" name="nombre" value="<?= $mostrarCambio['nombre'] ?>" id="nombre" class="estilo form-control" id="nombreVendedor" placeholder="Nombre" require>
                                                 </div>
                                                 <div class="dividir">
                                                     <div class="form-group">
                                                         <label for="apellidoP">Apellido paterno</label>
-                                                        <input disabled type="text" name="apellidoP" value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP" class="form-control" id="apellidoP" placeholder="Apellido paterno" require>
+                                                        <input disabled type="text" name="apellidoP" value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP" class="estilo form-control" id="apellidoP" placeholder="Apellido paterno" require>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="apellidoM">Apellido materno</label>
-                                                        <input disabled type="text" name="apellidoM" value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM" class="form-control" id="apellidoM" placeholder="Apellido materno" require>
+                                                        <input disabled type="text" name="apellidoM" value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM" class="estilo form-control" id="apellidoM" placeholder="Apellido materno" require>
                                                     </div>
                                                 </div>
                                                 <div class="dividir">
                                                     <div class="form-group">
                                                         <label for="numeroC">Numero de celular</label>
-                                                        <input disabled type="tel" name="numeroC" value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC" class="form-control" id="numeroC" placeholder="Telefono celular" require>
+                                                        <input disabled type="tel" name="numeroC" value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC" class="estilo form-control" id="numeroC" placeholder="Telefono celular" require>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Correo electronico</label>
-                                                        <input disabled type="email" name="email" value="<?= $mostrarCambio['correoElectronico'] ?>" id="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail" require>
+                                                        <input disabled type="email" name="email" value="<?= $mostrarCambio['correoElectronico'] ?>" id="email" class="estilo form-control" id="exampleInputEmail1" placeholder="E-mail" require>
                                                     </div>
                                                 </div>
                                                 <div class="dividir">
                                                     <div class="form-group">
                                                         <label for="user">Usuario</label>
-                                                        <input disabled type="text" name="user" value="<?= $mostrarCambio['usuario'] ?>" id="user" class="form-control" id="user" placeholder="Usuario" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
+                                                        <input disabled type="text" name="user" value="<?= $mostrarCambio['usuario'] ?>" id="user" class="estilo form-control" id="user" placeholder="Usuario" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="exampleInputPassword1">Contraseña</label>
-                                                        <input disabled type="password" name="pass" value="<?= sha1($mostrarCambio['contraseña']) ?>" id="pass" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" require>
+                                                        <input disabled type="password" name="pass" value="<?= sha1($mostrarCambio['contraseña']) ?>" id="pass" class="estilo form-control" id="exampleInputPassword1" placeholder="Contraseña" require>
                                                     </div>
                                                 </div>
 
@@ -478,7 +483,7 @@ if (
 
                                                 <div class="form-group">
                                                     <label for="direccion">Direccion completa</label>
-                                                    <textarea disabled name="direccion" id="direccion" class="form-control"><?php echo $mostrarCambio['direccion'] ?></textarea>
+                                                    <textarea disabled name="direccion" id="direccion" class="form-control estilo"><?php echo $mostrarCambio['direccion'] ?></textarea>
                                                 </div>
                                                 <div class="form-group d-none">
                                                     <label for="exampleInputFile">Entrada de archivo</label>

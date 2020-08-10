@@ -1,11 +1,8 @@
 <?php
 include '../../sessionIniciada.php';
-
 ?>
 <!DOCTYPE html>
 <html>
-
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -177,7 +174,7 @@ include '../../sessionIniciada.php';
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../paquetes/paquetes.php" class="nav-link">
+                                    <a href="../../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar paquete</p>
                                     </a>
@@ -247,8 +244,8 @@ include '../../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-md-10 col-sm-12  my-2 justify-content-center">
-                            <a href="#" class="btn btn-outline-primary">
-                                <i class="fas fa-shopping-cart"></i> Ver carrito
+                            <a href="verCarrito.php" class="col-lg-3 col-md-4 d-block btn btn-lg btn-outline-primary">
+                                <i class="fas fa-shopping-cart px-2"></i> Ver carrito
                             </a>
                         </div>
                     </div>
@@ -267,7 +264,7 @@ include '../../sessionIniciada.php';
                                     <table id="example2"
                                         class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
-                                            <tr>
+                                            <tr class="h5">
                                                 <th></th>
                                                 <th>Categoria</th>
                                                 <th>Descripcion</th>
@@ -288,15 +285,15 @@ include '../../sessionIniciada.php';
                                             <tr>
                                                 <td><img src="../../img_productos/<?= $img ?>" class="img-rounded"
                                                         alt="" width="80"></td>
-                                                <td><?php echo $mostrar['categoria'] ?></td>
-                                                <td><?php echo $mostrar['descripcion'] ?></td>
-                                                <td><?php echo '$' . $mostrar['costo'] ?></td>
-                                                <td><span
-                                                        class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span>
+                                                <td><p class="mt-3 h5 text-center"><?php echo $mostrar['categoria'] ?></p></td>
+                                                <td><p class="mt-3 h5 text-center"><?php echo $mostrar['descripcion'] ?></p></td>
+                                                <td><p class="mt-3 h5 text-center"><?php echo '$' . $mostrar['costo'] ?></p></td>
+                                                <td><p class="mt-3 h5 text-center"><span
+                                                        class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span></p>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group  mt-3">
-                                                        <a class="btn btn-info" href=""><i
+                                                        <a class="btn btn-lg btn-outline-info" href="add.php?idp=<?= $mostrar['id_producto'] ?>"><i
                                                                 class="fas fa-cart-plus"></i></a>
                                                     </div>
                                                 </td>
@@ -304,7 +301,7 @@ include '../../sessionIniciada.php';
                                             <?php } ?>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
+                                            <tr class="h5">
                                                 <th></th>
                                                 <th>Categoria</th>
                                                 <th>Descripcion</th>
@@ -339,8 +336,8 @@ include '../../sessionIniciada.php';
                                 $packListRest = $conexion->query($sqlgetPaqueteRest);
                                 $lista = "";
                                 while ($mtpRest = mysqli_fetch_array($packListRest)) {
-                                    $lista .= "<li>";
-                                    $lista .= $mtpRest['cantidad_T'] . " " . $mtpRest['descripcion'];
+                                    $lista .= "<li class='h5'>";
+                                    $lista .= "<strong>". $mtpRest['cantidad_T']."</strong>" . " " . $mtpRest['descripcion'];
                                     $lista .= "</li>";
                                 }
                                 echo '<div class="col-lg-8 col-sm-12 ">
@@ -356,8 +353,8 @@ include '../../sessionIniciada.php';
                                             </div>
                                             <div class="card-footer text-center text-muted">
                                                 <div class="btn-group ">
-                                                    <a href="accionesPaquetes/verPaquete.php?idp=' . $mostrar['idpaquete'] . '" class="btn btn-info px-5 border-dark"><strong   class="h3"><i class="fas fa-cart-plus"></i></strong></a>
-                                                    <a href="accionesPaquetes/verPaquete.php?idp=' . $mostrar['idpaquete'] . '" class="btn btn-light px-5 border-dark"><strong   class="h3"><i class="fas fa-eye"></i></strong></a>
+                                                    <a href="add.php?idpack=' . $mostrar['idpaquete'] . '" class="btn btn-outline-info px-5 border-right-0"><strong   class="h3"><i class="fas fa-cart-plus"></i></strong></a>
+                                                    <a href="verPaquete.php?idp=' . $mostrar['idpaquete'] . '" class="btn btn-outline-primary px-5 border-left-0"><strong   class="h3"><i class="fas fa-eye"></i></strong></a>
                                                 </div>
                                             </div>
                                         </div>

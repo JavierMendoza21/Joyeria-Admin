@@ -8,12 +8,14 @@ if (
     $idUsuario = $_GET['id'];
     $idProducto = $_GET['idProducto'];
     $valor = $_POST['valor'];
-    include '../../conexiones/conexion.php';
+    if($valor!=0){
+        include '../../conexiones/conexion.php';
 
-    $sql = "CALL agregarProductoUsuario($idUsuario,$idProducto,$valor) ";
-
-    $conexion->query($sql);
-    $conexion->close();
+        $sql = "CALL agregarProductoUsuario($idUsuario,$idProducto,$valor) ";
+        $conexion->query($sql);
+        $conexion->close();
+    }
+    
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
     $extra = 'vendedores/asignarProducto/masProducto.php?id='.$_GET['id'];

@@ -117,6 +117,11 @@ if (
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
+        .estilo{
+            background-color: #e1e1e1;
+            border-radius: 15px;
+            padding: 1rem;
+        }
         .dividir * {
             display: block;
         }
@@ -364,20 +369,20 @@ if (
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <input type="text" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción del producto" require>
+                                            <input type="text" name="descripcion" class="estilo form-control" id="descripcion" placeholder="Descripción del producto" require>
                                             <div class="invalid-feedback" id="msjValiddescripcion">
                                             </div>
                                         </div>
                                         <div class="dividir">
                                             <div class="form-group">
                                                 <label for="costoCompra">Costo de compra</label>
-                                                <input type="number" min="0" onblur="compruebaValidoEntero()" name="costoCompra" class="form-control "  id="costoCompra" placeholder="Costo de compra" require>
+                                                <input type="number" min="0" onblur="compruebaValidoEntero()" name="costoCompra" class="estilo form-control "  id="costoCompra" placeholder="Costo de compra" require>
                                                 <div class="invalid-feedback" id="msjValidCostoCompra">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Costo de venta</label>
-                                                <input type="number" min="0" name="costoVenta" class="form-control" id="costoVenta" readonly placeholder="Costo de venta" require>
+                                                <input type="number" min="0" name="costoVenta" class="estilo form-control" id="costoVenta" readonly placeholder="Costo de venta" require>
                                                 <div class="invalid-feedback" id="msjValidCostoVenta">
                                                 </div>
                                             </div>
@@ -406,7 +411,7 @@ if (
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Cantidad inicial</label>
-                                                <input type="number" min="0" name="stock" class="form-control" id="stock" placeholder="Stock inicial" require>
+                                                <input type="number" min="0" name="stock" class="estilo form-control" id="stock" placeholder="Stock inicial" require>
                                                 <div class="invalid-feedback" id="msjValidstock">
                                                 </div>
                                             </div>

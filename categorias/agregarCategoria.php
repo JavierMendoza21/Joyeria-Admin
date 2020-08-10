@@ -34,6 +34,13 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <style>
+    .estilo {
+        background-color: #e1e1e1;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -61,7 +68,8 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -79,7 +87,8 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -216,8 +225,10 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
                     <!-- Main row -->
                     <div class="row justify-content-center">
                         <div class="col-sm-12 col-md-8 col-lg-6">
-                            <div class="alert <?= ($msj == 'Error') ? 'alert-danger' : (($msj == '') ? '' : 'alert-success') ?> alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <div
+                                class="alert <?= ($msj == 'Error') ? 'alert-danger' : (($msj == '') ? '' : 'alert-success') ?> alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"
+                                    aria-hidden="true">&times;</button>
                                 <h5><i class="icon fas fa-ban"></i> Aviso!</h5>
                                 <?php if ($msj == 'Exito') {
                                     echo 'Se registro correctamente';
@@ -235,7 +246,8 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
                 <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-sm-12 col-md-8 col-lg-6">
-                            <form action="registrarCategoriaNueva.php" role="form" method="post" onsubmit="return comprobar()" class="">
+                            <form action="registrarCategoriaNueva.php" role="form" method="post"
+                                onsubmit="return comprobar()" class="">
                                 <div class="card card-primary">
                                     <div class="card-header">
                                         Agregar categoria
@@ -246,7 +258,8 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
 
                                         <div class="form-group">
                                             <label for="categoria">Categoria</label>
-                                            <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Nombre de categoria" require>
+                                            <input type="text" name="categoria" id="categoria" class="estilo form-control"
+                                                placeholder="Nombre de categoria" require>
                                             <div class="valid-feedback" id="msjValidCategoria">
                                             </div>
                                         </div>
@@ -254,7 +267,8 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
                                     </div>
 
                                     <div class="card-footer">
-                                        <input class="btn btn-primary btn-lg" type="submit" value="Enviar" onclick="return comprobar()">
+                                        <input class="btn btn-primary btn-lg" type="submit" value="Enviar"
+                                            onclick="return comprobar()">
                                         <a href="categorias.php" class="btn btn-danger btn-lg">Cancelar</a>
                                     </div>
 
@@ -293,11 +307,11 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-   <!-- overlayScrollbars -->
+    <!-- overlayScrollbars -->
     <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>

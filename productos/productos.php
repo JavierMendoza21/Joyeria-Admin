@@ -25,7 +25,11 @@ include '../sessionIniciada.php';
     <!-- DataTables -->
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-
+    <style>
+        tbody tr td{
+            min-width: 50px;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -238,8 +242,8 @@ include '../sessionIniciada.php';
             <section class="content">
                 <div class="container-fluid">
                     <!-- Main row -->
-                    <div class="row">
-                        <div class="col-12 mb-3">
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-lg-9 col-sm-12">
                             <a href="nuevoProducto.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
                                     class="ion ion-bag nav-icon"></i> Agregar producto</a>
                         </div>
@@ -250,8 +254,8 @@ include '../sessionIniciada.php';
                     $resultado = $conexion->query($sql);
                     $conexion->close();
                     ?>
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-9 col-sm-12">
                             <div class="card">
                                 <div
                                     class="card-body w-100 px-2                                                                                                                                                                                                              ">
@@ -278,20 +282,20 @@ include '../sessionIniciada.php';
                                             ?>
                                             <tr>
                                                 <td><img src="../img_productos/<?= $img ?>" class="img-rounded" alt=""
-                                                        width="80"></td>
-                                                <td><?php echo $mostrar['categoria'] ?></td>
-                                                <td><?php echo $mostrar['descripcion'] ?></td>
-                                                <td><strong><?php echo '$' . $mostrar['costo'] ?></strong></td>
-                                                <td><span
+                                                        width="100"></td>
+                                                <td><p class="mt-3 h5"><?php echo $mostrar['categoria'] ?></p></td>
+                                                <td><p class="mt-3 h5"><?php echo $mostrar['descripcion'] ?></p></td>
+                                                <td><strong><p class="mt-3 h5"><?php echo '$' . $mostrar['costo'] ?></p></strong></td>
+                                                <td><p class="mt-3 h5 "><span
                                                         class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
-                                                </td>
+                                                </p></td>
                                                 <td>
                                                     <div class="btn-group btn-group mt-3">
                                                         <a href="accionesProducto/actualizarProducto.php?id=<?= $mostrar['id_producto'] ?>"
-                                                            class="btn btn-outline-primary"><i
+                                                            class="btn btn-lg btn-outline-primary"><i
                                                                 class="fas fa-edit"></i></a>
-                                                                
-                                                        <a class="btn btn-outline-danger"
+
+                                                        <a class="btn btn-lg btn-outline-danger"
                                                             href="accionesProducto/eliminarProducto.php?id=<?= $mostrar['id_producto'] ?>"><i
                                                                 class="fas fa-trash-alt"></i></a>
                                                     </div>

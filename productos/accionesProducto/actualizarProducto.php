@@ -43,6 +43,11 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
+        .estilo{
+            background-color: #e1e1e1;
+            border-radius: 15px;
+            padding: 1rem;
+        }
         .dividir * {
             display: block;
         }
@@ -108,7 +113,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="../main.php" class="nav-link ">
+                            <a href="../../main.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Dashboard
@@ -126,13 +131,13 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="vendedores.php" class="nav-link">
+                                    <a href="../../vendedores/vendedores.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver usuarios</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="agregarVendedor.php" class="nav-link">
+                                    <a href="../../vendedores/agregarVendedor.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar usuario</p>
                                     </a>
@@ -149,21 +154,21 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../ventas/ventas.php" class="nav-link">
+                                    <a href="../../ventas/ventas.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver ventas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../ventas/ventas.php" class="nav-link">
+                                    <a href="../../ventas/ventas.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar Ventas</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link active">
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
                                 <i class="ion ion-bag nav-icon"></i>
                                 <p>
                                     Productos
@@ -172,13 +177,13 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../productos/productos.php" class="nav-link">
+                                    <a href="../productos.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver productos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link active">
+                                    <a href="../nuevoProducto.php" class="nav-link ">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar producto</p>
                                     </a>
@@ -195,13 +200,13 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="../categorias/categorias.php" class="nav-link">
+                                    <a href="../../categorias/categorias.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ver categorias</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../categorias/agregarCategoria.php" class="nav-link">
+                                    <a href="../../categorias/agregarCategoria.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar categorias</p>
                                     </a>
@@ -228,9 +233,9 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../main.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="../main.php">Dashboard</a></li>
-                                <li class="breadcrumb-item disabled"><a href="vendedores.php">Ver productos</a></li>
+                                <li class="breadcrumb-item"><a href="../../main.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="../../main.php">Dashboard</a></li>
+                                <li class="breadcrumb-item disabled"><a href="../productos.php">Ver productos</a></li>
                             </ol>
 
                         </div>
@@ -277,20 +282,20 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                                         </div>
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <input type="text" value="<?= $mostrarR['descripcion'] ?>" name="descripcion" class="form-control" id="descripcion" placeholder="Descripción del producto" require>
+                                            <input type="text" value="<?= $mostrarR['descripcion'] ?>" name="descripcion" class="form-control estilo" id="descripcion" placeholder="Descripción del producto" require>
                                             <div class="invalid-feedback" id="msjValiddescripcion">
                                             </div>
                                         </div>
                                         <div class="dividir">
                                             <div class="form-group">
-                                                <label for="costoVenta">Costo de compra</label>
-                                                <input type="number" value="<?= $mostrarR['costo_compra'] ?>" min="0" name="costoCompra" class="form-control" id="costoCompra" placeholder="Costo de compra" require>
+                                                <label for="costoCompra">Costo de compra</label>
+                                                <input type="number" value="<?= $mostrarR['costo_compra'] ?>" min="0" name="costoCompra" class="estilo form-control" id="costoCompra" placeholder="Costo de compra" require>
                                                 <div class="invalid-feedback" id="msjValidCostoCompra">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Costo de venta</label>
-                                                <input type="number" value="<?= $mostrarR['costo_venta'] ?>" min="0" name="costoVenta" class="form-control" id="costoVenta" placeholder="Costo de venta" require>
+                                                <input type="number" value="<?= $mostrarR['costo_venta'] ?>" min="0" name="costoVenta" class="estilo form-control" id="costoVenta" placeholder="Costo de venta" require>
                                                 <div class="invalid-feedback" id="msjValidCostoVenta">
                                                 </div>
                                             </div>
@@ -324,8 +329,8 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="costoVenta">Cantidad inicial</label>
-                                                <input type="number" value="<?= $mostrarR['cantidad_stock'] ?>" min="<?= $mostrarR['cantidad_stock'] ?>" name="stock" class="form-control" id="stock" placeholder="Stock inicial" require>
+                                                <label for="stock">Stock</label>
+                                                <input type="number" value="<?= $mostrarR['cantidad_stock'] ?>" min="<?= $mostrarR['cantidad_stock'] ?>" name="stock" class="estilo form-control" id="stock" placeholder="Stock inicial" require>
                                                 <div class="invalid-feedback" id="msjValidstock">
                                                 </div>
                                             </div>
@@ -333,7 +338,7 @@ if (isset($_GET['id']) && $_GET['id'] != '') {
                                         <div class="form-group">
                                             <label for="exampleInputFile">Entrada de archivo</label>
                                             <div class="custom-file">
-                                                <input type="file" lang="es" class="custom-file-input" id="imagen" name="imagen" accept="image/png, image/jpeg">
+                                                <input type="file" lang="es" class="custom-file-input estilo" id="imagen" name="imagen" accept="image/png, image/jpeg">
                                                 <label class="custom-file-label" for="imagen">Elija el archivo</label>
                                             </div>
                                         </div>

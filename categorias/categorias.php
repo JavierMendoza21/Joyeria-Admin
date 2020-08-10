@@ -58,8 +58,12 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             min-width: 100%;
         }
         tbody tr td{
-            min-width: calc(100% / 2);
+            min-width: 180px;
         }
+        tbody tr td:last-of-type{
+            text-align: center;
+        }
+
     </style>
 </head>
 
@@ -268,8 +272,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-8">
-                            <a href="agregarCategoria.php" class="col-lg-3 col-md-4 d-block btn btn-success mb-2"><i class="fas fa-boxes"></i> Agregar categoria</a>
+                        <div class=" col-md-10 col-lg-7">
+                            <a href="agregarCategoria.php" class="col-lg-4 col-md-5 d-block btn btn-success mb-2"><i class="fas fa-boxes"></i> Agregar categoria</a>
                         </div>
                     </div>
                 </div>
@@ -279,7 +283,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             <section class="content">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <div class="col-12 col-md-10 col-lg-8">
+                        <div class=" col-md-10 col-lg-7">
 
                             <div class="card">
 
@@ -288,8 +292,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                                     <table id="example2" class="table-hover table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Categoria</th>
+                                                
+                                                <th>Nombre categoria</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
@@ -305,18 +309,16 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
 
                                                 while ($mostrar = mysqli_fetch_array($result)) {
                                                 ?>
+                                                    
                                                     <td>
-                                                        <?= $mostrar['idcategoria_producto'] ?>
-                                                    </td>
-                                                    <td>
-                                                        <?= $mostrar['categoria'] ?>
+                                                        <p class="h5 mt-3"><?= $mostrar['categoria'] ?></p>
                                                     </td>
 
 
                                                     <td>
                                                         <div class="btn-group " role="toolbar" aria-label="Toolbar with button groups">
-                                                            <a href="editarCategoriaProducto.php?id=<?= $mostrar['idcategoria_producto'] ?>&acc=editar" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
-                                                            <a href="accionesCetegoria.php?id=<?= $mostrar['idcategoria_producto'] ?>&acc=eliminar" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                                                            <a href="editarCategoriaProducto.php?id=<?= $mostrar['idcategoria_producto'] ?>&acc=editar" class="btn btn-lg btn-outline-warning"><i class="fas fa-edit"></i></a>
+                                                            <a href="accionesCetegoria.php?id=<?= $mostrar['idcategoria_producto'] ?>&acc=eliminar" class="btn btn-lg btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                                                         </div>
                                                     </td>
                                             </tr>
@@ -327,8 +329,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
 
                                         <tfoot>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>Categoria</th>
+                                                <th>Nombre categoria</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </tfoot>
