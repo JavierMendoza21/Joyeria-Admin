@@ -272,7 +272,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                     <!-- Main row -->
                     <div class="row justify-content-center">
                         <div class="col-lg-10 col-sm-12">
-                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-3 btn btn-success mb-2"><i
+                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-3 btn-lg btn btn-success mb-2"><i
                                     class="fas fa-user-plus"></i> Agregar usuario</a>
                         </div>
                     </div>
@@ -350,7 +350,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                                                 </td>
                                                 <td class="d-flex">
                                                     <a href="vendedores.php?id=<?= $mostrar['idusuarios'] ?>&estate=<?= $mostrar['estado'] ?> "
-                                                        class="btn w-100  btn-sm mt-3 h5 p-2
+                                                        class="btn w-100 text-uppercase h4  btn-sm mt-3 h5 p-2
                                             <?= ($mostrar['estado'] == 1) ? 'btn-success ' : 'btn-secondary '; ?>
                                             <?= ($IDUSER == $mostrar['idusuarios']) ? 'disabled ' : ''; ?> "><?php echo ($mostrar['estado'] == 1) ? 'Activo' : 'Baja'; ?>
                                                     </a>

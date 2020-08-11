@@ -490,8 +490,7 @@ include '../../sessionIniciada.php';
                 if (result.value) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Compra realizada',
-                        text: 'Gracias por su compra!',
+                        title: 'Se cancelo',
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK',
                     }).then((result) => {

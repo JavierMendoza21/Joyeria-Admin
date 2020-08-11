@@ -3,6 +3,7 @@ include '../../sessionIniciada.php';
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -243,7 +244,7 @@ include '../../sessionIniciada.php';
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-10 col-sm-12  my-2 justify-content-center">
+                        <div class="col-lg-9 col-md-10 col-sm-12  my-2 justify-content-center">
                             <a href="verCarrito.php" class="col-lg-3 col-md-4 d-block btn btn-lg btn-outline-primary">
                                 <i class="fas fa-shopping-cart px-2"></i> Ver carrito
                             </a>
@@ -257,7 +258,7 @@ include '../../sessionIniciada.php';
                     $conexion->close();
                     ?>
                     <div class="row justify-content-center">
-                        <div class="col-lg-8 col-md-10 col-sm-12 justify-content-center">
+                        <div class="col-lg-9 col-md-10 col-sm-12 justify-content-center">
                             <div class="card">
                                 <div
                                     class="card-body w-100 px-2                                                                                                                                                                                                              ">
@@ -276,6 +277,7 @@ include '../../sessionIniciada.php';
                                         <tbody>
                                             <?php
                                             $img = "";
+                                            $var=0;
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
                                                 $img = $mostrar['img'];
                                                 if ($img == '') {
@@ -284,21 +286,63 @@ include '../../sessionIniciada.php';
                                             ?>
                                             <tr>
                                                 <td><img src="../../img_productos/<?= $img ?>" class="img-rounded"
-                                                        alt="" width="80"></td>
-                                                <td><p class="mt-3 h5 text-center"><?php echo $mostrar['categoria'] ?></p></td>
-                                                <td><p class="mt-3 h5 text-center"><?php echo $mostrar['descripcion'] ?></p></td>
-                                                <td><p class="mt-3 h5 text-center"><?php echo '$' . $mostrar['costo'] ?></p></td>
-                                                <td><p class="mt-3 h5 text-center"><span
-                                                        class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span></p>
+                                                        alt="" width="110" data-toggle="modal"
+                                                        data-target="#exampleModal<?=$var?>"></td>
+                                                <!--Inicio modal-->
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<?=$var?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title" id="exampleModalLabel"><?php echo $mostrar['descripcion'] ?></h3>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <img src="../../img_productos/<?= $img ?>"
+                                                                    class="img-rounded" alt="" width="330">
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <p class="h3">Precio : <strong><?php echo '$' . $mostrar['costo'] ?></strong></p>
+                                                                <button type="button" class="btn btn-lg btn-secondary"
+                                                                    data-dismiss="modal">Cerrar</button>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Fin modal-->
+
+                                                <td>
+                                                    <p class="mt-3 h5 text-center"><?php echo $mostrar['categoria'] ?>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5 text-center"><?php echo $mostrar['descripcion'] ?>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5 text-center"><?php echo '$' . $mostrar['costo'] ?>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5 text-center"><span
+                                                            class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span>
+                                                    </p>
                                                 </td>
                                                 <td>
                                                     <div class="btn-group btn-group  mt-3">
-                                                        <a class="btn btn-lg btn-outline-info" href="add.php?idp=<?= $mostrar['id_producto'] ?>"><i
+                                                        <a class="btn btn-lg btn-outline-info"
+                                                            href="add.php?idp=<?= $mostrar['id_producto'] ?>"><i
                                                                 class="fas fa-cart-plus"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php } ?>
+                                            <?php $var=$var+1;} ?>
                                         </tbody>
                                         <tfoot>
                                             <tr class="h5">
@@ -340,7 +384,7 @@ include '../../sessionIniciada.php';
                                     $lista .= "<strong>". $mtpRest['cantidad_T']."</strong>" . " " . $mtpRest['descripcion'];
                                     $lista .= "</li>";
                                 }
-                                echo '<div class="col-lg-8 col-sm-12 ">
+                                echo '<div class="col-lg-9 col-sm-12 col-md-10 ">
                                         <div class="card card-light">
                                             <div class="card-header d-flex justify-content-between">
                                                 <h3 class="text-left">Descuento de ' . $mostrar['porcentaje'] . ' <sup style="font-size: 20px">%</sup> </h3>

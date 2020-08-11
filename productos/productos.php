@@ -26,9 +26,9 @@ include '../sessionIniciada.php';
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <style>
-        tbody tr td{
-            min-width: 50px;
-        }
+    tbody tr td {
+        min-width: 50px;
+    }
     </style>
 </head>
 
@@ -244,7 +244,7 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row justify-content-center mb-3">
                         <div class="col-lg-9 col-sm-12">
-                            <a href="nuevoProducto.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
+                            <a href="nuevoProducto.php" class="col-lg-4 btn-lg col-md-4 d-block btn btn-success"><i
                                     class="ion ion-bag nav-icon"></i> Agregar producto</a>
                         </div>
                     </div>
@@ -274,6 +274,7 @@ include '../sessionIniciada.php';
                                         <tbody>
                                             <?php
                                             $img = "";
+                                            $var=0;
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
                                                 $img = $mostrar['img'];
                                                 if ($img == '') {
@@ -281,14 +282,53 @@ include '../sessionIniciada.php';
                                                 }
                                             ?>
                                             <tr>
-                                                <td><img src="../img_productos/<?= $img ?>" class="img-rounded" alt=""
-                                                        width="100"></td>
-                                                <td><p class="mt-3 h5"><?php echo $mostrar['categoria'] ?></p></td>
-                                                <td><p class="mt-3 h5"><?php echo $mostrar['descripcion'] ?></p></td>
-                                                <td><strong><p class="mt-3 h5"><?php echo '$' . $mostrar['costo'] ?></p></strong></td>
-                                                <td><p class="mt-3 h5 "><span
-                                                        class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
-                                                </p></td>
+                                                <td><img src="../img_productos/<?= $img ?>" data-toggle="modal"
+                                                        data-target="#exampleModal<?= $var ?>" class="img-rounded"
+                                                        alt="" width="100"></td>
+                                                <!--Inicio modal-->
+                                                <!-- Button trigger modal -->
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<?= $var ?>" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
+                                                    aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h3 class="modal-title" id="exampleModalLabel"><?php echo $mostrar['descripcion'] ?></h3>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body text-center">
+                                                                <img src="../img_productos/<?= $img ?>"
+                                                                    class="img-rounded" alt="" width="330">
+                                                            </div>
+                                                            <div class="modal-footer d-flex justify-content-between">
+                                                                <p class="h3 stripe">Precio : <strong><?php echo '$' . $mostrar['costo'] ?></strong></p>
+                                                                <button type="button" class="btn btn-lg btn-secondary"
+                                                                    data-dismiss="modal">Cerrar</button>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--Final modal-->
+                                                <td>
+                                                    <p class="mt-3 h5"><?php echo $mostrar['categoria'] ?></p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5"><?php echo $mostrar['descripcion'] ?></p>
+                                                </td>
+                                                <td><strong>
+                                                        <p class="mt-3 h5"><?php echo '$' . $mostrar['costo'] ?></p>
+                                                    </strong></td>
+                                                <td>
+                                                    <p class="mt-3 h5 "><span
+                                                            class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                    </p>
+                                                </td>
                                                 <td>
                                                     <div class="btn-group btn-group mt-3">
                                                         <a href="accionesProducto/actualizarProducto.php?id=<?= $mostrar['id_producto'] ?>"
@@ -301,7 +341,7 @@ include '../sessionIniciada.php';
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php } ?>
+                                            <?php $var=$var+1; } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>

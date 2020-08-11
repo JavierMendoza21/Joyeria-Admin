@@ -266,7 +266,7 @@ function getProducto($id)
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Paquete 
+                            <h1 class="m-0 text-dark">Paquete
                             </h1>
                         </div>
                         <!-- /.col -->
@@ -331,18 +331,48 @@ function getProducto($id)
 
                                                     if ($resultTabla) {
                                                         if (mysqli_num_rows($resultTabla) >= 1) {
+                                                            $var=0;
                                                             while ($most = mysqli_fetch_array($resultTabla)) {
                                                                 $valor = $most['cantidad_T'];
                                                                 $most = getProducto($most['idproducto']);
                                                                 echo '<tr>' .
-                                                                    '<td>' . '<img src="../../img_productos/' . $most["img"] . '" alt="' . $most["img"] . '" class="img-rounded" alt="" width="80">' . '</td>' .
+                                                                    '<td>' . '<img src="../../img_productos/' . $most["img"] . '"data-toggle="modal"
+                                                                    data-target="#exampleModal'.$var.'" alt="" class="img-rounded" alt="" width="120">' . '</td>' .
+
+                                                                    '<!--Inicio modal-->
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade" id="exampleModal'.$var.'" tabindex="-1"
+                                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h3 class="modal-title" id="exampleModalLabel">' . $most['descripcion'] . '</h3>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body text-center ">
+                                                                                <img src="../../img_productos/' . $most["img"] . '"data-toggle="modal"
+                                                                                data-target="#exampleModal'.$var.'" alt="" class="img-rounded" alt="" width="330">
+                                                                                </div>
+                                                                                <div class="modal-footer d-flex justify-content-between">
+                                                                                    <p class="h3">Precio : <strong>$' . $most['costo'] . '</strong></p>
+                                                                                    <button type="button" class="btn btn-lg btn-secondary"
+                                                                                        data-dismiss="modal">Cerrar</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--Final modal-->'.
                                                                     '<td>' . $most['descripcion'] . '</td>' .
                                                                     '<td>' . $most['costo'] . '</td>' .
                                                                     '<td>' . $valor . '</td>' .
                                                                     '<td>' .
                                                                     '<form action="verPaquete.php?idrem=' . $most["idProducto"] . '&idp='.$_GET['idp'].'" autocomplete="off" method="POST">' .
                                                                     '<div class="btn-group">' .
-                                                                    '<input type="submit" class="btn btn-outline-danger mt-3" value="Eliminar">' .
+                                                                    '<input type="submit" class="btn btn-outline-danger mt-4" value="Eliminar">' .
                                                                     '</div>' .
                                                                     '</form>' .
                                                                     '</td>' .
@@ -378,8 +408,9 @@ function getProducto($id)
                                 ?>
                                 <div class="card-footer d-sm-block d-md-flex  text-center justify-content-between">
                                     <div class="card-text text-left">
-                                        <h4>De : <strong> <?php echo "$".$res['precioOriginal'];?></strong> A <strong><?php echo "$".$res['precioVenta'];?></strong></h4>
-                                        
+                                        <h4>De : <strong> <?php echo "$".$res['precioOriginal'];?></strong> A
+                                            <strong><?php echo "$".$res['precioVenta'];?></strong></h4>
+
                                     </div>
                                     <form action="verPaquete.php?acc=del&idp=<?=$_GET['idp'];?>" autocomplete="off"
                                         method="POST" class="text-center mt-3">
