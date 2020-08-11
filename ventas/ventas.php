@@ -51,7 +51,8 @@ include '../sessionIniciada.php';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -69,7 +70,8 @@ include '../sessionIniciada.php';
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -237,7 +239,8 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row">
                         <div class="col-12 mb-3">
-                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i class="ion ion-bag nav-icon"></i> Nueva venta</a>
+                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
+                                    class="ion ion-bag nav-icon"></i> Nueva venta</a>
                         </div>
                     </div>
                     <?php
@@ -249,8 +252,10 @@ include '../sessionIniciada.php';
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
-                                <div class="card-body w-100 px-2                                                                                                                                                                                                              ">
-                                    <table id="example2" class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
+                                <div
+                                    class="card-body w-100 px-2                                                                                                                                                                                                              ">
+                                    <table id="example2"
+                                        class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -264,25 +269,60 @@ include '../sessionIniciada.php';
                                         <tbody>
                                             <?php
                                             $img = "";
+                                            $var=0;
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
                                                 $img = $mostrar['img'];
                                                 if ($img == '') {
                                                     $img = 'producto_default.png';
                                                 }
                                             ?>
-                                                <tr>
-                                                    <td><img src="../img_productos/<?= $img ?>" class="img-rounded" alt="" width="80"></td>
-                                                    <td><?php echo $mostrar['categoria'] ?></td>
-                                                    <td><?php echo $mostrar['descripcion'] ?></td>
-                                                    <td><?php echo '$' . $mostrar['costo'] ?></td>
-                                                    <td><span class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span></td>
-                                                    <td>
-                                                        <div class="btn-group btn-group mt-3">
-                                                            <a class="btn btn-info" href=""><i class="fas fa-cart-plus"></i></a>
+                                            <tr>
+                                                <td>
+                                                    <img src="../img_productos/<?= $img ?>" class="img-rounded" alt=""
+                                                        width="80" data-toggle="modal"
+                                                        data-target="#exampleModal<?=$var?>">
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal<?=$var?>" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel"><p class="h4">
+                                                                    <?php echo $mostrar['descripcion'] ?>
+                                                                    </p></h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <img src="../img_productos/<?= $img ?>"
+                                                                        class="img-rounded" alt="" width="330">
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn d-block btn-lg btn-secondary"
+                                                                        data-dismiss="modal">Cerrar</button>
+                                                                    
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
+                                                    </div>
+                                                </td>
+                                                <td><?php echo $mostrar['categoria'] ?></td>
+                                                <td><?php echo $mostrar['descripcion'] ?></td>
+                                                <td><?php echo '$' . $mostrar['costo'] ?></td>
+                                                <td><span
+                                                        class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
+                                                </td>
+                                                <td>
+                                                    <div class="btn-group btn-group mt-3">
+                                                        <a class="btn btn-info" href=""><i
+                                                                class="fas fa-cart-plus"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php $var=$var+1;} ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -327,7 +367,7 @@ include '../sessionIniciada.php';
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -345,22 +385,22 @@ include '../sessionIniciada.php';
     <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
-        $.extend(true, $.fn.dataTable.defaults, {
-            "searching": true,
-            "ordering": true
-        });
-        $(function() {
+    $.extend(true, $.fn.dataTable.defaults, {
+        "searching": true,
+        "ordering": true
+    });
+    $(function() {
 
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": true,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": true,
-                "responsive": false,
-            });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": true,
+            "responsive": false,
         });
+    });
     </script>
 </body>
 

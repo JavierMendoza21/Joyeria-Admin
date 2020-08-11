@@ -365,7 +365,7 @@
                         </div>
 
                         <div class="row justify-content-center">
-                            <div class="col-sm-12 col-lg-7 col-md-8 mt-3">
+                            <div class="col-sm-12 col-lg-8 col-md-10 mt-3">
                                 <div class="card card-primary">
                                     <div class="card-header">
                                         <h3 class="card-title">Datos del usuario</h3>
@@ -401,15 +401,17 @@
                                             <div class="dividir">
                                                 <div class="form-group">
                                                     <label for="numeroC">Numero de celular</label>
-                                                    <input type="tel" name="numeroC" id="numeroC" class="estilo form-control"
-                                                        id="numeroC" placeholder="Telefono celular" require>
+                                                    <input type="tel" name="numeroC" id="numeroC"
+                                                        class="estilo form-control" id="numeroC"
+                                                        placeholder="Telefono celular" require>
                                                     <div class="valid-feedback" id="msjValidnumC">
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Correo electronico</label>
-                                                    <input type="email" name="email" id="email" class="estilo form-control"
-                                                        id="exampleInputEmail1" placeholder="E-mail" require>
+                                                    <input type="email" name="email" id="email"
+                                                        class="estilo form-control" id="exampleInputEmail1"
+                                                        placeholder="E-mail" require>
                                                     <div class="valid-feedback" id="msjValidEmail">
                                                     </div>
                                                 </div>
@@ -475,8 +477,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer text-center d-flex justify-content-center">
-                                            <button id="enviar" onclick="return comprobar()" type="submit"
-                                                value="Agregar usuario"
+                                            <button id="enviar" onclick="" type="button"
                                                 class=" cambiar-tamanio  btn btn-primary btn-lg ">Agregar</button>
                                             <a href="vendedores.php" class=" btn btn-danger btn-lg">Cancelar</a>
                                         </div>
@@ -526,6 +527,42 @@
         <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
         <script src="comprobarCampos.js"></script>
         <script src="comprobarCampos.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script type="text/javascript">
+        $(document).ready(function() {
+            $("#enviar").click(function() {
+                if (comprobar()) {
+                    Swal.fire({
+                        title: 'Desea crear el usuario?',
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, crear!',
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.value) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Usuario creado',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                if (result.value) {
+                                    document.forms[0].submit();
+                                }
+                            })
+
+                        }
+                    })
+                }
+
+
+            });
+
+
+        })
+        </script>
         <script type="text/javascript">
         $(document).ready(function() {
             bsCustomFileInput.init();

@@ -154,25 +154,26 @@ if (
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
-        .estilo {
-            background-color: #e1e1e1;
-            border-radius: 15px;
-            padding: 1rem;
-        }
-        .dividir * {
-            display: block;
+    .estilo {
+        background-color: #e1e1e1;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+
+    .dividir * {
+        display: block;
+    }
+
+    @media (min-width: 700px) {
+        .dividir {
+            display: flex;
+            justify-content: space-between;
         }
 
-        @media (min-width: 700px) {
-            .dividir {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .dividir .form-group {
-                flex-basis: calc(50% - 1rem);
-            }
+        .dividir .form-group {
+            flex-basis: calc(50% - 1rem);
         }
+    }
     </style>
 </head>
 
@@ -201,7 +202,8 @@ if (
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -219,7 +221,8 @@ if (
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -375,7 +378,8 @@ if (
                     <!-- Main row -->
                     <div class="row justify-content-center d-none" id="contenedor_msj">
                         <div class="col-sm-5 col-md-6">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-hidden="true">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                                aria-hidden="true">
                                 <strong>Aviso:</strong>
                                 <p class="mb-0" id="msj"></p>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -413,57 +417,82 @@ if (
                                             $imagen = "../uploads/user-default.jpg";
                                         }
                                 ?>
-                                        <form role="form" action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>&img=<?= $mostrarCambio['imgUsuario'] ?>" method="post" enctype="multipart/form-data">
-                                            <div class="card-body">
-                                                <div class="mb-3 text-center">
-                                                    <img src="<?= $imagen ?>" class="img-circle elevation-2" width="95" alt="<?= $mostrarCambio['imgUsuario'] ?>">
-                                                </div>
+                                <form role="form"
+                                    action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>&img=<?= $mostrarCambio['imgUsuario'] ?>"
+                                    method="post" enctype="multipart/form-data">
+                                    <div class="card-body">
+                                        <div class="mb-3 text-center">
+                                            <img src="<?= $imagen ?>" class="img-circle elevation-2" width="95"
+                                                alt="<?= $mostrarCambio['imgUsuario'] ?>">
+                                        </div>
 
-                                                <div class="form-group">
-                                                    <label for="nombreVendedor">Nombre del vendedor</label>
-                                                    <input disabled type="text" name="nombre" value="<?= $mostrarCambio['nombre'] ?>" id="nombre" class="estilo form-control" id="nombreVendedor" placeholder="Nombre" require>
-                                                </div>
-                                                <div class="dividir">
-                                                    <div class="form-group">
-                                                        <label for="apellidoP">Apellido paterno</label>
-                                                        <input disabled type="text" name="apellidoP" value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP" class="estilo form-control" id="apellidoP" placeholder="Apellido paterno" require>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="apellidoM">Apellido materno</label>
-                                                        <input disabled type="text" name="apellidoM" value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM" class="estilo form-control" id="apellidoM" placeholder="Apellido materno" require>
-                                                    </div>
-                                                </div>
-                                                <div class="dividir">
-                                                    <div class="form-group">
-                                                        <label for="numeroC">Numero de celular</label>
-                                                        <input disabled type="tel" name="numeroC" value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC" class="estilo form-control" id="numeroC" placeholder="Telefono celular" require>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputEmail1">Correo electronico</label>
-                                                        <input disabled type="email" name="email" value="<?= $mostrarCambio['correoElectronico'] ?>" id="email" class="estilo form-control" id="exampleInputEmail1" placeholder="E-mail" require>
-                                                    </div>
-                                                </div>
-                                                <div class="dividir">
-                                                    <div class="form-group">
-                                                        <label for="user">Usuario</label>
-                                                        <input disabled type="text" name="user" value="<?= $mostrarCambio['usuario'] ?>" id="user" class="estilo form-control" id="user" placeholder="Usuario" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="exampleInputPassword1">Contraseña</label>
-                                                        <input disabled type="password" name="pass" value="<?= sha1($mostrarCambio['contraseña']) ?>" id="pass" class="estilo form-control" id="exampleInputPassword1" placeholder="Contraseña" require>
-                                                    </div>
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="nombreVendedor">Nombre del vendedor</label>
+                                            <input disabled type="text" name="nombre"
+                                                value="<?= $mostrarCambio['nombre'] ?>" id="nombre"
+                                                class="estilo form-control" id="nombreVendedor" placeholder="Nombre"
+                                                require>
+                                        </div>
+                                        <div class="dividir">
+                                            <div class="form-group">
+                                                <label for="apellidoP">Apellido paterno</label>
+                                                <input disabled type="text" name="apellidoP"
+                                                    value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP"
+                                                    class="estilo form-control" id="apellidoP"
+                                                    placeholder="Apellido paterno" require>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="apellidoM">Apellido materno</label>
+                                                <input disabled type="text" name="apellidoM"
+                                                    value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM"
+                                                    class="estilo form-control" id="apellidoM"
+                                                    placeholder="Apellido materno" require>
+                                            </div>
+                                        </div>
+                                        <div class="dividir">
+                                            <div class="form-group">
+                                                <label for="numeroC">Numero de celular</label>
+                                                <input disabled type="tel" name="numeroC"
+                                                    value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC"
+                                                    class="estilo form-control" id="numeroC"
+                                                    placeholder="Telefono celular" require>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Correo electronico</label>
+                                                <input disabled type="email" name="email"
+                                                    value="<?= $mostrarCambio['correoElectronico'] ?>" id="email"
+                                                    class="estilo form-control" id="exampleInputEmail1"
+                                                    placeholder="E-mail" require>
+                                            </div>
+                                        </div>
+                                        <div class="dividir">
+                                            <div class="form-group">
+                                                <label for="user">Usuario</label>
+                                                <input disabled type="text" name="user"
+                                                    value="<?= $mostrarCambio['usuario'] ?>" id="user"
+                                                    class="estilo form-control" id="user" placeholder="Usuario"
+                                                    pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputPassword1">Contraseña</label>
+                                                <input disabled type="password" name="pass"
+                                                    value="<?= sha1($mostrarCambio['contraseña']) ?>" id="pass"
+                                                    class="estilo form-control" id="exampleInputPassword1"
+                                                    placeholder="Contraseña" require>
+                                            </div>
+                                        </div>
 
-                                                <?php
+                                        <?php
                                                 include '../conexiones/conexion.php';
                                                 $sql = 'SELECT * FROM categoria_usuario';
                                                 $result = $conexion->query($sql);
                                                 ?>
-                                                <div class="form-group">
-                                                    <label>Seleciona una categoria</label>
-                                                    <select disabled class="form-control" name="categoria[]" id="categoria" require>
-                                                        <option disabled selected value="0">Selecciona una categoria</option>
-                                                        <?php while ($mostrar = mysqli_fetch_array($result)) {
+                                        <div class="form-group">
+                                            <label>Seleciona una categoria</label>
+                                            <select disabled class="form-control" name="categoria[]" id="categoria"
+                                                require>
+                                                <option disabled selected value="0">Selecciona una categoria</option>
+                                                <?php while ($mostrar = mysqli_fetch_array($result)) {
 
                                                             echo "<option value='" . $mostrar['idcategoria_usuario'] . "' ";
 
@@ -473,42 +502,46 @@ if (
                                                             echo "  >" . $mostrar['categoria_usuario'] . "</option>";
                                                         ?>
 
-                                                        <?php
+                                                <?php
                                                         }
                                                         $conexion->close();
                                                         ?>
 
-                                                    </select>
-                                                </div>
+                                            </select>
+                                        </div>
 
-                                                <div class="form-group">
-                                                    <label for="direccion">Direccion completa</label>
-                                                    <textarea disabled name="direccion" id="direccion" class="form-control estilo"><?php echo $mostrarCambio['direccion'] ?></textarea>
-                                                </div>
-                                                <div class="form-group d-none">
-                                                    <label for="exampleInputFile">Entrada de archivo</label>
-                                                    <div class="custom-file">
-                                                        <input type="file" class="custom-file-input" value="archivo.jpg" id="imagen" name="imagen" accept="image/png, image/jpeg">
-                                                        <label class="custom-file-label" for="imagen"><?php if (strlen($mostrarCambio['imgUsuario']) > 16) :
+                                        <div class="form-group">
+                                            <label for="direccion">Direccion completa</label>
+                                            <textarea disabled name="direccion" id="direccion"
+                                                class="form-control estilo"><?php echo $mostrarCambio['direccion'] ?></textarea>
+                                        </div>
+                                        <div class="form-group d-none">
+                                            <label for="exampleInputFile">Entrada de archivo</label>
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" value="archivo.jpg"
+                                                    id="imagen" name="imagen" accept="image/png, image/jpeg">
+                                                <label class="custom-file-label" for="imagen"><?php if (strlen($mostrarCambio['imgUsuario']) > 16) :
                                                                                                             echo substr($mostrarCambio['imgUsuario'], 11);
 
                                                                                                         else :
                                                                                                             echo $mostrarCambio['imgUsuario'];
                                                                                                         endif;
                                                                                                         ?></label>
-                                                    </div>
-                                                </div>
-
-
-
                                             </div>
-                                            <!-- /.card-body -->
-                                            <div class="card-footer text-center  ">
-                                                <button id="enviar" onclick="return comprobar()" type="submit" class="cambiar-tamanio  btn btn-lg <?= $_GET['acc'] == 'eliminar' ? 'btn-danger' : 'btn-warning d-none'; ?>"><?php echo $_GET['acc'] == 'eliminar' ? 'Eliminar' : '<i class="fas fa-pen-fancy"></i>'; ?></button>
-                                                <a href="vendedores.php" class=" cambiar-tamanio btn btn-primary btn-lg">Regresar</a>
+                                        </div>
 
-                                            </div>
-                                        </form>
+
+
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer text-center  ">
+                                        <button id="enviar" onclick="" type="button"
+                                            class="cambiar-tamanio btn btn-lg <?= $_GET['acc'] == 'eliminar' ? 'btn-danger' : 'btn-warning d-none'; ?>"><?php echo $_GET['acc'] == 'eliminar' ? 'Eliminar' : '<i class="fas fa-pen-fancy"></i>'; ?></button>
+                                        <a href="vendedores.php"
+                                            class=" cambiar-tamanio btn btn-primary btn-lg">Regresar</a>
+
+                                    </div>
+                                </form>
                                 <?php
                                     }
                                 } ?>
@@ -553,7 +586,7 @@ if (
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -562,10 +595,42 @@ if (
     <!-- bs-custom-file-input -->
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="comprobarCampos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            bsCustomFileInput.init();
+    $(document).ready(function() {
+        $("#enviar").click(function() {
+                Swal.fire({
+                    title: 'Desea eliminar el usuario?',
+                    text: 'Esta acción ya no se va a poder deshacer',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, crear!',
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Usuario creado',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            if (result.value) {
+                                document.forms[0].submit();
+                            }
+                        })
+                    }
+                })
         });
+
+
+    })
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        bsCustomFileInput.init();
+    });
     </script>
 </body>
 

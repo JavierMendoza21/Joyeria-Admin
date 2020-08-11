@@ -22,10 +22,12 @@ include '../../sessionIniciada.php';
     <link rel="stylesheet" href="../../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
     <style>
-    thead tr th{
+    thead tr th {
         min-width: 8rem;
     }
+
     tbody tr {
         min-width: 8rem;
     }
@@ -249,7 +251,7 @@ include '../../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row justify-content-center my-3 border-dark">
                         <div class="col-lg-8 col-md-10 col-sm-12 justify-content-center">
-                            <form action="" class="  ">
+                            <form action="comprar.php" class="" onsubmit="">
                                 <div class="form-group">
                                     <label for="name" class="h3 d-block text-left">Nombre </label>
                                     <input type="text" id="name" class="w-50 text-capitalize d-block border-0 py-2 px-2"
@@ -260,13 +262,18 @@ include '../../sessionIniciada.php';
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <button type="button" class="h3 text-uppercase btn btn-lg btn-outline-success w-100"><i
+                                        <button type="button" id="btn-comprar" onclick=""
+                                            class="h3 text-uppercase btn btn-lg btn-outline-success w-100"><i
                                                 class="fas fa-cash-register pr-3"></i>Comprar</button>
                                     </div>
+
+
                                     <div class="col-lg-6">
-                                        <a class="h3 text-uppercase btn btn-lg btn-outline-danger w-100"
-                                            href="remover.php?remover=0"><i
-                                                class="fas fa-window-close pr-3"></i>Cancelar</a>
+
+                                        <button type="button" id="cancelar"
+                                            class="h3 text-uppercase btn btn-lg btn-outline-danger w-100"><i
+                                                class="fas fa-window-close pr-3"></i>Cancelar</button>
+                                        
                                     </div>
 
                                 </div>
@@ -278,7 +285,7 @@ include '../../sessionIniciada.php';
                     //echo 'Usuario id : '.$_SESSION['idusuario'];
                     $sql = "CALL selectCarritoProductos(" . $_SESSION['idusuario'] . ")";
                     $resultado = $conexion->query($sql);
-                    
+
                     ?>
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-md-10 col-sm-12 justify-content-center">
@@ -322,7 +329,7 @@ include '../../sessionIniciada.php';
                                                     <div class="btn-group btn-group  mt-3">
                                                         <a class="btn btn-lg btn-outline-danger"
                                                             href="remover.php?idp=<?= $mostrar['idProducto'] ?>"><i
-                                                                class="fas fa-minus"></i></a>
+                                                                class="fas fa-trash-alt"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -348,43 +355,43 @@ include '../../sessionIniciada.php';
                         <?php
                         include '../../conexiones/conexion.php';
                         $sqlPaquetes = "SELECT carritoPaquete.idpaquete,porcentaje,precioOriginal,precioVenta,cantidadP from carritoPaquete inner join Paquetes on Paquetes.idpaquete=carritoPaquete.idpaquete
-                        where carritoPaquete.idusuario=".$_SESSION['idusuario'];
+                        where carritoPaquete.idusuario=" . $_SESSION['idusuario'];
                         $resPaquetes = $conexion->query($sqlPaquetes);
 
                         while ($mostrar = mysqli_fetch_array($resPaquetes)) {
-                                include '../../conexiones/conexion.php';
-                                $sqlgetPaqueteRest = 'call getPaquetes(' . $mostrar['idpaquete'] . ');';
-                                $packListRest = $conexion->query($sqlgetPaqueteRest);
-                                $lista = "";
-                                while ($mtpRest = mysqli_fetch_array($packListRest)) {
-                                    $lista .= "<li class='h5'>";
-                                    $lista .= "<strong>".$mtpRest['cantidad_T'] . "</strong> " . $mtpRest['descripcion'];
-                                    $lista .= "</li>";
-                                }
-                                echo '<div class="col-lg-8 col-sm-12 ">
+                            include '../../conexiones/conexion.php';
+                            $sqlgetPaqueteRest = 'call getPaquetes(' . $mostrar['idpaquete'] . ');';
+                            $packListRest = $conexion->query($sqlgetPaqueteRest);
+                            $lista = "";
+                            while ($mtpRest = mysqli_fetch_array($packListRest)) {
+                                $lista .= "<li class='h5'>";
+                                $lista .= "<strong>" . $mtpRest['cantidad_T'] . "</strong> " . $mtpRest['descripcion'];
+                                $lista .= "</li>";
+                            }
+                            echo '<div class="col-lg-8 col-sm-12 ">
                                         <div class="card card-light">
                                             <div class="card-header d-flex justify-content-between">
                                                 <h3 class="">Descuento de ' . $mostrar['porcentaje'] . ' <sup style="font-size: 20px">%</sup></h3>
-                                                <p class="h3">Total : #'.$mostrar['cantidadP'].'</p>
+                                                <p class="h3">Total : #' . $mostrar['cantidadP'] . '</p>
                                             </div>
                                             <div class="card-body">
                                                 <ul>
                                                     ' . $lista . '
                                                 </ul>
-                                            <p class="card-text text-center h2">De : <strong >$' . $mostrar['precioOriginal']*$mostrar['cantidadP'] . '</strong> a <strong>'.$mostrar['precioVenta']*$mostrar['cantidadP'].'</strong></p>
+                                            <p class="card-text text-center h2">De : <strong >$' . $mostrar['precioOriginal'] * $mostrar['cantidadP'] . '</strong> a <strong>' . $mostrar['precioVenta'] * $mostrar['cantidadP'] . '</strong></p>
                                             </div>
                                             <div class="card-footer text-center text-muted">
                                                 <div class="btn-group ">
-                                                    <a href="remover.php?idpack=' . $mostrar['idpaquete'] . '" class="btn btn-outline-danger px-5 border-right-0"><strong   class="h3"><i class="fas fa-minus"></i></strong></a>
+                                                    <a href="remover.php?idpack=' . $mostrar['idpaquete'] . '" class="btn btn-outline-danger px-5 border-right-0"><strong   class="h3"><i class="fas fa-trash-alt"></i></strong></a>
                                                     <a href="verPaquete.php?idp=' . $mostrar['idpaquete'] . '" class="btn btn-outline-primary px-5  border-left-0"><strong   class="h3"><i class="fas fa-eye"></i></strong></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>';
-                            
-                            
+
+
                             //echo "<br>Mi lista ".$lista;
-                            
+
                         }
                         ?>
                     </div>
@@ -433,6 +440,72 @@ include '../../sessionIniciada.php';
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#btn-comprar").click(function() {
+            var texto = document.getElementById("name").value;
+            if (texto != "") {
+                Swal.fire({
+                    title: 'Desea realizar la compra?',
+                    text: "¡No podrás revertir esto!",
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, comprar!',
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Compra realizada',
+                            text: 'Gracias por su compra!',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            if (result.value) {
+                                document.forms[0].submit();
+                            }
+                        })
+
+                    }
+                })
+            }
+
+
+        });
+        $("#cancelar").click(function() {
+            Swal.fire({
+                title: 'Desea cancelar la compra?',
+                text: "¡No podrás revertir esto!",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Si, cancelar!',
+                cancelButtonText: "Continuar"
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Compra realizada',
+                        text: 'Gracias por su compra!',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.value) {
+                            var enlace=document.createElement("a");
+                            enlace.setAttribute("href","remover.php?remover=1");
+                            enlace.click();
+                        }
+                    })
+                }
+            })
+        });
+    })
+    </script>
     <script>
     $.extend(true, $.fn.dataTable.defaults, {
         "searching": true,
