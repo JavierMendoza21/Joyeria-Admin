@@ -244,7 +244,7 @@ include '../../sessionIniciada.php';
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-lg-9 col-md-10 col-sm-12  my-2 justify-content-center">
+                        <div class="col-lg-9 col-md-10 col-sm-12 mb-3 justify-content-center">
                             <a href="verCarrito.php" class="col-lg-3 col-md-4 d-block btn btn-lg btn-outline-primary">
                                 <i class="fas fa-shopping-cart px-2"></i> Ver carrito
                             </a>
@@ -373,8 +373,9 @@ include '../../sessionIniciada.php';
                             $sqlgetPaquete = 'call getCountProductosPaquete(' . $mostrar['idpaquete'] . ','.$_SESSION['idusuario'].');';
                             $packList = $conexion->query($sqlgetPaquete);
                             $numeroT=mysqli_num_rows($packList);
+                            
                             $mtp = mysqli_fetch_array($packList);
-                            if($mtp['total']==$numeroT){
+                            if(isset($mtp['total']) && $mtp['total']==$numeroT){
                                 include '../../conexiones/conexion.php';
                                 $sqlgetPaqueteRest = 'call getPaquetes(' . $mostrar['idpaquete'] . ');';
                                 $packListRest = $conexion->query($sqlgetPaqueteRest);
@@ -442,6 +443,8 @@ include '../../sessionIniciada.php';
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- overlayScrollbars -->
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src=" ../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
     <!-- AdminLTE App -->

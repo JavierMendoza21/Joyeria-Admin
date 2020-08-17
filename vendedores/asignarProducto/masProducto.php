@@ -266,7 +266,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-sm-12 col-md-10 col-lg-9">
                             <div class="card card-primary card-default ">
                                 <div class="card-header">
                                     <h3 class="card-title">Productos del usuario</h3>
@@ -295,7 +295,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                             $imagenUser="../".$mostrarCambio['imgUsuario'];
                                         }
                                         ?>
-                                        <img src="<?= $imagenUser ?>" class="img-circle elevation-2" width="115"
+                                        <img src="<?= $imagenUser ?>" class="img-circle elevation-2" width="130"
                                             alt="<?= $imagenUser ?>">
                                     </div>
                                     <div class="row mb-5 justify-content-center">
@@ -304,8 +304,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                 class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                                 <thead class="">
                                                     <tr class="">
-                                                        <th class=""></th>
-                                                        <th>Categoria</th>
+                                                        <th></th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Stock</th>
@@ -324,10 +323,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                     ?>
                                                     <tr>
                                                         <td><img src="../../img_productos/<?= $img ?>"
-                                                                class="img-rounded" alt="" width="80"></td>
-                                                        <td>
-                                                            <p class="mt-3 h5"><?php echo $mostrar['categoria'] ?></p>
-                                                        </td>
+                                                                class="img-rounded" alt="" width="130"></td>
                                                         <td>
                                                             <p class="mt-3 h5"><?php echo $mostrar['descripcion'] ?></p>
                                                         </td>
@@ -367,7 +363,6 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                 <tfoot>
                                                     <tr>
                                                         <th></th>
-                                                        <th>Categoria</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Stock</th>
@@ -387,7 +382,7 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-sm-12 col-md-10 col-lg-9">
                             <div class="card card-primary card-default ">
                                 <div class="card-header">
                                     <h3 class="card-title">Agregar productos al usuario</h3>
@@ -415,7 +410,6 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                 <thead>
                                                     <tr>
                                                         <th></th>
-                                                        <th>Categoria</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Stock</th>
@@ -435,15 +429,13 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                     ?>
                                                     <tr>
                                                         <td><img src="../../img_productos/<?= $img ?>"
-                                                                class="img-rounded" alt="" width="80"></td>
-                                                        <td>
-                                                            <p class="h5 mt-3"><?php echo $mostrar['categoria'] ?></p>
-                                                        </td>
+                                                                class="img-rounded" alt="" width="130"></td>
                                                         <td>
                                                             <p class="h5 mt-3"><?php echo $mostrar['descripcion'] ?></p>
                                                         </td>
                                                         <td>
-                                                            <p class="h5 mt-3"><strong><?php echo '$' . $mostrar['costo'] ?></strong>
+                                                            <p class="h5 mt-3">
+                                                                <strong><?php echo '$' . $mostrar['costo'] ?></strong>
                                                             </p>
                                                         </td>
                                                         <td>
@@ -478,7 +470,6 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
                                                 <tfoot>
                                                     <tr>
                                                         <th></th>
-                                                        <th>Categoria</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Stock</th>
@@ -535,11 +526,10 @@ if (!isset($_GET['id']) || $_GET['id'] == '') {
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- ChartJS -->
-    <script src=" ../../plugins/chart.js/Chart.min.js "></script>
+    <!-- overlayScrollbars -->
+    <script src=" ../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../../dist/js/adminlte.js "></script>
-
     <!-- DataTables -->
     <script src="../../plugins/datatables/jquery.dataTables.js"></script>
     <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

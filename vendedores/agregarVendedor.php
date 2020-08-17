@@ -117,12 +117,6 @@
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
         <style>
-        .estilo {
-            background-color: #e1e1e1;
-            border-radius: 15px;
-            padding: 1rem;
-        }
-
         .dividir * {
             display: block;
         }
@@ -375,7 +369,7 @@
                                         <div class="card-body">
                                             <div class="form-group">
                                                 <label for="nombreVendedor">Nombre del usuario</label>
-                                                <input type="text" name="nombre" id="nombre" class="estilo form-control"
+                                                <input type="text" name="nombre" id="nombre" class=" form-control"
                                                     id="nombreVendedor" placeholder="Nombre" require>
                                                 <div class="invalid-feedback" id="msjValidname">
                                                 </div>
@@ -384,7 +378,7 @@
                                                 <div class="form-group">
                                                     <label for="apellidoP">Apellido paterno</label>
                                                     <input type="text" name="apellidoP" id="apellidoP"
-                                                        class="estilo form-control" id="apellidoP"
+                                                        class=" form-control" id="apellidoP"
                                                         placeholder="Apellido paterno" require>
                                                     <div class="valid-feedback" id="msjValidapellidoP">
                                                     </div>
@@ -392,7 +386,7 @@
                                                 <div class="form-group">
                                                     <label for="apellidoM">Apellido materno</label>
                                                     <input type="text" name="apellidoM" id="apellidoM"
-                                                        class="estilo form-control" id="apellidoM"
+                                                        class=" form-control" id="apellidoM"
                                                         placeholder="Apellido materno" require>
                                                     <div class="valid-feedback" id="msjValidapellidoM">
                                                     </div>
@@ -402,7 +396,7 @@
                                                 <div class="form-group">
                                                     <label for="numeroC">Numero de celular</label>
                                                     <input type="tel" name="numeroC" id="numeroC"
-                                                        class="estilo form-control" id="numeroC"
+                                                        class=" form-control" id="numeroC"
                                                         placeholder="Telefono celular" require>
                                                     <div class="valid-feedback" id="msjValidnumC">
                                                     </div>
@@ -410,7 +404,7 @@
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1">Correo electronico</label>
                                                     <input type="email" name="email" id="email"
-                                                        class="estilo form-control" id="exampleInputEmail1"
+                                                        class=" form-control" id="exampleInputEmail1"
                                                         placeholder="E-mail" require>
                                                     <div class="valid-feedback" id="msjValidEmail">
                                                     </div>
@@ -419,7 +413,7 @@
                                             <div class="dividir">
                                                 <div class="form-group">
                                                     <label for="user">Usuario</label>
-                                                    <input type="text" name="user" id="user" class="estilo form-control"
+                                                    <input type="text" name="user" id="user" class=" form-control"
                                                         id="user" placeholder="Usuario" require>
                                                     <div class="valid-feedback" id="msjValidUsuario">
                                                     </div>
@@ -428,12 +422,11 @@
                                                     <label for="exampleInputPassword1">Contraseña</label>
                                                     <div class="d-flex">
                                                         <input type="password" name="pass" id="pass"
-                                                            class="estilo form-control" id="exampleInputPassword1"
-                                                            placeholder="Usuario" require>
+                                                            class=" form-control" id="exampleInputPassword1"
+                                                            placeholder="Usuario" autocomplete="off" require>
                                                         <button type="button" id="btnpass" onclick="cambio()"
                                                             class="btn border-bottom bg-gradient-light"><i
                                                                 class="fas fa-eye"></i></button>
-
                                                     </div>
                                                     <div class="valid-feedback" id="msjValidContraseña">
                                                     </div>
@@ -464,7 +457,7 @@
                                             <div class="form-group">
                                                 <label for="direccion">Direccion completa</label>
                                                 <textarea name="direccion" id="direccion"
-                                                    class="form-control  estilo"></textarea>
+                                                    class="form-control  "></textarea>
                                             </div>
                                             <div class="form-group">
                                                 <label for="exampleInputFile">Entrada de archivo</label>

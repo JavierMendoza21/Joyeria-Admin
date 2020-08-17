@@ -25,7 +25,7 @@ function comprobar() {
     var validador_pass = document.getElementById("msjValidContraseña");
     var validador_cat = document.getElementById("msjValidCategoria");
     /*************Validacion del campo nombre*****************************/
-    if (btn_nombre.length < '5' || btn_nombre == '') {
+    if (btn_nombre.length < '1' || btn_nombre == '') {
         document.getElementById("nombre").classList.add("is-invalid");
         document.getElementById("nombre").classList.remove("is-valid");
 

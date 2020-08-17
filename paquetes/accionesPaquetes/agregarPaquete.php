@@ -10,7 +10,7 @@ include '../../conexiones/conexion.php';
     $total=$mostrar['total'];
 
 if(isset($_GET['idrem']) && $_GET['idrem']!=''){
-    $sqlInsert="CALL eliminarProductoPaquete(".$_GET['idp'].",".$_GET['idrem'].")";
+    $sqlInsert="CALL eliminarProductoTemporal(".$_GET['idrem'].",".$_SESSION['idusuario'].")";
     $resultadoSQL=$conexion->query($sqlInsert);
     echo $conexion->error;
 }
@@ -344,7 +344,7 @@ function concluirPaquete(){
                                                         <th>Imagen</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Cantidad</th>
+                                                        <th>Piezas</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -361,15 +361,15 @@ function concluirPaquete(){
                                                                     $valor=$most['cantidad_T'];
                                                                     $most=getProducto($most['idproducto']);
                                                                     echo '<tr>'.
-                                                                    '<td>'.'<img src="../../img_productos/'.$most["img"].'" alt="'.$most["img"].'" class="img-rounded" alt="" width="80">'.'</td>'.
-                                                                    '<td>'.$most['descripcion'].'</td>'.
-                                                                    '<td>'.$most['costo'].'</td>'.
-                                                                    '<td>'.$valor.'</td>'.
+                                                                    '<td>'.'<img src="../../img_productos/'.$most["img"].'" alt="'.$most["img"].'" class="img-rounded" alt="" width="120">'.'</td>'.
+                                                                    '<td><p class="mt-4 h5">'.$most['descripcion'].'</p></td>'.
+                                                                    '<td><p class="mt-4 h5">'.$most['costo'].'</p></td>'.
+                                                                    '<td><p class="mt-4 h5">'.$valor.'</p></td>'.
                                                                     '<td>'.
                                                                     '<form action="agregarPaquete.php?idrem='.$most["idProducto"].'" autocomplete="off" method="POST">'.
                                                                     '<div class="btn-group">'.
-                                                                    '<input type="submit" class="btn btn-outline-danger" value="Eliminar">'.
-                                                                    '</div>'.
+                                                                    '<Button type="submit" class="btn btn-lg mt-4 btn-outline-danger"><i class="fas fa-trash-alt"></i></Button>
+                                                                    '.'</div>'.
                                                                     '</form>'.
                                                                     '</td>'.
                                                                     '</tr>';
@@ -385,7 +385,7 @@ function concluirPaquete(){
                                                         <th>Imagen</th>
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
-                                                        <th>Cantidad</th>
+                                                        <th>Piezas</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </tfoot>
@@ -408,12 +408,15 @@ function concluirPaquete(){
                                     <form action="agregarPaquete.php?acc=add" autocomplete="off" method="POST"
                                         class="text-center">
                                         <div class="form-group-lg d-flex mb-2 flex-shrink-1">
-                                            <label for="" class="h5 mr-1 d-flex w-auto"><p class="mr-2 mt-1">Descuento</p><input type="number" class="estilo form-control" name="costoFinal" min="0" max="100"
-                                                placeholder="%" require></label>
-                                            
+                                            <label for="" class="h5 mr-1 d-flex w-auto">
+                                                <p class="mr-2 mt-1">Descuento</p>
+                                                <input type="number" class="estilo form-control" name="costoFinal"
+                                                    min="0" max="100" placeholder="%" required>
+                                            </label>
+
                                         </div>
                                         <div class="btn-group">
-                                            <button class=" btn btn-success  ">Agregar
+                                            <button type="submit" class="btn btn-success">Agregar
                                                 paquete</button>
                                             <a href="agregarPaquete.php?acc=mov" class=" btn btn-danger">Cancelar</a>
                                         </div>
@@ -485,7 +488,8 @@ function concluirPaquete(){
                                                                 <div class="form-group mt-3">
                                                                     <input id="valor" name="valor"
                                                                         max="<?= $mostrar['stock'] ?>" min='0' value="0"
-                                                                        class="form-control estilo" type="number" name="">
+                                                                        class="form-control estilo" type="number"
+                                                                        name="">
                                                                 </div>
                                                             </td>
                                                             <td>

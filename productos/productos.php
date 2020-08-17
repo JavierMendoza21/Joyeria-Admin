@@ -332,7 +332,7 @@ include '../sessionIniciada.php';
                                                 <td>
                                                     <div class="btn-group btn-group mt-3">
                                                         <a href="accionesProducto/actualizarProducto.php?id=<?= $mostrar['id_producto'] ?>"
-                                                            class="btn btn-lg btn-outline-primary"><i
+                                                            class="btn btn-lg btn-outline-warning"><i
                                                                 class="fas fa-edit"></i></a>
 
                                                         <a class="btn btn-lg btn-outline-danger"
@@ -380,19 +380,22 @@ include '../sessionIniciada.php';
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src=" ../plugins/jquery/jquery.min.js "></script>
+    <script src="../plugins/jquery/jquery.min.js "></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
+    <script src="../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
     $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
-    <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <script src="../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
     <!-- AdminLTE App -->
-    <script src=" ../dist/js/adminlte.js "></script>
+    <script src="../dist/js/adminlte.js "></script>
     <!-- AdminLTE for demo purposes -->
-    <script src=" ../dist/js/demo.js "></script>
+    <script src="../dist/js/demo.js "></script>
+    
     <!-- DataTables -->
     <script src="../plugins/datatables/jquery.dataTables.js"></script>
     <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

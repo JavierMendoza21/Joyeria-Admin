@@ -251,18 +251,20 @@ include '../../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row justify-content-center my-3 border-dark">
                         <div class="col-lg-8 col-md-10 col-sm-12 justify-content-center">
-                            <form action="comprar.php" class="" onsubmit="">
+                            <form action="comprar.php" class="" method="POST" onsubmit="">
                                 <div class="form-group">
                                     <label for="name" class="h3 d-block text-left">Nombre </label>
-                                    <input type="text" id="name" class="w-50 text-capitalize d-block border-0 py-2 px-2"
-                                        style="background-color: #3333; border-radius: 15px; " value=""
-                                        placeholder="Nombre completo" required>
+                                    <input type="text" name="nombre" id="nombre" autocomplete="off"
+                                        class="text-capitalize form-control" id="nombreVendedor"
+                                        placeholder="nombre completo" require>
+                                    <div class="invalid-feedback" id="msjValidname">
+                                    </div>
 
                                 </div>
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <button type="button" id="btn-comprar" onclick=""
+                                        <button type="button" id="btn-comprar"
                                             class="h3 text-uppercase btn btn-lg btn-outline-success w-100"><i
                                                 class="fas fa-cash-register pr-3"></i>Comprar</button>
                                     </div>
@@ -273,9 +275,20 @@ include '../../sessionIniciada.php';
                                         <button type="button" id="cancelar"
                                             class="h3 text-uppercase btn btn-lg btn-outline-danger w-100"><i
                                                 class="fas fa-window-close pr-3"></i>Cancelar</button>
-                                        
-                                    </div>
 
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <?php
+                                        include '../../conexiones/conexion.php';
+                                        $sqltotal="call obtenerCostoTotalCompra(".$_SESSION['idusuario'].")";
+                                        $total=$conexion->query($sqltotal);
+                                        $conexion->close();
+                                        $total=mysqli_fetch_array($total);
+                                        ?>
+                                        <p class="h1 my-2">Total :
+                                            <strong><?php echo sprintf("%01.2f", $total['total']==0?'0':$total['total']) ;?></strong>
+                                        </p>
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -427,6 +440,8 @@ include '../../sessionIniciada.php';
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- overlayScrollbars -->
+    <script src="../../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src=" ../../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
     <!-- AdminLTE App -->
@@ -445,8 +460,9 @@ include '../../sessionIniciada.php';
     $(document).ready(function() {
 
         $("#btn-comprar").click(function() {
-            var texto = document.getElementById("name").value;
-            if (texto != "") {
+            var texto = document.getElementById("nombre");
+
+            if (texto.value != "") {
                 Swal.fire({
                     title: 'Desea realizar la compra?',
                     text: "¡No podrás revertir esto!",
@@ -472,6 +488,14 @@ include '../../sessionIniciada.php';
 
                     }
                 })
+            } else {
+                var validador_nombre = document.getElementById("msjValidname");
+                document.getElementById("nombre").classList.add("is-invalid");
+                document.getElementById("nombre").classList.remove("is-valid");
+
+                validador_nombre.classList.add("invalid-feedback");
+                validador_nombre.classList.remove("valid-feedback");
+                validador_nombre.innerHTML = "Nombre del cliente.";
             }
 
 
@@ -495,8 +519,8 @@ include '../../sessionIniciada.php';
                         confirmButtonText: 'OK',
                     }).then((result) => {
                         if (result.value) {
-                            var enlace=document.createElement("a");
-                            enlace.setAttribute("href","remover.php?remover=1");
+                            var enlace = document.createElement("a");
+                            enlace.setAttribute("href", "remover.php?remover=1");
                             enlace.click();
                         }
                     })

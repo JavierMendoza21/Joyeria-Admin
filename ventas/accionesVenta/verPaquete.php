@@ -266,7 +266,7 @@ function getProducto($id)
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0 text-dark">Paquete 
+                            <h1 class="m-0 text-dark">Paquete
                             </h1>
                         </div>
                         <!-- /.col -->
@@ -290,7 +290,7 @@ function getProducto($id)
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-12">
+                        <div class="col-sm-12 col-md-10 col-lg-8">
                             <div class="card card-primary card-default ">
                                 <div class="card-header">
                                     <h3 class="card-title">Productos del paquete : </h3>
@@ -315,7 +315,7 @@ function getProducto($id)
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Cantidad</th>
-                                                        
+
                                                     </tr>
                                                 </thead>
                                                 <tbody id="tabla">
@@ -330,17 +330,48 @@ function getProducto($id)
                                                     //$most=mysqli_fetch_array($resultTabla);
 
                                                     if ($resultTabla) {
+                                                        $var=0;
                                                         if (mysqli_num_rows($resultTabla) >= 1) {
                                                             while ($most = mysqli_fetch_array($resultTabla)) {
                                                                 $valor = $most['cantidad_T'];
                                                                 $most = getProducto($most['idproducto']);
                                                                 echo '<tr>' .
-                                                                    '<td>' . '<img src="../../img_productos/' . $most["img"] . '" alt="' . $most["img"] . '" class="img-rounded" alt="" width="100">' . '</td>' .
+                                                                    '<td>' . '<img data-toggle="modal"
+                                                                    data-target="#exampleModal'.$var.'" src="../../img_productos/' . $most["img"] . '" alt="' . $most["img"] . '" class="img-rounded" alt="" width="130">' . '</td>' .
+                                                                    ' <!--Inicio modal-->
+                                                                    <!-- Modal -->
+                                                                    <div class="modal fade" id="exampleModal'.$var.'" tabindex="-1"
+                                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                                        aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <h3 class="modal-title" id="exampleModalLabel">' . $most['descripcion'] . '</h3>
+                                                                                    <button type="button" class="close"
+                                                                                        data-dismiss="modal" aria-label="Close">
+                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body text-center">
+                                                                                '. '<img data-toggle="modal"
+                                                                                data-target="#exampleModal'.$var.'" src="../../img_productos/' . $most["img"] . '" alt="' . $most["img"] . '" class="img-rounded" alt="" width="330">' .
+                                                                                '</div>
+                                                                                <div class="modal-footer justify-content-between d-flex">
+                                                                                    <p class="h3">Precio : <strong>$' . $most['costo'] . '</strong></p>
+                                                                                    <button type="button" class="btn btn-secondary"
+                                                                                        data-dismiss="modal">Cerrar</button>
+                                                                                    
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--Final modal-->'.
+
                                                                     '<td><p class="mt-3 h5">' . $most['descripcion'] . '</p></td>' .
                                                                     '<td><p class="mt-3 h5">$' . $most['costo'] . '</p></td>' .
                                                                     '<td><p class="mt-3 h5">' . $valor . ' Pieza</p></td>' .
                                                                     '</tr>';
-                                                            }
+                                                            $var=$var+1;}
                                                         }
                                                     }
                                                     ?>
@@ -353,7 +384,7 @@ function getProducto($id)
                                                         <th>Descripcion</th>
                                                         <th>Precio</th>
                                                         <th>Cantidad</th>
-                                                        
+
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -371,8 +402,9 @@ function getProducto($id)
                                 ?>
                                 <div class="card-footer d-sm-block d-md-flex  text-center justify-content-between">
                                     <div class="card-text text-left">
-                                        <p class="h3">De : <strong> <?php echo "$".$res['precioOriginal'];?></strong> A <strong><?php echo "$".$res['precioVenta'];?></strong></p>
-                                        
+                                        <p class="h3">De : <strong> <?php echo "$".$res['precioOriginal'];?></strong> A
+                                            <strong><?php echo "$".$res['precioVenta'];?></strong></p>
+
                                     </div>
                                 </div>
                             </div>

@@ -23,11 +23,14 @@ $IMGUSER = substr($IMGUSER, 3);
     <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+        .scroll {
+            overflow-x: auto;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -43,8 +46,7 @@ $IMGUSER = substr($IMGUSER, 3);
             </ul>
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <a class="nav-link effectoHover" data-toggle=""
-                    href="vendedores/editarMiUsuario.php?id=<?= $IDUSER ?>&acc=editar">
+                <a class="nav-link effectoHover" data-toggle="" href="vendedores/editarMiUsuario.php?id=<?= $IDUSER ?>&acc=editar">
                     <i class="fas fa-cogs"></i>
                 </a>
                 <a class="nav-link effectoHover" data-toggle="" href="cerrarSesion.php">
@@ -58,8 +60,7 @@ $IMGUSER = substr($IMGUSER, 3);
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="main.php" class="brand-link">
-                <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -77,8 +78,7 @@ $IMGUSER = substr($IMGUSER, 3);
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2 <?= '' ?>">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -237,177 +237,285 @@ $IMGUSER = substr($IMGUSER, 3);
                 <!-- /.container-fluid -->
             </div>
             <!-- /.content-header -->
-
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-info">
-                                <div class="inner">
-                                    <h3>150</h3>
-
-                                    <p>Productos del inventario</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="ion ion-bag"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">
-                                    Mas información <i class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-success">
-                                <div class="inner">
-                                    <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                                    <p>Ventas</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="far fa-money-bill-alt"></i>
-                                </div>
-                                <a href="#" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <!-- ./col -->
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-warning">
-                                <div class="inner">
-                                    <?php
-                                    include 'conexiones/conexion.php';
-                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
-                                    $result = $conexion->query($sql);
-                                    $contador = 0;
-                                    $mostrar = mysqli_fetch_array($result)
-
-                                    ?>
-                                    <h3><?php echo $mostrar['total'] ?></h3>
-
-                                    <p>Usuarios</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="far fa-user"></i>
-                                </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-danger">
-                                <div class="inner">
-                                    <?php
-                                    include 'conexiones/conexion.php';
-                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
-                                    $result = $conexion->query($sql);
-                                    $contador = 0;
-                                    $mostrar = mysqli_fetch_array($result)
-
-                                    ?>
-                                    <h3><?php echo $mostrar['total'] ?></h3>
-
-                                    <p>Categorias</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-boxes"></i>
-                                </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-secondary">
-                                <div class="inner">
-                                    <?php
-                                    include 'conexiones/conexion.php';
-                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
-                                    $result = $conexion->query($sql);
-                                    $contador = 0;
-                                    $mostrar = mysqli_fetch_array($result)
-
-                                    ?>
-                                    <h3><?php echo $mostrar['total'] ?></h3>
-
-                                    <p>Paquetes</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-12">
-                            <!-- small box -->
-                            <div class="small-box bg-primary">
-                                <div class="inner">
-                                    <?php
-                                    include 'conexiones/conexion.php';
-                                    $sql = 'SELECT count(*) as "total" FROM usuarios;';
-                                    $result = $conexion->query($sql);
-                                    $contador = 0;
-                                    $mostrar = mysqli_fetch_array($result)
-
-                                    ?>
-                                    <h3><?php echo $mostrar['total'] ?></h3>
-
-                                    <p>Ganancias</p>
-                                </div>
-                                <div class="icon">
-                                    <i class="fas fa-chart-line"></i>
-                                </div>
-                                <a href="vendedores/vendedores.php" class="small-box-footer">Mas información <i
-                                        class="fas fa-arrow-circle-right"></i></a>
-                            </div>
-                        </div>
-
-                    </div>
-                    <!-- /.row -->
-                    <!-- Main row -->
                     <div class="row">
+                        <div class="col-12">
+                            <!-- BAR CHART -->
+                            <div class="card card-info ">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ventas por usuario</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="overflow:scroll ;">
+                                    <div class="chart" style="width: 950px;">
+                                        <canvas id="barChart" style="min-height: 300px; height: 300px; max-height: 300px; width: 1200px;"></canvas>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <div class="col-sm-12 col-md-5 col-lg-4">
+                            <!-- BAR CHART -->
+                            <div class="card card-info ">
+                                <div class="card-header">
+                                    <h3 class="card-title">Ventas totales</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body ">
+                                    <canvas id="barChart2" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <div class="col-sm-12 col-md-7 col-lg-8">
+                            <!-- BAR CHART -->
+                            <div class="card card-info ">
+                                <div class="card-header">
+                                    <h3 class="card-title">Categorias mas vendidas</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body ">
+                                    <canvas id="barChart3" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
 
                     </div>
-                    <!-- /.container-fluid -->
-            </section>
-            <!-- /.content -->
-        </div>
-        <!--                 /.content-wrapper -->
-        <footer class=" main-footer ">
-            <strong>Copyright &copy; 2020 <a href="#">AdminLTE.io</a>.</strong> Todos los derecho reservados.
-            <div class=" float-right d-none d-sm-inline-block ">
-                <b>Version</b> 3.0.5
+                </div>
+        </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!--                 /.content-wrapper -->
+    <footer class=" main-footer ">
+        <strong>Copyright &copy; 2020 <a href="#">AdminLTE.io</a>.</strong> Todos los derecho reservados.
+        <div class=" float-right d-none d-sm-inline-block ">
+            <b>Version</b> 3.0.5
 
-            </div>
-        </footer>
-        <!-- /.control-sidebar -->
+        </div>
+    </footer>
+    <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
-
     <!-- jQuery -->
-    <script src=" plugins/jquery/jquery.min.js "></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src=" plugins/jquery-ui/jquery-ui.min.js "></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-    $.widget.bridge('uibutton', $.ui.button)
-    </script>
+    <script src="plugins/jquery/jquery.min.js "></script>
     <!-- Bootstrap 4 -->
-    <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="plugins/chart.js/Chart.min.js"></script>
     <!-- AdminLTE App -->
-    <script src=" dist/js/adminlte.js "></script>
+    <script src="dist/js/adminlte.js "></script>
     <!-- AdminLTE for demo purposes -->
-    <script src=" ../dist/js/demo.js "></script>
-    <!-- overlayScrollbars -->
-    <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
+    <script src="dist/js/demo.js"></script>
+    <script>
+        $(function() {
+            /* ChartJS
+             * -------
+             * Here we will create a few charts using ChartJS
+             */
+            //--------------
+            //- AREA CHART -
+            //--------------
+            var areaChartData = {
+                labels: [<?php include 'conexiones/conexion.php';
+                            $sqlusuarios = "call ventaPorUsuario(" . $_SESSION['idusuario'] .
+                                ")";
+                            $resultado = $conexion->query($sqlusuarios);
+                            $conexion->close();
+                            while ($mostrar = mysqli_fetch_array($resultado)) {
+                                echo "'" . $mostrar['nombre'] . "',";
+                            } ?>],
+                datasets: [{
+                        label: 'Ventas',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "call ventaPorUsuario(" . $_SESSION['idusuario'] . ")";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['venta'] . "',";
+                                } ?>]
+                    },
+                    {
+                        label: 'Activos',
+                        backgroundColor: 'rgba(210, 214, 222, 1)',
+                        borderColor: 'rgba(210, 214, 222, 1)',
+                        pointRadius: false,
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "call ventaPorUsuario(" . $_SESSION['idusuario'] .
+                                    ")";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['cubierto'] . "',";
+                                } ?>]
+                    },
+                ]
+            }
+            //- AREA CHART 2-
+            //--------------
+            var areaChartData2 = {
+                labels: ["Total"],
+                datasets: [{
+                        label: 'Ventas',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "select sum(total) as venta, sum(costoCubierto) as cubierto 
+                                from compra inner join usuarios on idvendedor=idusuarios;";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['venta'] .
+                                        "',";
+                                } ?>]
+                    },
+                    {
+                        label: 'Activos',
+                        backgroundColor: 'rgba(210, 214, 222, 1)',
+                        borderColor: 'rgba(210, 214, 222, 1)',
+                        pointRadius: false,
+                        pointColor: 'rgba(210, 214, 222, 1)',
+                        pointStrokeColor: '#c1c7d1',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(220,220,220,1)',
+                        data: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "select sum(total) as venta, sum(costoCubierto) as cubierto 
+                                from compra inner join usuarios on idvendedor=idusuarios;";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['cubierto'] . "',";
+                                } ?>]
+                    },
+                ]
+            }
+            //- AREA CHART 2-
+            //--------------
+            var areaChartData3 = {
+                labels: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
+                                on producto.idProducto=productosVendidos.idProducto
+                                inner join categoria_producto
+                                on categoria_producto.idcategoria_producto=producto.categoria_kf
+                                group by categoria_producto.idcategoria_producto
+                                order by total desc;";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['categoria'] .
+                                        "',";
+                                } ?>],
+                datasets: [{
+                        label: 'Vendidos',
+                        backgroundColor: 'rgba(60,141,188,0.9)',
+                        borderColor: 'rgba(60,141,188,0.8)',
+                        pointRadius: false,
+                        pointColor: '#3b8bba',
+                        pointStrokeColor: 'rgba(60,141,188,1)',
+                        pointHighlightFill: '#fff',
+                        pointHighlightStroke: 'rgba(60,141,188,1)',
+                        data: [<?php include 'conexiones/conexion.php';
+                                $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
+                                on producto.idProducto=productosVendidos.idProducto
+                                inner join categoria_producto
+                                on categoria_producto.idcategoria_producto=producto.categoria_kf
+                                group by categoria_producto.idcategoria_producto
+                                order by total desc;";
+                                $resultado = $conexion->query($sqlusuarios);
+                                $conexion->close();
+                                while ($mostrar = mysqli_fetch_array($resultado)) {
+                                    echo "'" . $mostrar['total'] .
+                                        "',";
+                                } ?>]
+                    },
+                ]
+            }
+            //-------------
+            //- BAR CHART -
+            //-------------
+            var barChartCanvas = $('#barChart').get(0).getContext('2d')
+            var barChartData = jQuery.extend(true, {}, areaChartData)
+            var temp0 = areaChartData.datasets[0]
+            var temp1 = areaChartData.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
 
+            var barChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                datasetFill: false
+            }
 
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+            //-------------
+            //- BAR CHART 2 -
+            //-------------
+            var barChartCanvas = $('#barChart2').get(0).getContext('2d')
+            var barChartData = jQuery.extend(true, {}, areaChartData2)
+            var temp0 = areaChartData2.datasets[0]
+            var temp1 = areaChartData2.datasets[1]
+            barChartData.datasets[0] = temp1
+            barChartData.datasets[1] = temp0
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+
+            var barChartCanvas = $('#barChart3').get(0).getContext('2d')
+            var barChartData = jQuery.extend(true, {}, areaChartData3)
+            var temp0 = areaChartData3.datasets[0]
+            barChartData.datasets[0] = temp0
+
+            var barChart = new Chart(barChartCanvas, {
+                type: 'bar',
+                data: barChartData,
+                options: barChartOptions
+            })
+        })
+    </script>
 </body>
 
 </html>

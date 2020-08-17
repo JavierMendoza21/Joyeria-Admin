@@ -55,8 +55,6 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     .effectoHover:hover {
         color: black;
     }
-
-
     </style>
 </head>
 
@@ -271,8 +269,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                 <div class="container-fluid">
                     <!-- Main row -->
                     <div class="row justify-content-center">
-                        <div class="col-lg-10 col-sm-12">
-                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-3 btn-lg btn btn-success mb-2"><i
+                        <div class="col-lg-9 col-sm-12">
+                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-4 btn-lg btn btn-success mb-3"><i
                                     class="fas fa-user-plus"></i> Agregar usuario</a>
                         </div>
                     </div>
@@ -283,10 +281,10 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
             <section class="content">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <div class="col-lg-10 col-sm-12">
+                        <div class="col-lg-9 col-sm-12">
                             <div class="card">
                                 <!-- /.card-header -->
-                                <div class="card-body w-100 px-2">
+                                <div class="card-body w-100 text-center">
                                     <table id="example2"
                                         class="w-100 text-center table-hover table-sm table table-bordered table-striped table-responsive">
                                         <thead>
@@ -329,7 +327,8 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                                                         class="rounded my-0 mx-0" width="100">
                                                 </td>
                                                 <td>
-                                                    <p class="mt-3 h5"><?php echo $mostrar['nombre'] . ' ' . $mostrar['apellidoP'] ?>
+                                                    <p class="mt-3 h5">
+                                                        <?php echo $mostrar['nombre'] . ' ' . $mostrar['apellidoP'] ?>
                                                     </p>
                                                 </td>
                                                 <td>
@@ -425,14 +424,12 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- daterangepicker -->
-    <script src=" ../plugins/moment/moment.min.js "></script>
-    <script src=" ../plugins/daterangepicker/daterangepicker.js "></script>
+    <!-- overlayScrollbars -->
+    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-    <script src="../alertifyjs/alertify.js"></script>
 
 
     <!-- DataTables -->

@@ -117,25 +117,20 @@ if (
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
-        .estilo{
-            background-color: #e1e1e1;
-            border-radius: 15px;
-            padding: 1rem;
-        }
-        .dividir * {
-            display: block;
+    .dividir * {
+        display: block;
+    }
+
+    @media (min-width: 700px) {
+        .dividir {
+            display: flex;
+            justify-content: space-between;
         }
 
-        @media (min-width: 700px) {
-            .dividir {
-                display: flex;
-                justify-content: space-between;
-            }
-
-            .dividir .form-group {
-                flex-basis: calc(50% - 1rem);
-            }
+        .dividir .form-group {
+            flex-basis: calc(50% - 1rem);
         }
+    }
     </style>
 </head>
 
@@ -164,7 +159,8 @@ if (
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -182,7 +178,8 @@ if (
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -349,7 +346,8 @@ if (
                     <!-- Main row -->
                     <div class="row justify-content-center d-none" id="contenedor_msj">
                         <div class="col-sm-5 col-md-6">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-hidden="true">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
+                                aria-hidden="true">
                                 <strong>Aviso:</strong>
                                 <p class="mb-0" id="msj"></p>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -365,24 +363,29 @@ if (
                                 <div class="card-header">
                                     <h3 class="card-title">Datos del producto</h3>
                                 </div>
-                                <form role="form" action="accionesProducto/agregarProducto.php" autocomplete="off" onsubmit="return comprobar()" method="post" enctype="multipart/form-data">
+                                <form role="form" action="accionesProducto/agregarProducto.php" autocomplete="off"
+                                    onsubmit="return comprobar()" method="post" enctype="multipart/form-data">
                                     <div class="card-body">
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
-                                            <input type="text" name="descripcion" class="estilo form-control" id="descripcion" placeholder="Descripción del producto" require>
+                                            <input type="text" name="descripcion" class=" form-control" id="descripcion"
+                                                placeholder="Descripción del producto" require>
                                             <div class="invalid-feedback" id="msjValiddescripcion">
                                             </div>
                                         </div>
                                         <div class="dividir">
                                             <div class="form-group">
                                                 <label for="costoCompra">Costo de compra</label>
-                                                <input type="number" min="0" onblur="compruebaValidoEntero()" name="costoCompra" class="estilo form-control "  id="costoCompra" placeholder="Costo de compra" require>
+                                                <input type="number" min="0" onblur="compruebaValidoEntero()"
+                                                    name="costoCompra" class=" form-control " id="costoCompra"
+                                                    placeholder="Costo de compra" require>
                                                 <div class="invalid-feedback" id="msjValidCostoCompra">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Costo de venta</label>
-                                                <input type="number" min="0" name="costoVenta" class="estilo form-control" id="costoVenta" readonly placeholder="Costo de venta" require>
+                                                <input type="number" min="0" name="costoVenta" class=" form-control"
+                                                    id="costoVenta" readonly placeholder="Costo de venta" require>
                                                 <div class="invalid-feedback" id="msjValidCostoVenta">
                                                 </div>
                                             </div>
@@ -398,7 +401,8 @@ if (
 
                                             <div class="form-group">
                                                 <label>Categoria del producto</label>
-                                                <select class="form-control select2 " name="categoria" id="categoria" style="width: 100%; padding: 5px;">
+                                                <select class="form-control select2 " name="categoria" id="categoria"
+                                                    style="width: 100%; padding: 5px;">
                                                     <option selected="selected" disabled>Selecciona una opcion</option>
                                                     <?php
                                                     while ($mostrar = mysqli_fetch_array($result)) {
@@ -411,7 +415,8 @@ if (
                                             </div>
                                             <div class="form-group">
                                                 <label for="costoVenta">Cantidad inicial</label>
-                                                <input type="number" min="0" name="stock" class="estilo form-control" id="stock" placeholder="Stock inicial" require>
+                                                <input type="number" min="0" name="stock" class=" form-control"
+                                                    id="stock" placeholder="Stock inicial" require>
                                                 <div class="invalid-feedback" id="msjValidstock">
                                                 </div>
                                             </div>
@@ -419,13 +424,15 @@ if (
                                         <div class="form-group">
                                             <label for="exampleInputFile">Entrada de archivo</label>
                                             <div class="custom-file">
-                                                <input type="file" lang="es" class="custom-file-input" id="imagen" name="imagen" accept="image/png, image/jpeg">
+                                                <input type="file" lang="es" class="custom-file-input" id="imagen"
+                                                    name="imagen" accept="image/png, image/jpeg">
                                                 <label class="custom-file-label" for="imagen">Elija el archivo</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card-footer text-center">
-                                        <button id="enviar" onclick="return comprobar()" type="submit" class=" cambiar-tamanio  btn btn-primary btn-lg ">Agregar</button>
+                                        <button id="enviar" onclick="return comprobar()" type="submit"
+                                            class=" cambiar-tamanio  btn btn-primary btn-lg ">Agregar</button>
                                         <a href="productos.php" class=" btn btn-danger btn-lg">Cancelar</a>
                                     </div>
                                 </form>
@@ -453,64 +460,63 @@ if (
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-
     <!-- bs-custom-file-input -->
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <!-- Select2 -->
     <script src="../plugins/select2/js/select2.full.min.js"></script>
     <script src="validarformProducto.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            bsCustomFileInput.init();
-        });
+    $(document).ready(function() {
+        bsCustomFileInput.init();
+    });
     </script>
     <script>
-        $(function() {
-            //Initialize Select2 Elements
-            $('.select2').select2()
+    $(function() {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
-            //Initialize Select2 Elements
-            $('.select2bs4').select2({
-                theme: 'bootstrap4'
-            })
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
         })
+    })
 
-        function validarEntero(valor) {
-            //intento convertir a entero. 
-            //si era un entero no le afecta, si no lo era lo intenta convertir 
-            valor = parseFloat(valor);
+    function validarEntero(valor) {
+        //intento convertir a entero. 
+        //si era un entero no le afecta, si no lo era lo intenta convertir 
+        valor = parseFloat(valor);
 
-            //Compruebo si es un valor numérico 
-            if (isNaN(valor)) {
-                //entonces (no es numero) devuelvo el valor cadena vacia 
-                return ""
-            } else {
-                //En caso contrario (Si era un número) devuelvo el valor 
-                return valor
-            }
+        //Compruebo si es un valor numérico 
+        if (isNaN(valor)) {
+            //entonces (no es numero) devuelvo el valor cadena vacia 
+            return ""
+        } else {
+            //En caso contrario (Si era un número) devuelvo el valor 
+            return valor
         }
+    }
 
-        function compruebaValidoEntero() {
-            inp = document.getElementById("costoCompra");
-            var enteroValidado = validarEntero(inp.value);
-            if (enteroValidado == "") {
-                //si era la cadena vacía es que no era válido. Lo aviso 
-                //alert("Debe escribir un entero!");
-                //selecciono el texto 
-                inp.select();
-                //coloco otra vez el foco 
-                inp.focus();
-                inp.value = "";
-            } else{
-                inpVenta=document.getElementById("costoVenta");
-                inpVenta.value=enteroValidado*5;
-            }
-                //inp.value = enteroValidado;
+    function compruebaValidoEntero() {
+        inp = document.getElementById("costoCompra");
+        var enteroValidado = validarEntero(inp.value);
+        if (enteroValidado == "") {
+            //si era la cadena vacía es que no era válido. Lo aviso 
+            //alert("Debe escribir un entero!");
+            //selecciono el texto 
+            inp.select();
+            //coloco otra vez el foco 
+            inp.focus();
+            inp.value = "";
+        } else {
+            inpVenta = document.getElementById("costoVenta");
+            inpVenta.value = enteroValidado * 5;
         }
+        //inp.value = enteroValidado;
+    }
     </script>
 </body>
 

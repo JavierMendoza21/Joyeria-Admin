@@ -23,7 +23,11 @@ include '../sessionIniciada.php';
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-
+    <style>
+    tbody tr td {
+        width: calc(100% / 5);
+    }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -237,20 +241,20 @@ include '../sessionIniciada.php';
             <section class="content">
                 <div class="container-fluid">
                     <!-- Main row -->
-                    <div class="row">
-                        <div class="col-12 mb-3">
-                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 d-block btn btn-success"><i
+                    <div class="row justify-content-center mb-3">
+                        <div class="col-sm-12 col-md-10 col-lg-9">
+                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 btn-lg btn btn-success"><i
                                     class="ion ion-bag nav-icon"></i> Nueva venta</a>
                         </div>
                     </div>
                     <?php
                     include '../conexiones/conexion.php';
-                    $sql = "CALL select_tabla_productos()";
+                    $sql = "select date(fecha) as fecha,nombreCliente,total,costoCubierto,estado,idcompra  from compra where idvendedor=".$_SESSION['idusuario'];
                     $resultado = $conexion->query($sql);
                     $conexion->close();
                     ?>
-                    <div class="row">
-                        <div class="col-12">
+                    <div class="row justify-content-center">
+                        <div class="col-sm-12 col-md-10 col-lg-9">
                             <div class="card">
                                 <div
                                     class="card-body w-100 px-2                                                                                                                                                                                                              ">
@@ -258,79 +262,109 @@ include '../sessionIniciada.php';
                                         class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
                                             <tr>
-                                                <th></th>
-                                                <th>Categoria</th>
-                                                <th>Descripcion</th>
-                                                <th>Precio</th>
-                                                <th>Stock</th>
+                                                <th>Estatus</th>
+                                                <th>Nombre</th>
+                                                <th>Total</th>
+                                                <th>fecha</th>
+                                                <th>Abonado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
                                             $img = "";
-                                            $var=0;
+                                            
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
-                                                $img = $mostrar['img'];
-                                                if ($img == '') {
-                                                    $img = 'producto_default.png';
-                                                }
+                                                
                                             ?>
                                             <tr>
                                                 <td>
-                                                    <img src="../img_productos/<?= $img ?>" class="img-rounded" alt=""
-                                                        width="80" data-toggle="modal"
-                                                        data-target="#exampleModal<?=$var?>">
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal<?=$var?>" tabindex="-1"
-                                                        role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel"><p class="h4">
-                                                                    <?php echo $mostrar['descripcion'] ?>
-                                                                    </p></h5>
-                                                                    <button type="button" class="close"
-                                                                        data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <img src="../img_productos/<?= $img ?>"
-                                                                        class="img-rounded" alt="" width="330">
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn d-block btn-lg btn-secondary"
-                                                                        data-dismiss="modal">Cerrar</button>
-                                                                    
+                                                    <h5><span
+                                                            class="mt-3 badge badge-<?=$mostrar['estado']==0?'danger':'success';?>"><?php echo $mostrar['estado']==0?'Adeudo':'Liquidado'; ?></span>
+                                                    </h5>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5 text-capitalize">
+                                                        <?php echo $mostrar['nombreCliente'] ?></p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5">
+                                                        <strong><?php echo '$'.$mostrar['total'] ?></strong></p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5"><?php echo $mostrar['fecha'] ?></p>
+                                                </td>
+                                                <td>
+                                                    <p class="mt-3 h5">
+                                                        <strong><?php echo '$' . $mostrar['costoCubierto'] ?></strong>
+                                                    </p>
+                                                </td>
+
+                                                <td>
+
+                                                    <div class="btn-group btn-group mt-2">
+
+                                                        <button type="button" data-toggle="modal"
+                                                            data-target="#exampleModal<?=$mostrar['idcompra']?>"
+                                                            data-whatever="@mdo" class="btn btn-lg btn-outline-success"
+                                                            id="abonar" <?=$mostrar['estado']==1?'disabled':'';?>>
+                                                            <i class="far fa-money-bill-alt"></i></button>
+
+                                                        <div class="modal fade"
+                                                            id="exampleModal<?=$mostrar['idcompra']?>" tabindex="-1"
+                                                            role="dialog" aria-labelledby="exampleModalLabel"
+                                                            aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered"
+                                                                role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Abono</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form>
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                    for="inputCantidad<?=$mostrar['idcompra']?>"
+                                                                                    class="text-left d-block">Cantidad a
+                                                                                    abonar:</label>
+                                                                                <input type="number" min="0"
+                                                                                    class="form-control"
+                                                                                    id="inputCantidad<?=$mostrar['idcompra']?>">
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button"
+                                                                            class="btn btn-lg btn-danger"
+                                                                            data-dismiss="modal">Cancelar</button>
+                                                                        <button onclick="abonar(this)" type="button"
+                                                                            id="<?=$mostrar['idcompra']?>"
+                                                                            class="btn btn-lg btn-success">Agregar
+                                                                            pago</button>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td><?php echo $mostrar['categoria'] ?></td>
-                                                <td><?php echo $mostrar['descripcion'] ?></td>
-                                                <td><?php echo '$' . $mostrar['costo'] ?></td>
-                                                <td><span
-                                                        class="badge mt-4 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> d-block"><?php echo $mostrar['stock'] ?></span>
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group btn-group mt-3">
-                                                        <a class="btn btn-info" href=""><i
-                                                                class="fas fa-cart-plus"></i></a>
+                                                        <a class="btn btn-lg btn-outline-info" href=""><i
+                                                                class="far fa-eye"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <?php $var=$var+1;} ?>
+                                            <?php } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th></th>
-                                                <th>Categoria</th>
-                                                <th>Descripcion</th>
-                                                <th>Precio</th>
-                                                <th>Stock</th>
+                                                <th>Estatus</th>
+                                                <th>Nombre</th>
+                                                <th>Total</th>
+                                                <th>fecha</th>
+                                                <th>Abonado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </tfoot>
@@ -373,6 +407,10 @@ include '../sessionIniciada.php';
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
     <!-- Tempusdominus Bootstrap 4 -->
     <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
+    <!-- Summernote -->
+    <script src=" ../plugins/summernote/summernote-bs4.min.js "></script>
+    <!-- overlayScrollbars -->
+    <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
@@ -384,13 +422,55 @@ include '../sessionIniciada.php';
     <script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
     <script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+
     <script>
+    function abonar(btnid) {
+        var idcompra = btnid.id;
+        var total = document.getElementById("inputCantidad" + idcompra).value;
+        //alert("Total : " + total);
+        $.ajax({
+            type: "POST",
+            data: {
+                "cantidad": total,
+                "idcompra": idcompra
+            },
+            url: "accionesVenta/abonar.php",
+            success: function(response) {
+                location.reload();
+                //console.log(response);
+                //$('#lblDatos').text(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                //if(textStatus === 'timeout'){alert('Failed from timeout');}   
+                if (jqXHR.status === 0) {
+                    alert('Not connect: Verify Network: ' + textStatus);
+                } else if (jqXHR.status == 404) {
+                    alert('Requested page not found [404]');
+                } else if (jqXHR.status == 500) {
+                    alert('Internal Server Error [500].');
+                } else if (textStatus === 'parsererror') {
+                    alert('Requested JSON parse failed.');
+                } else if (textStatus === 'timeout') {
+                    alert('Time out error.');
+                } else if (textStatus === 'abort') {
+                    alert('Ajax request aborted.');
+                } else {
+                    alert('Uncaught Error: ' + jqXHR.responseText);
+                }
+                //location.reload();
+            },
+            timeout: 5000
+            //timeout: 1000//para probar timeout
+        }).always(function() {
+            /** Al finalizar la consulta del servidor **/
+
+        });
+    }
     $.extend(true, $.fn.dataTable.defaults, {
         "searching": true,
         "ordering": true
     });
     $(function() {
-
         $('#example2').DataTable({
             "paging": true,
             "lengthChange": true,

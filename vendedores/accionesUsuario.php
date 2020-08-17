@@ -152,7 +152,7 @@ if (
     <link rel="stylesheet" href="../plugins/summernote/summernote-bs4.css">
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-   
+
     <style>
     .estilo {
         background-color: #e1e1e1;
@@ -473,13 +473,6 @@ if (
                                                     class="estilo form-control" id="user" placeholder="Usuario"
                                                     pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Contraseña</label>
-                                                <input disabled type="password" name="pass"
-                                                    value="<?= sha1($mostrarCambio['contraseña']) ?>" id="pass"
-                                                    class="estilo form-control" id="exampleInputPassword1"
-                                                    placeholder="Contraseña" require>
-                                            </div>
                                         </div>
 
                                         <?php
@@ -590,6 +583,8 @@ if (
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
+    <!-- overlayScrollbars -->
+    <script src="../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
     <!-- bs-custom-file-input -->
@@ -599,29 +594,29 @@ if (
     <script type="text/javascript">
     $(document).ready(function() {
         $("#enviar").click(function() {
-                Swal.fire({
-                    title: 'Desea eliminar el usuario?',
-                    text: 'Esta acción ya no se va a poder deshacer',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, crear!',
-                    cancelButtonText: "Cancelar"
-                }).then((result) => {
-                    if (result.value) {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Usuario creado',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
-                        }).then((result) => {
-                            if (result.value) {
-                                document.forms[0].submit();
-                            }
-                        })
-                    }
-                })
+            Swal.fire({
+                title: 'Desea eliminar el usuario?',
+                text: 'Esta acción ya no se va a poder deshacer',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, eliminar!',
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Usuario creado',
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'OK',
+                    }).then((result) => {
+                        if (result.value) {
+                            document.forms[0].submit();
+                        }
+                    })
+                }
+            })
         });
 
 
