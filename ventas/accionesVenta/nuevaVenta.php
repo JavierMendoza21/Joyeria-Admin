@@ -1,5 +1,12 @@
 <?php
 include '../../sessionIniciada.php';
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,13 +30,13 @@ include '../../sessionIniciada.php';
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-    tbody tr {
-        min-width: 100%;
-    }
+        tbody tr {
+            min-width: 100%;
+        }
 
-    tbody tr td {
-        min-width: calc(100% / 5);
-    }
+        tbody tr td {
+            min-width: calc(100% / 5);
+        }
     </style>
 </head>
 
@@ -58,8 +65,7 @@ include '../../sessionIniciada.php';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../../main.php" class="brand-link">
-                <img src="../../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -77,8 +83,7 @@ include '../../sessionIniciada.php';
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -90,29 +95,33 @@ include '../../sessionIniciada.php';
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-user nav-icon"></i>
-                                <p>
-                                    Usuarios
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../vendedores/vendedores.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver usuarios</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../vendedores/agregarVendedor.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar usuario</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>
+                                Usuarios
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../vendedores/vendedores.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../vendedores/agregarVendedor.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
@@ -136,75 +145,85 @@ include '../../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
-                                    Productos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../productos/productos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../productos/nuevoProducto.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar producto</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
-                                <i class="fas fa-cubes mx-1"></i>
-                                <p class="ml-1">
-                                    Paquetes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../paquetes/paquetes.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver paquetes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar paquete</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-boxes nav-icon"></i>
-                                <p>
-                                    Categorias
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../categorias/categorias.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver categorias</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../categorias/agregarCategoria.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar categorias</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="ion ion-bag nav-icon"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../productos/productos.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver productos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../productos/nuevoProducto.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar producto</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="fas fa-cubes mx-1"></i>
+                            <p class="ml-1">
+                                Paquetes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../paquetes/paquetes.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver paquetes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar paquete</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>
+                                Categorias
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../categorias/categorias.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../categorias/agregarCategoria.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -260,10 +279,8 @@ include '../../sessionIniciada.php';
                     <div class="row justify-content-center">
                         <div class="col-lg-9 col-md-10 col-sm-12 justify-content-center">
                             <div class="card">
-                                <div
-                                    class="card-body w-100 px-2                                                                                                                                                                                                              ">
-                                    <table id="example2"
-                                        class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
+                                <div class="card-body w-100 px-2                                                                                                                                                                                                              ">
+                                    <table id="example2" class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
                                             <tr class="h5">
                                                 <th></th>
@@ -277,72 +294,63 @@ include '../../sessionIniciada.php';
                                         <tbody>
                                             <?php
                                             $img = "";
-                                            $var=0;
+                                            $var = 0;
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
                                                 $img = $mostrar['img'];
                                                 if ($img == '') {
                                                     $img = 'producto_default.png';
                                                 }
                                             ?>
-                                            <tr>
-                                                <td><img src="../../img_productos/<?= $img ?>" class="img-rounded"
-                                                        alt="" width="110" data-toggle="modal"
-                                                        data-target="#exampleModal<?=$var?>"></td>
-                                                <!--Inicio modal-->
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal<?=$var?>" tabindex="-1"
-                                                    role="dialog" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h3 class="modal-title" id="exampleModalLabel"><?php echo $mostrar['descripcion'] ?></h3>
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body text-center">
-                                                                <img src="../../img_productos/<?= $img ?>"
-                                                                    class="img-rounded" alt="" width="330">
-                                                            </div>
-                                                            <div class="modal-footer d-flex justify-content-between">
-                                                                <p class="h3">Precio : <strong><?php echo '$' . $mostrar['costo'] ?></strong></p>
-                                                                <button type="button" class="btn btn-lg btn-secondary"
-                                                                    data-dismiss="modal">Cerrar</button>
+                                                <tr>
+                                                    <td><img src="../../img_productos/<?= $img ?>" class="img-rounded" alt="" width="110" data-toggle="modal" data-target="#exampleModal<?= $var ?>"></td>
+                                                    <!--Inicio modal-->
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModal<?= $var ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h3 class="modal-title" id="exampleModalLabel"><?php echo $mostrar['descripcion'] ?></h3>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body text-center">
+                                                                    <img src="../../img_productos/<?= $img ?>" class="img-rounded" alt="" width="330">
+                                                                </div>
+                                                                <div class="modal-footer d-flex justify-content-between">
+                                                                    <p class="h3">Precio : <strong><?php echo '$' . $mostrar['costo'] ?></strong></p>
+                                                                    <button type="button" class="btn btn-lg btn-secondary" data-dismiss="modal">Cerrar</button>
 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <!--Fin modal-->
+                                                    <!--Fin modal-->
 
-                                                <td>
-                                                    <p class="mt-3 h5 text-center"><?php echo $mostrar['categoria'] ?>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5 text-center"><?php echo $mostrar['descripcion'] ?>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5 text-center"><?php echo '$' . $mostrar['costo'] ?>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5 text-center"><span
-                                                            class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group btn-group  mt-3">
-                                                        <a class="btn btn-lg btn-outline-info"
-                                                            href="add.php?idp=<?= $mostrar['id_producto'] ?>"><i
-                                                                class="fas fa-cart-plus"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <?php $var=$var+1;} ?>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-center"><?php echo $mostrar['categoria'] ?>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-center"><?php echo $mostrar['descripcion'] ?>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-center"><?php echo '$' . $mostrar['costo'] ?>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-center"><span class="badge mt-3 d-block py-2 <?= ($mostrar['stock'] < 50) ? "badge-danger" : (($mostrar['stock'] < 100) ? "badge-warning" : "badge-success") ?> "><?php echo $mostrar['stock'] ?></span>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group btn-group  mt-3">
+                                                            <a class="btn btn-lg btn-outline-info" href="add.php?idp=<?= $mostrar['id_producto'] ?>"><i class="fas fa-cart-plus"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <?php $var = $var + 1;
+                                            } ?>
                                         </tbody>
                                         <tfoot>
                                             <tr class="h5">
@@ -369,20 +377,20 @@ include '../../sessionIniciada.php';
 
                         while ($mostrar = mysqli_fetch_array($resPaquetes)) {
                             include '../../conexiones/conexion.php';
-                        
-                            $sqlgetPaquete = 'call getCountProductosPaquete(' . $mostrar['idpaquete'] . ','.$_SESSION['idusuario'].');';
+
+                            $sqlgetPaquete = 'call getCountProductosPaquete(' . $mostrar['idpaquete'] . ',' . $_SESSION['idusuario'] . ');';
                             $packList = $conexion->query($sqlgetPaquete);
-                            $numeroT=mysqli_num_rows($packList);
-                            
+                            $numeroT = mysqli_num_rows($packList);
+
                             $mtp = mysqli_fetch_array($packList);
-                            if(isset($mtp['total']) && $mtp['total']==$numeroT){
+                            if (isset($mtp['total']) && $mtp['total'] == $numeroT) {
                                 include '../../conexiones/conexion.php';
                                 $sqlgetPaqueteRest = 'call getPaquetes(' . $mostrar['idpaquete'] . ');';
                                 $packListRest = $conexion->query($sqlgetPaqueteRest);
                                 $lista = "";
                                 while ($mtpRest = mysqli_fetch_array($packListRest)) {
                                     $lista .= "<li class='h5'>";
-                                    $lista .= "<strong>". $mtpRest['cantidad_T']."</strong>" . " " . $mtpRest['descripcion'];
+                                    $lista .= "<strong>" . $mtpRest['cantidad_T'] . "</strong>" . " " . $mtpRest['descripcion'];
                                     $lista .= "</li>";
                                 }
                                 echo '<div class="col-lg-9 col-sm-12 col-md-10 ">
@@ -394,7 +402,7 @@ include '../../sessionIniciada.php';
                                                 <ul>
                                                     ' . $lista . '
                                                 </ul>
-                                            <p class="card-text text-center h2">De : <strong >$' . $mostrar['precioOriginal'] . '</strong> a <strong>'.$mostrar['precioVenta'].'</strong></p>
+                                            <p class="card-text text-center h2">De : <strong >$' . $mostrar['precioOriginal'] . '</strong> a <strong>' . $mostrar['precioVenta'] . '</strong></p>
                                             </div>
                                             <div class="card-footer text-center text-muted">
                                                 <div class="btn-group ">
@@ -405,9 +413,9 @@ include '../../sessionIniciada.php';
                                         </div>
                                     </div>';
                             }
-                            
+
                             //echo "<br>Mi lista ".$lista;
-                            
+
                         }
                         ?>
                     </div>
@@ -439,7 +447,7 @@ include '../../sessionIniciada.php';
     <script src=" ../../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -459,22 +467,22 @@ include '../../sessionIniciada.php';
     <script src="../../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
     <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script>
-    $.extend(true, $.fn.dataTable.defaults, {
-        "searching": true,
-        "ordering": true
-    });
-    $(function() {
-
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
+        $.extend(true, $.fn.dataTable.defaults, {
             "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
+            "ordering": true
         });
-    });
+        $(function() {
+
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": false,
+            });
+        });
     </script>
 </body>
 

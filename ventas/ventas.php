@@ -1,5 +1,12 @@
 <?php
 include '../sessionIniciada.php';
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,9 +31,9 @@ include '../sessionIniciada.php';
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-    tbody tr td {
-        width: calc(100% / 5);
-    }
+        tbody tr td {
+            width: calc(100% / 5);
+        }
     </style>
 </head>
 
@@ -55,8 +62,7 @@ include '../sessionIniciada.php';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -74,8 +80,7 @@ include '../sessionIniciada.php';
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -87,29 +92,33 @@ include '../sessionIniciada.php';
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-user nav-icon"></i>
-                                <p>
-                                    Usuarios
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../vendedores/vendedores.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver usuarios</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../vendedores/agregarVendedor.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar usuario</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>
+                                Usuarios
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../vendedores/vendedores.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../vendedores/agregarVendedor.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
@@ -134,75 +143,85 @@ include '../sessionIniciada.php';
 
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
-                                    Productos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../productos/productos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../productos/nuevoProducto.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar producto</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
-                                <i class="fas fa-cubes mx-1"></i>
-                                <p class="ml-1">
-                                    Paquetes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../paquetes/paquetes.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver paquetes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../paquetes/paquetes.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar paquete</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-boxes nav-icon"></i>
-                                <p>
-                                    Categorias
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../categorias/categorias.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver categorias</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../categorias/agregarCategoria.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar categorias</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="ion ion-bag nav-icon"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../productos/productos.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver productos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../productos/nuevoProducto.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar producto</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="fas fa-cubes mx-1"></i>
+                            <p class="ml-1">
+                                Paquetes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../paquetes/paquetes.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver paquetes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../paquetes/paquetes.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar paquete</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>
+                                Categorias
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../categorias/categorias.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../categorias/agregarCategoria.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -243,23 +262,20 @@ include '../sessionIniciada.php';
                     <!-- Main row -->
                     <div class="row justify-content-center mb-3">
                         <div class="col-sm-12 col-md-10 col-lg-9">
-                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 btn-lg btn btn-success"><i
-                                    class="ion ion-bag nav-icon"></i> Nueva venta</a>
+                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 btn-lg btn btn-success"><i class="ion ion-bag nav-icon"></i> Nueva venta</a>
                         </div>
                     </div>
                     <?php
                     include '../conexiones/conexion.php';
-                    $sql = "select date(fecha) as fecha,nombreCliente,total,costoCubierto,estado,idcompra  from compra where idvendedor=".$_SESSION['idusuario'];
+                    $sql = "select date(fecha) as fecha,nombreCliente,total,costoCubierto,estado,idcompra  from compra where idvendedor=" . $_SESSION['idusuario'];
                     $resultado = $conexion->query($sql);
                     $conexion->close();
                     ?>
                     <div class="row justify-content-center">
                         <div class="col-sm-12 col-md-10 col-lg-9">
                             <div class="card">
-                                <div
-                                    class="card-body w-100 px-2                                                                                                                                                                                                              ">
-                                    <table id="example2"
-                                        class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
+                                <div class="card-body w-100 px-2                                                                                                                                                                                                              ">
+                                    <table id="example2" class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
                                             <tr>
                                                 <th>Estatus</th>
@@ -273,89 +289,71 @@ include '../sessionIniciada.php';
                                         <tbody>
                                             <?php
                                             $img = "";
-                                            
+
                                             while ($mostrar = mysqli_fetch_array($resultado)) {
-                                                
+
                                             ?>
-                                            <tr>
-                                                <td>
-                                                    <h5><span
-                                                            class="mt-3 badge badge-<?=$mostrar['estado']==0?'danger':'success';?>"><?php echo $mostrar['estado']==0?'Adeudo':'Liquidado'; ?></span>
-                                                    </h5>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5 text-capitalize">
-                                                        <?php echo $mostrar['nombreCliente'] ?></p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5">
-                                                        <strong><?php echo '$'.$mostrar['total'] ?></strong></p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5"><?php echo $mostrar['fecha'] ?></p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5">
-                                                        <strong><?php echo '$' . $mostrar['costoCubierto'] ?></strong>
-                                                    </p>
-                                                </td>
+                                                <tr>
+                                                    <td>
+                                                        <h5><span class="mt-3 badge badge-<?= $mostrar['estado'] == 0 ? 'danger' : 'success'; ?>"><?php echo $mostrar['estado'] == 0 ? 'Adeudo' : 'Liquidado'; ?></span>
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-capitalize">
+                                                            <?php echo $mostrar['nombreCliente'] ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5">
+                                                            <strong><?php echo '$' . $mostrar['total'] ?></strong></p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5"><?php echo $mostrar['fecha'] ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5">
+                                                            <strong><?php echo '$' . $mostrar['costoCubierto'] ?></strong>
+                                                        </p>
+                                                    </td>
 
-                                                <td>
+                                                    <td>
 
-                                                    <div class="btn-group btn-group mt-2">
+                                                        <div class="btn-group btn-group mt-2">
 
-                                                        <button type="button" data-toggle="modal"
-                                                            data-target="#exampleModal<?=$mostrar['idcompra']?>"
-                                                            data-whatever="@mdo" class="btn btn-lg btn-outline-success"
-                                                            id="abonar" <?=$mostrar['estado']==1?'disabled':'';?>>
-                                                            <i class="far fa-money-bill-alt"></i></button>
+                                                            <button type="button" data-toggle="modal" data-target="#exampleModal<?= $mostrar['idcompra'] ?>" data-whatever="@mdo" class="btn btn-lg btn-outline-success" id="abonar" <?= $mostrar['estado'] == 1 ? 'disabled' : ''; ?>>
+                                                                <i class="far fa-money-bill-alt"></i></button>
 
-                                                        <div class="modal fade"
-                                                            id="exampleModal<?=$mostrar['idcompra']?>" tabindex="-1"
-                                                            role="dialog" aria-labelledby="exampleModalLabel"
-                                                            aria-hidden="true">
-                                                            <div class="modal-dialog modal-dialog-centered"
-                                                                role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Abono</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <form>
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    for="inputCantidad<?=$mostrar['idcompra']?>"
-                                                                                    class="text-left d-block">Cantidad a
-                                                                                    abonar:</label>
-                                                                                <input type="number" min="0"
-                                                                                    class="form-control"
-                                                                                    id="inputCantidad<?=$mostrar['idcompra']?>">
-                                                                            </div>
+                                                            <div class="modal fade" id="exampleModal<?= $mostrar['idcompra'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                                                Abono</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <form>
+                                                                                <div class="form-group">
+                                                                                    <label for="inputCantidad<?= $mostrar['idcompra'] ?>" class="text-left d-block">Cantidad a
+                                                                                        abonar:</label>
+                                                                                    <input type="number" min="0" class="form-control" id="inputCantidad<?= $mostrar['idcompra'] ?>">
+                                                                                </div>
 
-                                                                        </form>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button"
-                                                                            class="btn btn-lg btn-danger"
-                                                                            data-dismiss="modal">Cancelar</button>
-                                                                        <button onclick="abonar(this)" type="button"
-                                                                            id="<?=$mostrar['idcompra']?>"
-                                                                            class="btn btn-lg btn-success">Agregar
-                                                                            pago</button>
+                                                                            </form>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Cancelar</button>
+                                                                            <button onclick="abonar(this)" type="button" id="<?= $mostrar['idcompra'] ?>" class="btn btn-lg btn-success">Agregar
+                                                                                pago</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <a class="btn btn-lg btn-outline-info" href=""><i class="far fa-eye"></i></a>
                                                         </div>
-                                                        <a class="btn btn-lg btn-outline-info" href=""><i
-                                                                class="far fa-eye"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
                                         <tfoot>
@@ -401,7 +399,7 @@ include '../sessionIniciada.php';
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -424,63 +422,63 @@ include '../sessionIniciada.php';
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
     <script>
-    function abonar(btnid) {
-        var idcompra = btnid.id;
-        var total = document.getElementById("inputCantidad" + idcompra).value;
-        //alert("Total : " + total);
-        $.ajax({
-            type: "POST",
-            data: {
-                "cantidad": total,
-                "idcompra": idcompra
-            },
-            url: "accionesVenta/abonar.php",
-            success: function(response) {
-                location.reload();
-                //console.log(response);
-                //$('#lblDatos').text(response);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                //if(textStatus === 'timeout'){alert('Failed from timeout');}   
-                if (jqXHR.status === 0) {
-                    alert('Not connect: Verify Network: ' + textStatus);
-                } else if (jqXHR.status == 404) {
-                    alert('Requested page not found [404]');
-                } else if (jqXHR.status == 500) {
-                    alert('Internal Server Error [500].');
-                } else if (textStatus === 'parsererror') {
-                    alert('Requested JSON parse failed.');
-                } else if (textStatus === 'timeout') {
-                    alert('Time out error.');
-                } else if (textStatus === 'abort') {
-                    alert('Ajax request aborted.');
-                } else {
-                    alert('Uncaught Error: ' + jqXHR.responseText);
-                }
-                //location.reload();
-            },
-            timeout: 5000
-            //timeout: 1000//para probar timeout
-        }).always(function() {
-            /** Al finalizar la consulta del servidor **/
+        function abonar(btnid) {
+            var idcompra = btnid.id;
+            var total = document.getElementById("inputCantidad" + idcompra).value;
+            //alert("Total : " + total);
+            $.ajax({
+                type: "POST",
+                data: {
+                    "cantidad": total,
+                    "idcompra": idcompra
+                },
+                url: "accionesVenta/abonar.php",
+                success: function(response) {
+                    location.reload();
+                    //console.log(response);
+                    //$('#lblDatos').text(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //if(textStatus === 'timeout'){alert('Failed from timeout');}   
+                    if (jqXHR.status === 0) {
+                        alert('Not connect: Verify Network: ' + textStatus);
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (textStatus === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (textStatus === 'timeout') {
+                        alert('Time out error.');
+                    } else if (textStatus === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error: ' + jqXHR.responseText);
+                    }
+                    //location.reload();
+                },
+                timeout: 5000
+                //timeout: 1000//para probar timeout
+            }).always(function() {
+                /** Al finalizar la consulta del servidor **/
 
-        });
-    }
-    $.extend(true, $.fn.dataTable.defaults, {
-        "searching": true,
-        "ordering": true
-    });
-    $(function() {
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
+            });
+        }
+        $.extend(true, $.fn.dataTable.defaults, {
             "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
+            "ordering": true
         });
-    });
+        $(function() {
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": false,
+            });
+        });
     </script>
 </body>
 

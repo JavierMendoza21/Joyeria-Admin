@@ -5,7 +5,7 @@ $CATEGORIA = "";
 $IMGUSER = "";
 $NOMBREUSER = "";
 $IDUSER = "";
-if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {  
+if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {
     $idusuario = $_SESSION['idusuario'];
 
     include 'conexiones/conexion.php';
@@ -21,7 +21,6 @@ if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         $extra = 'vendedores/vendedores.php';
         header("Location: http://$host/Admin_joyeria/$extra");
-        
     }
     $IDUSER = $mostrar['idusuarios'];
     $CATEGORIA = $mostrar['categoria_usuario'];

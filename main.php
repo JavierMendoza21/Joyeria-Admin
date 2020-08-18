@@ -1,6 +1,14 @@
 <?php
-require 'sessionIniciada.php';
+include 'sessionIniciada.php';
 $IMGUSER = substr($IMGUSER, 3);
+
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 
 ?>
 
@@ -27,8 +35,8 @@ $IMGUSER = substr($IMGUSER, 3);
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        .scroll {
-            overflow-x: auto;
+        tr td {
+            width: calc(100% / 4);
         }
     </style>
 </head>
@@ -90,29 +98,33 @@ $IMGUSER = substr($IMGUSER, 3);
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-user nav-icon"></i>
-                                <p>
-                                    Usuarios
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="vendedores/vendedores.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver usuarios</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="vendedores/agregarVendedor.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar usuario</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>
+                                Usuarios
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="vendedores/vendedores.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="vendedores/agregarVendedor.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
@@ -136,75 +148,86 @@ $IMGUSER = substr($IMGUSER, 3);
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
-                                    Productos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="productos/productos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="productos/nuevoProducto.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar producto</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
-                                <i class="fas fa-cubes mx-1"></i>
-                                <p class="ml-1">
-                                    Paquetes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="paquetes/paquetes.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver paquetes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar paquete</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-boxes nav-icon"></i>
-                                <p>
-                                    Categorias
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="categorias/categorias.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver categorias</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="categorias/agregarCategoria.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar categorias</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="ion ion-bag nav-icon"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="productos/productos.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver productos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="productos/nuevoProducto.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar producto</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="fas fa-cubes mx-1"></i>
+                            <p class="ml-1">
+                                Paquetes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="paquetes/paquetes.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver paquetes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar paquete</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>
+                                Categorias
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="categorias/categorias.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="categorias/agregarCategoria.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -253,7 +276,8 @@ $IMGUSER = substr($IMGUSER, 3);
                                         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="card-body" style="overflow:scroll ;">
+                                <div class="card-body text-center" style="overflow:scroll ;">
+                                    <p class="text-muted"><i class="fas fa-info-circle"></i> La columna de ventas reprecenta, las ventas hechas por los vendedores y la columna activos, representa el total de los abonos a esas cuentas </p>
                                     <div class="chart" style="width: 950px;">
                                         <canvas id="barChart" style="min-height: 300px; height: 300px; max-height: 300px; width: 1200px;"></canvas>
                                     </div>
@@ -262,44 +286,116 @@ $IMGUSER = substr($IMGUSER, 3);
                             </div>
                             <!-- /.card -->
                         </div>
-                        <div class="col-sm-12 col-md-5 col-lg-4">
+                        <?php
+                        $usuarios = '<div class="col-sm-12 col-md-5 col-lg-4">
+                        <!-- BAR CHART -->
+                        <div class="card card-info ">
+                            <div class="card-header">
+                                <h3 class="card-title">Ventas totales</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <canvas id="barChart2" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<div class="col-sm-12 col-md-7 col-lg-8">
+                        <!-- BAR CHART -->
+                        <div class="card card-info ">
+                            <div class="card-header">
+                                <h3 class="card-title">Categorias mas vendidas</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="card-body ">
+                                <canvas id="barChart3" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
+                        <?php
+                        include "conexiones/conexion.php";
+                        $sql = "call getPorcentajes()";
+                        $result = $conexion->query($sql);
+                        $conexion->close();
+                        $usuarios="";
+                        while ($mostrar = mysqli_fetch_array($result)) {
+                            $usuarios = '<div class="col-12">
                             <!-- BAR CHART -->
                             <div class="card card-info ">
                                 <div class="card-header">
-                                    <h3 class="card-title">Ventas totales</h3>
-
+                                    <h3 class="card-title">Porcentajes</h3>
+    
                                     <div class="card-tools">
                                         <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
                                         </button>
                                         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="card-body ">
-                                    <canvas id="barChart2" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
+                                <div class="card-body text-center">
+                                    <p class="text-muted"><i class="fas fa-info-circle"></i> El total es de los productos que ya se terminaron de pagar, no se incluyen los productos que no hayan sido pagados. </p>
+                                    <table id="example2" class="col-lg-10 col-sm-12 col-md-9 mx-auto table-hover  p-0 table-sm table table-bordered table-striped text-center table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th>Total <p class="text-muted d-inline">(100%)</p>
+                                                </th>
+                                                <th>Recompra <p class="text-muted d-inline">(10%)</p>
+                                                </th>
+                                                <th>Vendedores <p class="text-muted d-inline">(30%)</p>
+                                                </th>
+                                                <th>Socio <p class="text-muted d-inline">(35%)</p>
+                                                </th>
+                                                <th>Alexis Alarcon <p class="text-muted d-inline">(25%)</p>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                    <td class="pt-3">
+                                                        <p class="h3">$'.number_format($mostrar["total"], 2) .'</p>
+                                                    </td>
+                                                    <td class="pt-3">
+                                                        <p class="h3">$'.number_format($mostrar["recompra"], 2) .'</p>
+                                                    </td>
+                                                    <td class="pt-3">
+                                                        <p class="h3">$'.number_format($mostrar["Vendedor"], 2) .'</p>
+                                                    </td>
+                                                    <td class="pt-3">
+                                                        <p class="h3">$'.number_format($mostrar["socio"], 2) .'</p>
+                                                    </td>
+                                                    <td class="pt-3">
+                                                        <p class="h3">$'.number_format($mostrar["alexis"], 2) .'</p>
+                                                    </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
-                        </div>
-                        <div class="col-sm-12 col-md-7 col-lg-8">
-                            <!-- BAR CHART -->
-                            <div class="card card-info ">
-                                <div class="card-header">
-                                    <h3 class="card-title">Categorias mas vendidas</h3>
+                        </div>';
+                        }
 
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                <div class="card-body ">
-                                    <canvas id="barChart3" style="min-height: 300px; height: 300px; max-height: 300px; max-width: 200%;"></canvas>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
 
                     </div>
                 </div>
@@ -430,42 +526,45 @@ $IMGUSER = substr($IMGUSER, 3);
             //--------------
             var areaChartData3 = {
                 labels: [<?php include 'conexiones/conexion.php';
-                                $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
+                            $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
                                 on producto.idProducto=productosVendidos.idProducto
                                 inner join categoria_producto
                                 on categoria_producto.idcategoria_producto=producto.categoria_kf
                                 group by categoria_producto.idcategoria_producto
                                 order by total desc;";
-                                $resultado = $conexion->query($sqlusuarios);
-                                $conexion->close();
-                                while ($mostrar = mysqli_fetch_array($resultado)) {
-                                    echo "'" . $mostrar['categoria'] .
-                                        "',";
-                                } ?>],
+                            $resultado = $conexion->query($sqlusuarios);
+                            $conexion->close();
+                            $contador = 0;
+                            while ($mostrar = mysqli_fetch_array($resultado) and $contador < 5) {
+                                echo "'" . $mostrar['categoria'] .
+                                    "',";
+                                $contador = $contador + 1;
+                            } ?>],
                 datasets: [{
-                        label: 'Vendidos',
-                        backgroundColor: 'rgba(60,141,188,0.9)',
-                        borderColor: 'rgba(60,141,188,0.8)',
-                        pointRadius: false,
-                        pointColor: '#3b8bba',
-                        pointStrokeColor: 'rgba(60,141,188,1)',
-                        pointHighlightFill: '#fff',
-                        pointHighlightStroke: 'rgba(60,141,188,1)',
-                        data: [<?php include 'conexiones/conexion.php';
-                                $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
+                    label: 'Vendidos',
+                    backgroundColor: 'rgba(60,141,188,0.9)',
+                    borderColor: 'rgba(60,141,188,0.8)',
+                    pointRadius: false,
+                    pointColor: '#3b8bba',
+                    pointStrokeColor: 'rgba(60,141,188,1)',
+                    pointHighlightFill: '#fff',
+                    pointHighlightStroke: 'rgba(60,141,188,1)',
+                    data: [<?php include 'conexiones/conexion.php';
+                            $sqlusuarios = "select  categoria_producto.categoria,sum(cantidad) as total from productosVendidos inner join producto
                                 on producto.idProducto=productosVendidos.idProducto
                                 inner join categoria_producto
                                 on categoria_producto.idcategoria_producto=producto.categoria_kf
                                 group by categoria_producto.idcategoria_producto
                                 order by total desc;";
-                                $resultado = $conexion->query($sqlusuarios);
-                                $conexion->close();
-                                while ($mostrar = mysqli_fetch_array($resultado)) {
-                                    echo "'" . $mostrar['total'] .
-                                        "',";
-                                } ?>]
-                    },
-                ]
+                            $resultado = $conexion->query($sqlusuarios);
+                            $conexion->close();
+                            $contador = 0;
+                            while ($mostrar = mysqli_fetch_array($resultado) and $contador < 5) {
+                                echo "'" . $mostrar['total'] .
+                                    "',";
+                                $contador = $contador + 1;
+                            } ?>]
+                }, ]
             }
             //-------------
             //- BAR CHART -

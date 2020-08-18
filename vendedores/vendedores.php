@@ -20,6 +20,13 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     $extra = 'vendedores/vendedores.php';
     header("Location: http://$host/Admin_joyeria/$extra");
 }
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,13 +55,13 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
     <style>
-    .effectoHover {
-        color: #e1e1e1;
-    }
+        .effectoHover {
+            color: #e1e1e1;
+        }
 
-    .effectoHover:hover {
-        color: black;
-    }
+        .effectoHover:hover {
+            color: black;
+        }
     </style>
 </head>
 
@@ -82,8 +89,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -103,8 +109,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -270,8 +275,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                     <!-- Main row -->
                     <div class="row justify-content-center">
                         <div class="col-lg-9 col-sm-12">
-                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-4 btn-lg btn btn-success mb-3"><i
-                                    class="fas fa-user-plus"></i> Agregar usuario</a>
+                            <a href="agregarVendedor.php" class="col-sm-12 col-lg-4 btn-lg btn btn-success mb-3"><i class="fas fa-user-plus"></i> Agregar usuario</a>
                         </div>
                     </div>
                 </div>
@@ -285,8 +289,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                             <div class="card">
                                 <!-- /.card-header -->
                                 <div class="card-body w-100 text-center">
-                                    <table id="example2"
-                                        class="w-100 text-center table-hover table-sm table table-bordered table-striped table-responsive">
+                                    <table id="example2" class="w-100 text-center table-hover table-sm table table-bordered table-striped table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Imagen</th>
@@ -322,54 +325,45 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
                                                     }
                                                     //echo $imagenUser . ' --- Ingreso <br>';
                                                 ?>
-                                                <td>
-                                                    <img src="<?= $imagenUser ?>" alt="Imagen de usuario"
-                                                        class="rounded my-0 mx-0" width="100">
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5">
-                                                        <?php echo $mostrar['nombre'] . ' ' . $mostrar['apellidoP'] ?>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5"><?php
-                                                            include '../conexiones/conexion.php';
-                                                            
-                                                            $sqlCategoria = "CALL getIDCategoria(" . $mostrar['categoria_usuario'] . ") ";
-                                                            if ($resultadoCategoria = $conexion->query($sqlCategoria)) {
-                                                                $resultadoCategoria = mysqli_fetch_array($resultadoCategoria);
-                                                                echo $resultadoCategoria['categoria_usuario'];
-                                                            } else {
-                                                                //echo 'no se hiso la consulta';
-                                                            }
+                                                    <td>
+                                                        <img src="<?= $imagenUser ?>" alt="Imagen de usuario" class="rounded my-0 mx-0" width="100">
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5">
+                                                            <?php echo $mostrar['nombre'] . ' ' . $mostrar['apellidoP'] ?>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5"><?php
+                                                                            include '../conexiones/conexion.php';
+
+                                                                            $sqlCategoria = "CALL getIDCategoria(" . $mostrar['categoria_usuario'] . ") ";
+                                                                            if ($resultadoCategoria = $conexion->query($sqlCategoria)) {
+                                                                                $resultadoCategoria = mysqli_fetch_array($resultadoCategoria);
+                                                                                echo $resultadoCategoria['categoria_usuario'];
+                                                                            } else {
+                                                                                //echo 'no se hiso la consulta';
+                                                                            }
 
 
-                                                            $conexion->close();
-                                                            ?></p>
-                                                </td>
-                                                <td class="d-flex">
-                                                    <a href="vendedores.php?id=<?= $mostrar['idusuarios'] ?>&estate=<?= $mostrar['estado'] ?> "
-                                                        class="btn w-100 text-uppercase h4  btn-sm mt-3 h5 p-2
+                                                                            $conexion->close();
+                                                                            ?></p>
+                                                    </td>
+                                                    <td class="d-flex">
+                                                        <a href="vendedores.php?id=<?= $mostrar['idusuarios'] ?>&estate=<?= $mostrar['estado'] ?> " class="btn w-100 text-uppercase h4  btn-sm mt-3 h5 p-2
                                             <?= ($mostrar['estado'] == 1) ? 'btn-success ' : 'btn-secondary '; ?>
                                             <?= ($IDUSER == $mostrar['idusuarios']) ? 'disabled ' : ''; ?> "><?php echo ($mostrar['estado'] == 1) ? 'Activo' : 'Baja'; ?>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group mt-3" role="toolbar"
-                                                        aria-label="Toolbar with button groups">
-                                                        <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=editar"
-                                                            class="btn btn-lg btn-outline-info"><i
-                                                                class="fas fa-eye"></i></a>
-                                                        <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=eliminar"
-                                                            class="btn btn-lg btn-outline-danger <?= ($IDUSER == $mostrar['idusuarios']) ? 'disabled ' : ''; ?>"><i
-                                                                class="fas fa-trash-alt"></i></a>
-                                                        <a href="asignarProducto/masProducto.php?id=<?= $mostrar['idusuarios'] ?>"
-                                                            class="btn btn-lg  btn-outline-primary <?= ($mostrar['estado'] == 1) ? '' : ' disabled'; ?>"><i
-                                                                class="fas fa-clipboard-list"></i></a>
-                                                    </div>
-                                                </td>
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group mt-3" role="toolbar" aria-label="Toolbar with button groups">
+                                                            <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=editar" class="btn btn-lg btn-outline-info"><i class="fas fa-eye"></i></a>
+                                                            <a href="accionesUsuario.php?id=<?= $mostrar['idusuarios'] ?>&acc=eliminar" class="btn btn-lg btn-outline-danger <?= ($IDUSER == $mostrar['idusuarios']) ? 'disabled ' : ''; ?>"><i class="fas fa-trash-alt"></i></a>
+                                                            <a href="asignarProducto/masProducto.php?id=<?= $mostrar['idusuarios'] ?>" class="btn btn-lg  btn-outline-primary <?= ($mostrar['estado'] == 1) ? '' : ' disabled'; ?>"><i class="fas fa-clipboard-list"></i></a>
+                                                        </div>
+                                                    </td>
                                             </tr>
-                                            <?php
+                                        <?php
                                                 }
                                         ?>
                                         </tbody>
@@ -420,7 +414,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -439,22 +433,22 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     <script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 
     <script>
-    $.extend(true, $.fn.dataTable.defaults, {
-        "searching": true,
-        "ordering": true
-    });
-    $(function() {
-
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
+        $.extend(true, $.fn.dataTable.defaults, {
             "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
+            "ordering": true
         });
-    });
+        $(function() {
+
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": false,
+            });
+        });
     </script>
 
 </body>

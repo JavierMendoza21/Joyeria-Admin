@@ -1,5 +1,12 @@
 <?php
 include '../../sessionIniciada.php';
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,17 +31,17 @@ include '../../sessionIniciada.php';
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
-    thead tr th {
-        min-width: 8rem;
-    }
+        thead tr th {
+            min-width: 8rem;
+        }
 
-    tbody tr {
-        min-width: 8rem;
-    }
+        tbody tr {
+            min-width: 8rem;
+        }
 
-    tbody tr td {
-        min-width: 8rem;
-    }
+        tbody tr td {
+            min-width: 8rem;
+        }
     </style>
 </head>
 
@@ -63,8 +70,7 @@ include '../../sessionIniciada.php';
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../../main.php" class="brand-link">
-                <img src="../../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -82,8 +88,7 @@ include '../../sessionIniciada.php';
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -95,29 +100,33 @@ include '../../sessionIniciada.php';
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-user nav-icon"></i>
-                                <p>
-                                    Usuarios
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../vendedores/vendedores.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver usuarios</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../vendedores/agregarVendedor.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar usuario</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>
+                                Usuarios
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../vendedores/vendedores.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../vendedores/agregarVendedor.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        
                         <li class="nav-item has-treeview ">
                             <a href="#" class="nav-link ">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
@@ -141,75 +150,85 @@ include '../../sessionIniciada.php';
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
-                                    Productos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../productos/productos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../productos/nuevoProducto.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar producto</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview ">
-                            <a href="#" class="nav-link ">
-                                <i class="fas fa-cubes mx-1"></i>
-                                <p class="ml-1">
-                                    Paquetes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../paquetes/paquetes.php" class="nav-link ">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver paquetes</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../paquetes/paquetes.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar paquete</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-boxes nav-icon"></i>
-                                <p>
-                                    Categorias
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../../categorias/categorias.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver categorias</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../categorias/agregarCategoria.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar categorias</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="ion ion-bag nav-icon"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../productos/productos.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver productos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../productos/nuevoProducto.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar producto</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview ">
+                        <a href="#" class="nav-link ">
+                            <i class="fas fa-cubes mx-1"></i>
+                            <p class="ml-1">
+                                Paquetes
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../paquetes/paquetes.php" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver paquetes</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../paquetes/paquetes.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar paquete</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>
+                                Categorias
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../../categorias/categorias.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../categorias/agregarCategoria.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -254,9 +273,7 @@ include '../../sessionIniciada.php';
                             <form action="comprar.php" class="" method="POST" onsubmit="">
                                 <div class="form-group">
                                     <label for="name" class="h3 d-block text-left">Nombre </label>
-                                    <input type="text" name="nombre" id="nombre" autocomplete="off"
-                                        class="text-capitalize form-control" id="nombreVendedor"
-                                        placeholder="nombre completo" require>
+                                    <input type="text" name="nombre" id="nombre" autocomplete="off" class="text-capitalize form-control" id="nombreVendedor" placeholder="nombre completo" require>
                                     <div class="invalid-feedback" id="msjValidname">
                                     </div>
 
@@ -264,29 +281,25 @@ include '../../sessionIniciada.php';
 
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <button type="button" id="btn-comprar"
-                                            class="h3 text-uppercase btn btn-lg btn-outline-success w-100"><i
-                                                class="fas fa-cash-register pr-3"></i>Comprar</button>
+                                        <button type="button" id="btn-comprar" class="h3 text-uppercase btn btn-lg btn-outline-success w-100"><i class="fas fa-cash-register pr-3"></i>Comprar</button>
                                     </div>
 
 
                                     <div class="col-lg-6">
 
-                                        <button type="button" id="cancelar"
-                                            class="h3 text-uppercase btn btn-lg btn-outline-danger w-100"><i
-                                                class="fas fa-window-close pr-3"></i>Cancelar</button>
+                                        <button type="button" id="cancelar" class="h3 text-uppercase btn btn-lg btn-outline-danger w-100"><i class="fas fa-window-close pr-3"></i>Cancelar</button>
 
                                     </div>
                                     <div class="col-12 text-center">
                                         <?php
                                         include '../../conexiones/conexion.php';
-                                        $sqltotal="call obtenerCostoTotalCompra(".$_SESSION['idusuario'].")";
-                                        $total=$conexion->query($sqltotal);
+                                        $sqltotal = "call obtenerCostoTotalCompra(" . $_SESSION['idusuario'] . ")";
+                                        $total = $conexion->query($sqltotal);
                                         $conexion->close();
-                                        $total=mysqli_fetch_array($total);
+                                        $total = mysqli_fetch_array($total);
                                         ?>
                                         <p class="h1 my-2">Total :
-                                            <strong><?php echo sprintf("%01.2f", $total['total']==0?'0':$total['total']) ;?></strong>
+                                            <strong><?php echo sprintf("%01.2f", $total['total'] == 0 ? '0' : $total['total']); ?></strong>
                                         </p>
                                     </div>
                                 </div>
@@ -303,10 +316,8 @@ include '../../sessionIniciada.php';
                     <div class="row justify-content-center">
                         <div class="col-lg-8 col-md-10 col-sm-12 justify-content-center">
                             <div class="card">
-                                <div
-                                    class="card-body w-100 px-2                                                                                                                                                                                                              ">
-                                    <table id="example2"
-                                        class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
+                                <div class="card-body w-100 px-2                                                                                                                                                                                                              ">
+                                    <table id="example2" class="table-sm table-hover table-responsive table table-striped table-bordered text-center">
                                         <thead>
                                             <tr>
                                                 <th></th>
@@ -325,27 +336,24 @@ include '../../sessionIniciada.php';
                                                     $img = 'producto_default.png';
                                                 }
                                             ?>
-                                            <tr>
-                                                <td><img src="../../img_productos/<?= $img ?>" class="img-rounded"
-                                                        alt="" width="100"></td>
-                                                <td>
-                                                    <p class="mt-3 h5 text-left"><?php echo $mostrar['descripcion'] ?>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h5"><?php echo '$' . $mostrar['costo'] ?></p>
-                                                </td>
-                                                <td>
-                                                    <p class="mt-3 h4">#<?php echo $mostrar['stock'] ?></p>
-                                                </td>
-                                                <td>
-                                                    <div class="btn-group btn-group  mt-3">
-                                                        <a class="btn btn-lg btn-outline-danger"
-                                                            href="remover.php?idp=<?= $mostrar['idProducto'] ?>"><i
-                                                                class="fas fa-trash-alt"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <tr>
+                                                    <td><img src="../../img_productos/<?= $img ?>" class="img-rounded" alt="" width="100"></td>
+                                                    <td>
+                                                        <p class="mt-3 h5 text-left"><?php echo $mostrar['descripcion'] ?>
+                                                        </p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h5"><?php echo '$' . $mostrar['costo'] ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <p class="mt-3 h4">#<?php echo $mostrar['stock'] ?></p>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group btn-group  mt-3">
+                                                            <a class="btn btn-lg btn-outline-danger" href="remover.php?idp=<?= $mostrar['idProducto'] ?>"><i class="fas fa-trash-alt"></i></a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             <?php } ?>
                                         </tbody>
                                         <tfoot>
@@ -436,7 +444,7 @@ include '../../sessionIniciada.php';
     <script src=" ../../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -457,95 +465,95 @@ include '../../sessionIniciada.php';
     <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
+        $(document).ready(function() {
 
-        $("#btn-comprar").click(function() {
-            var texto = document.getElementById("nombre");
+            $("#btn-comprar").click(function() {
+                var texto = document.getElementById("nombre");
 
-            if (texto.value != "") {
+                if (texto.value != "") {
+                    Swal.fire({
+                        title: 'Desea realizar la compra?',
+                        text: "¡No podrás revertir esto!",
+                        icon: 'question',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Si, comprar!',
+                        cancelButtonText: "Cancelar"
+                    }).then((result) => {
+                        if (result.value) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Compra realizada',
+                                text: 'Gracias por su compra!',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK',
+                            }).then((result) => {
+                                if (result.value) {
+                                    document.forms[0].submit();
+                                }
+                            })
+
+                        }
+                    })
+                } else {
+                    var validador_nombre = document.getElementById("msjValidname");
+                    document.getElementById("nombre").classList.add("is-invalid");
+                    document.getElementById("nombre").classList.remove("is-valid");
+
+                    validador_nombre.classList.add("invalid-feedback");
+                    validador_nombre.classList.remove("valid-feedback");
+                    validador_nombre.innerHTML = "Nombre del cliente.";
+                }
+
+
+            });
+            $("#cancelar").click(function() {
                 Swal.fire({
-                    title: 'Desea realizar la compra?',
+                    title: 'Desea cancelar la compra?',
                     text: "¡No podrás revertir esto!",
                     icon: 'question',
                     showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Si, comprar!',
-                    cancelButtonText: "Cancelar"
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Si, cancelar!',
+                    cancelButtonText: "Continuar"
                 }).then((result) => {
                     if (result.value) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Compra realizada',
-                            text: 'Gracias por su compra!',
+                            title: 'Se cancelo',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                         }).then((result) => {
                             if (result.value) {
-                                document.forms[0].submit();
+                                var enlace = document.createElement("a");
+                                enlace.setAttribute("href", "remover.php?remover=1");
+                                enlace.click();
                             }
                         })
-
                     }
                 })
-            } else {
-                var validador_nombre = document.getElementById("msjValidname");
-                document.getElementById("nombre").classList.add("is-invalid");
-                document.getElementById("nombre").classList.remove("is-valid");
-
-                validador_nombre.classList.add("invalid-feedback");
-                validador_nombre.classList.remove("valid-feedback");
-                validador_nombre.innerHTML = "Nombre del cliente.";
-            }
-
-
-        });
-        $("#cancelar").click(function() {
-            Swal.fire({
-                title: 'Desea cancelar la compra?',
-                text: "¡No podrás revertir esto!",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Si, cancelar!',
-                cancelButtonText: "Continuar"
-            }).then((result) => {
-                if (result.value) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Se cancelo',
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'OK',
-                    }).then((result) => {
-                        if (result.value) {
-                            var enlace = document.createElement("a");
-                            enlace.setAttribute("href", "remover.php?remover=1");
-                            enlace.click();
-                        }
-                    })
-                }
-            })
-        });
-    })
+            });
+        })
     </script>
     <script>
-    $.extend(true, $.fn.dataTable.defaults, {
-        "searching": true,
-        "ordering": true
-    });
-    $(function() {
-
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": true,
+        $.extend(true, $.fn.dataTable.defaults, {
             "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": true,
-            "responsive": false,
+            "ordering": true
         });
-    });
+        $(function() {
+
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": true,
+                "responsive": false,
+            });
+        });
     </script>
 </body>
 

@@ -116,7 +116,13 @@ if (
         }
     }
 }
-
+function imprimirMenu($menu, $CAT, $ADMIN)
+{
+    if ($CAT == $ADMIN) {
+        return $menu;
+    }
+    return '';
+}
 
 ?>
 <!DOCTYPE html>
@@ -154,28 +160,28 @@ if (
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <style>
-    .dividir * {
-        display: block;
-    }
-
-    @media (min-width: 700px) {
-        .dividir {
-            display: flex;
-            justify-content: space-between;
+        .dividir * {
+            display: block;
         }
 
-        .dividir .form-group {
-            flex-basis: calc(50% - 1rem);
+        @media (min-width: 700px) {
+            .dividir {
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .dividir .form-group {
+                flex-basis: calc(50% - 1rem);
+            }
         }
-    }
 
-    .effectoHover {
-        color: #e1e1e1;
-    }
+        .effectoHover {
+            color: #e1e1e1;
+        }
 
-    .effectoHover:hover {
-        color: black;
-    }
+        .effectoHover:hover {
+            color: black;
+        }
     </style>
 
 </head>
@@ -205,8 +211,7 @@ if (
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../main.php" class="brand-link">
-                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                    style="opacity: .8">
+                <img src="../img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">Rodey</span>
             </a>
 
@@ -224,8 +229,7 @@ if (
 
                 <!-- Sidebar Menu -->
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                        data-accordion="false">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                              with font-awesome or any other icon font library -->
                         <li class="nav-item">
@@ -237,29 +241,33 @@ if (
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-user nav-icon"></i>
-                                <p>
-                                    Usuario
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="vendedores.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver usuarios</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="agregarVendedor.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar usuario</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="far fa-user nav-icon"></i>
+                            <p>
+                                Usuario
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="vendedores.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver usuarios</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="agregarVendedor.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar usuario</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
                                 <i class="far fa-money-bill-alt nav-icon"></i>
@@ -283,52 +291,59 @@ if (
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="ion ion-bag nav-icon"></i>
-                                <p>
-                                    Productos
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../productos/productos.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver productos</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar producto</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="fas fa-boxes nav-icon"></i>
-                                <p>
-                                    Categorias
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="../categorias/categorias.php" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Ver categorias</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Agregar categorias</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="ion ion-bag nav-icon"></i>
+                            <p>
+                                Productos
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../productos/productos.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver productos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar producto</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+                        <?php
+                        $usuarios = '<li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-boxes nav-icon"></i>
+                            <p>
+                                Categorias
+                                <i class="fas fa-angle-left right"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="../categorias/categorias.php" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Ver categorias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agregar categorias</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>';
+                        echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        ?>
+
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -382,8 +397,7 @@ if (
                     <!-- Main row -->
                     <div class="row justify-content-center d-none" id="contenedor_msj">
                         <div class="col-sm-5 col-md-6">
-                            <div class="alert alert-warning alert-dismissible fade show" role="alert"
-                                aria-hidden="true">
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" aria-hidden="true">
                                 <strong>Aviso:</strong>
                                 <p class="mb-0" id="msj"></p>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -416,89 +430,65 @@ if (
                                     $sql = 'SELECT * FROM usuarios where idusuarios=' . $_GET['id'];
                                     $result = $conexion->query($sql);
                                     while ($mostrarCambio = mysqli_fetch_array($result)) {
-                                        $imagen=$mostrarCambio['imgUsuario'];
-                                        if($imagen=='user-default.jpg'){
-                                            $imagen="../uploads/user-default.jpg";
+                                        $imagen = $mostrarCambio['imgUsuario'];
+                                        if ($imagen == 'user-default.jpg') {
+                                            $imagen = "../uploads/user-default.jpg";
                                         }
                                 ?>
-                                <form role="form"
-                                    action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>&img=<?= $mostrarCambio['imgUsuario'] ?>"
-                                    method="post" enctype="multipart/form-data">
-                                    <div class="card-body">
-                                        <div class="mb-3 text-center">
-                                            <img src="<?= $imagen?>" class="img-circle elevation-2" width="95"
-                                                alt="<?= $mostrarCambio['imgUsuario'] ?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="nombreVendedor">Nombre del vendedor</label>
-                                            <input type="text" name="nombre" value="<?= $mostrarCambio['nombre'] ?>"
-                                                id="nombre" class="form-control" id="nombreVendedor"
-                                                placeholder="Nombre" require>
-                                        </div>
-                                        <div class="dividir">
-                                            <div class="form-group">
-                                                <label for="apellidoP">Apellido paterno</label>
-                                                <input type="text" name="apellidoP"
-                                                    value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP"
-                                                    class="form-control" id="apellidoP" placeholder="Apellido paterno"
-                                                    require>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="apellidoM">Apellido materno</label>
-                                                <input type="text" name="apellidoM"
-                                                    value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM"
-                                                    class="form-control" id="apellidoM" placeholder="Apellido materno"
-                                                    require>
-                                            </div>
-                                        </div>
-                                        <div class="dividir">
-                                            <div class="form-group">
-                                                <label for="numeroC">Numero de celular</label>
-                                                <input type="tel" name="numeroC"
-                                                    value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC"
-                                                    class="form-control" id="numeroC" placeholder="Telefono celular"
-                                                    require>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Correo electronico</label>
-                                                <input type="email" name="email"
-                                                    value="<?= $mostrarCambio['correoElectronico'] ?>" id="email"
-                                                    class="form-control" id="exampleInputEmail1" placeholder="E-mail"
-                                                    require>
-                                            </div>
-                                        </div>
-                                        <div class="dividir">
-                                            <div class="form-group">
-                                                <label for="user">Usuario</label>
-                                                <input type="text" name="user" value="<?= $mostrarCambio['usuario'] ?>"
-                                                    id="user" class="form-control" id="user" placeholder="Usuario"
-                                                    pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputPassword1">Contraseña</label>
-                                                <div class="d-flex">
-                                                    <input type="password" name="pass"
-                                                        value="<?= $mostrarCambio['contraseña'] ?>" id="pass"
-                                                        class="form-control" id="exampleInputPassword1"
-                                                        placeholder="Contraseña" require>
-                                                    <button type="button" id="btnpass" onclick="cambio()"
-                                                        class="btn border-bottom bg-gradient-light"><i
-                                                            class="fas fa-eye"></i></button>
+                                        <form role="form" action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>&img=<?= $mostrarCambio['imgUsuario'] ?>" method="post" enctype="multipart/form-data">
+                                            <div class="card-body">
+                                                <div class="mb-3 text-center">
+                                                    <img src="<?= $imagen ?>" class="img-circle elevation-2" width="95" alt="<?= $mostrarCambio['imgUsuario'] ?>">
                                                 </div>
-                                            </div>
-                                        </div>
 
-                                        <?php
+                                                <div class="form-group">
+                                                    <label for="nombreVendedor">Nombre del vendedor</label>
+                                                    <input type="text" name="nombre" value="<?= $mostrarCambio['nombre'] ?>" id="nombre" class="form-control" id="nombreVendedor" placeholder="Nombre" require>
+                                                </div>
+                                                <div class="dividir">
+                                                    <div class="form-group">
+                                                        <label for="apellidoP">Apellido paterno</label>
+                                                        <input type="text" name="apellidoP" value="<?= $mostrarCambio['apellidoP'] ?>" id="apellidoP" class="form-control" id="apellidoP" placeholder="Apellido paterno" require>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="apellidoM">Apellido materno</label>
+                                                        <input type="text" name="apellidoM" value="<?= $mostrarCambio['apellidoM'] ?>" id="apellidoM" class="form-control" id="apellidoM" placeholder="Apellido materno" require>
+                                                    </div>
+                                                </div>
+                                                <div class="dividir">
+                                                    <div class="form-group">
+                                                        <label for="numeroC">Numero de celular</label>
+                                                        <input type="tel" name="numeroC" value="<?= $mostrarCambio['numeroCelular'] ?>" id="numeroC" class="form-control" id="numeroC" placeholder="Telefono celular" require>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Correo electronico</label>
+                                                        <input type="email" name="email" value="<?= $mostrarCambio['correoElectronico'] ?>" id="email" class="form-control" id="exampleInputEmail1" placeholder="E-mail" require>
+                                                    </div>
+                                                </div>
+                                                <div class="dividir">
+                                                    <div class="form-group">
+                                                        <label for="user">Usuario</label>
+                                                        <input type="text" name="user" value="<?= $mostrarCambio['usuario'] ?>" id="user" class="form-control" id="user" placeholder="Usuario" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{3,15}$" require>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputPassword1">Contraseña</label>
+                                                        <div class="d-flex">
+                                                            <input type="password" name="pass" value="<?= $mostrarCambio['contraseña'] ?>" id="pass" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" require>
+                                                            <button type="button" id="btnpass" onclick="cambio()" class="btn border-bottom bg-gradient-light"><i class="fas fa-eye"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <?php
                                                 include '../conexiones/conexion.php';
                                                 $sql = 'SELECT * FROM categoria_usuario';
                                                 $result = $conexion->query($sql);
                                                 ?>
-                                        <div class="form-group">
-                                            <label>Seleciona una categoria</label>
-                                            <select class="form-control" name="categoria[]" id="categoria" require>
-                                                <option disabled selected value="0">Selecciona una categoria</option>
-                                                <?php while ($mostrar = mysqli_fetch_array($result)) {
+                                                <div class="form-group">
+                                                    <label>Seleciona una categoria</label>
+                                                    <select class="form-control" name="categoria[]" id="categoria" require>
+                                                        <option disabled selected value="0">Selecciona una categoria</option>
+                                                        <?php while ($mostrar = mysqli_fetch_array($result)) {
 
                                                             echo "<option value='" . $mostrar['idcategoria_usuario'] . "' ";
 
@@ -508,46 +498,42 @@ if (
                                                             echo "  >" . $mostrar['categoria_usuario'] . "</option>";
                                                         ?>
 
-                                                <?php
+                                                        <?php
                                                         }
                                                         $conexion->close();
                                                         ?>
 
-                                            </select>
-                                        </div>
+                                                    </select>
+                                                </div>
 
-                                        <div class="form-group">
-                                            <label for="direccion">Direccion completa</label>
-                                            <textarea name="direccion" id="direccion"
-                                                class="form-control"><?php echo $mostrarCambio['direccion'] ?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">Entrada de archivo</label>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" value="archivo.jpg"
-                                                    id="imagen" name="imagen" accept="image/png, image/jpeg">
-                                                <label class="custom-file-label" for="imagen"><?php if (strlen($mostrarCambio['imgUsuario']) > 16) :
+                                                <div class="form-group">
+                                                    <label for="direccion">Direccion completa</label>
+                                                    <textarea name="direccion" id="direccion" class="form-control"><?php echo $mostrarCambio['direccion'] ?></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="exampleInputFile">Entrada de archivo</label>
+                                                    <div class="custom-file">
+                                                        <input type="file" class="custom-file-input" value="archivo.jpg" id="imagen" name="imagen" accept="image/png, image/jpeg">
+                                                        <label class="custom-file-label" for="imagen"><?php if (strlen($mostrarCambio['imgUsuario']) > 16) :
                                                                                                             echo substr($mostrarCambio['imgUsuario'], 11);
 
                                                                                                         else :
                                                                                                             echo $mostrarCambio['imgUsuario'];
                                                                                                         endif;
                                                                                                         ?></label>
+                                                    </div>
+                                                </div>
+
+
+
                                             </div>
-                                        </div>
+                                            <!-- /.card-body -->
+                                            <div class="card-footer text-center ">
+                                                <button id="enviar" onclick="return comprobar()" type="submit" class="cambiar-tamanio btn btn-lg <?= $_GET['acc'] == 'eliminar' ? 'btn-danger' : 'btn-warning'; ?>"><?php echo $_GET['acc'] == 'eliminar' ? 'Eliminar' : 'Guardar'; ?></button>
+                                                <a href="../main.php" class="cambiar-tamanio btn btn-primary btn-lg">Regresar</a>
 
-
-
-                                    </div>
-                                    <!-- /.card-body -->
-                                    <div class="card-footer text-center ">
-                                        <button id="enviar" onclick="return comprobar()" type="submit"
-                                            class="cambiar-tamanio btn btn-lg <?= $_GET['acc'] == 'eliminar' ? 'btn-danger' : 'btn-warning'; ?>"><?php echo $_GET['acc'] == 'eliminar' ? 'Eliminar' : 'Guardar'; ?></button>
-                                        <a href="../main.php"
-                                            class="cambiar-tamanio btn btn-primary btn-lg">Regresar</a>
-
-                                    </div>
-                                </form>
+                                            </div>
+                                        </form>
                                 <?php
                                     }
                                 } ?>
@@ -592,7 +578,7 @@ if (
     <script src=" ../plugins/jquery-ui/jquery-ui.min.js "></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
-    $.widget.bridge('uibutton', $.ui.button)
+        $.widget.bridge('uibutton', $.ui.button)
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
@@ -603,9 +589,9 @@ if (
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="comprobarCampos.js"></script>
     <script type="text/javascript">
-    $(document).ready(function() {
-        bsCustomFileInput.init();
-    });
+        $(document).ready(function() {
+            bsCustomFileInput.init();
+        });
     </script>
 </body>
 
