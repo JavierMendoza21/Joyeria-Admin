@@ -1,5 +1,11 @@
 <?php
 include '../sessionIniciada.php';
+if ($CATEGORIA != 1) {
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'main.php';
+    header("Location: http://$host/Admin_joyeria/$extra");
+}
 if ((isset($_GET['id']) && $_GET['id'] != '') &&
     (isset($_GET['estate']) && $_GET['estate'] != '')
 ) {
@@ -20,6 +26,7 @@ if ((isset($_GET['id']) && $_GET['id'] != '') &&
     $extra = 'vendedores/vendedores.php';
     header("Location: http://$host/Admin_joyeria/$extra");
 }
+
 function imprimirMenu($menu, $CAT, $ADMIN)
 {
     if ($CAT == $ADMIN) {

@@ -1,6 +1,12 @@
 <?php
 include '../../sessionIniciada.php';
-
+include '../../conexiones/conexion.php';
+if ($CATEGORIA != 1) {
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'main.php';
+    header("Location: http://$host/Admin_joyeria/$extra");
+}
 if (
     isset($_POST['descripcion']) || $_POST['descripcion'] != '' &&
     isset($_POST['costoCompra']) || $_POST['costoCompra'] != '' &&

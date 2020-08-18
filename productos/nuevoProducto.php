@@ -1,6 +1,12 @@
 <?php
 include '../sessionIniciada.php';
-$conexion = new mysqli('127.0.0.1', 'root', '100%Alexis', 'Joyeria');
+include '../conexiones/conexion.php';
+if ($CATEGORIA != 1) {
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'main.php';
+    header("Location: http://$host/Admin_joyeria/$extra");
+}
 $message = -1;
 if (
     !empty($_POST['nombre']) && !empty($_POST['apellidoP'])
@@ -116,22 +122,6 @@ if (
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-    <style>
-    .dividir * {
-        display: block;
-    }
-
-    @media (min-width: 700px) {
-        .dividir {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .dividir .form-group {
-            flex-basis: calc(50% - 1rem);
-        }
-    }
-    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">

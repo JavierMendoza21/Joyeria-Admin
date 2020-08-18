@@ -1,6 +1,13 @@
 <?php
 $msj = null;
 include '../sessionIniciada.php';
+include '../conexiones/conexion.php';
+if ($CATEGORIA != 1) {
+    $host  = $_SERVER['HTTP_HOST'];
+    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+    $extra = 'main.php';
+    header("Location: http://$host/Admin_joyeria/$extra");
+}
 $msj = "";
 if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
     if ($_GET['msj'] == 'Error') {
