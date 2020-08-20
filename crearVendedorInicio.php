@@ -6,7 +6,7 @@ if (
     !empty($_POST['nombre']) && !empty($_POST['apellidoP'])
     && !empty($_POST['apellidoM']) && !empty($_POST['numeroC'])
     && !empty($_POST['email']) && !empty($_POST['user'])
-    && !empty($_POST['pass'])
+    && !empty($_POST['pass'] && !empty($_POST['targeta']))
 ) {
     //echo 'Voy a hacer el insert con el procedimiento almacenado.  ';
     //valido direccion --INICIO
@@ -82,12 +82,13 @@ if (
         $direccionP = $direccion;
         $user = $_POST['user'];
         $pas = $_POST['pass'];
+        $targeta=$_POST['targeta'];
         $img_S = $img;
         $cate = "2";
 
         include 'conexiones/conexion.php';
         $sql = "CALL insert_usuarios('" . $nombre . "','" . $apellidoP . "','" . $apellidoM . "','" . $numeroC . "',
-        '" . $email . "','" . $direccion . "','" . $user . "','" . $pas . "','" . $img_S . "','" . $cate . "')";
+        '" . $email . "','" . $direccion . "','" . $user . "','" . $pas . "','" . $img_S . "','" . $cate . "','".$targeta."')";
 
         if (!$conexion->query($sql)) {
             $message = "Falló CALL: (" . $conexion->errno . ") " . $conexion->error;

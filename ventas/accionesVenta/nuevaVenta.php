@@ -7,6 +7,10 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     }
     return '';
 }
+if ($IMGUSER != 'user-default.jpg') {
+} else {
+    $IMGUSER = "../uploads/" . $IMGUSER;
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -244,8 +248,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="../main.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="../main.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="../../main.php">Dashboard</a></li>
                                 <li class="breadcrumb-item disabled"><a href="../ventas.php">Ver ventas</a></li>
                             </ol>
 

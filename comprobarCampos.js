@@ -1,13 +1,4 @@
-//window.addEventListener("load", comprobar());
-
-function inicio() {
-    //document.getElementById("enviar").addEventListener("click", comprobar);
-}
-
 function comprobar() {
-    //document.getElementById("contenedor_msj").classList.add("d-none");
-    //alert('Entro a la funcion');
-    console.log("Entro a la funcion");
     var btn_nombre = document.getElementById("nombre").value;
     var btn_apellidoP = document.getElementById("apellidoP").value;
     var btn_apellidoM = document.getElementById("apellidoM").value;
@@ -15,6 +6,7 @@ function comprobar() {
     var btn_Email = document.getElementById("email").value;
     var btn_user = document.getElementById("user").value;
     var btn_pass = document.getElementById("pass").value;
+    var btn_targeta = document.getElementById("targeta").value;
 
 
     var validador_nombre = document.getElementById("msjValidname");
@@ -24,8 +16,9 @@ function comprobar() {
     var validador_email = document.getElementById("msjValidEmail");
     var validador_user = document.getElementById("msjValidUsuario");
     var validador_pass = document.getElementById("msjValidContraseña");
+    var validador_pass = document.getElementById("msjValidTargeta");
 
-    console.log("Va a validar");
+
     /*************Validacion del campo nombre*****************************/
     if (btn_nombre.length < '5' || btn_nombre == '') {
         document.getElementById("nombre").classList.add("is-invalid");
@@ -34,10 +27,9 @@ function comprobar() {
         validador_nombre.classList.add("invalid-feedback");
         validador_nombre.classList.remove("valid-feedback");
         validador_nombre.innerHTML = "Agrege un nombre valido";
-        console.log("Entre al if");
         return false;
     } else {
-        console.log("Entre al else");
+
         document.getElementById("nombre").classList.add("is-valid");
         document.getElementById("nombre").classList.remove("is-invalid");
 
@@ -150,9 +142,51 @@ function comprobar() {
         validador_pass.classList.remove("invalid-feedback");
         validador_pass.innerHTML = "Perfecto";
     }
+    /*************Validacion del campo tageta*****************************/
+    if (btn_targeta.length < 16) {
+        document.getElementById("targeta").classList.add("is-invalid");
+        document.getElementById("targeta").classList.remove("is-valid");
+
+        validador_pass.classList.add("invalid-feedback");
+        validador_pass.classList.remove("valid-feedback");
+        validador_pass.innerHTML = "Ingrese una targeta valida";
+        return false;
+
+    } else {
+        document.getElementById("targeta").classList.add("is-valid");
+        document.getElementById("targeta").classList.remove("is-invalid");
+
+        validador_pass.classList.add("valid-feedback");
+        validador_pass.classList.remove("invalid-feedback");
+        validador_pass.innerHTML = "Perfecto";
+    }
     /*************Validacion del seleccion de categorias**********************/
 
 
 
     return true;
 }
+
+console.log('evento');
+var creditcard = document.getElementById('targeta');
+
+function onkeyPress(event) {
+
+    creditcard.value = creditcard.value.replace(/[a-zA-Z]/g, '');
+
+    //validamos si es american express para esto quitamos todos los espacios en blaco y luego veriricamos que tenga 4, 6 y 5 digitos.
+    if (creditcard.value.replace(/ /g, '').match(/\b(\d{4})(\d{6})(\d{5})\b/))
+        creditcard.value = creditcard.value
+        .replace(/\W/gi, '') //quitamos todos los espacios demas
+        .replace(/\b(\d{4})(\d{6})(\d{5})\b/, '$1 $2 $3') //si cumple el formato añadimos 3,6 y 5 digitos
+        .trim();
+    else //si no es american express entonces es una tarjeta visa o master card
+        creditcard.value = creditcard.value
+        .replace(/\W/gi, '')
+        .replace(/(.{4})/g, '$1 ')
+        .trim()
+}
+
+creditcard.addEventListener('keypress', onkeyPress);
+creditcard.addEventListener('keydown', onkeyPress);
+creditcard.addEventListener('keyup', onkeyPress);

@@ -1,11 +1,8 @@
 <?php
+include '../sessionIniciada.php';
 include '../conexiones/conexion.php';
-if ($CATEGORIA != 1) {
-    $host  = $_SERVER['HTTP_HOST'];
-    $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-    $extra = 'main.php';
-    header("Location: http://$host/Admin_joyeria/$extra");
-}
+
+
 if (
     isset($_GET['acc']) && isset($_GET['id']) && $_GET['acc'] != '' &&  $_GET['id'] != ''
 ) {
@@ -75,11 +72,13 @@ if (
             }
             $img = $posFile;
         } else {
-            if(isset($_GET['img'])&&$_GET['img']!='user-default.jpg'){
-                $img=$_GET['img'];            
+            if (isset($_GET['img']) && $_GET['img'] != 'user-default.jpg') {
+                $img = $_GET['img'];
+            }else{
+                $img="user-default.jpg";
             }
         }
-        
+
         //echo 'Imagen : '.$img;
         //$ID="";
         $NOMBRE = $_POST['nombre'];
@@ -91,13 +90,14 @@ if (
         $USER = $_POST['user'];
         $CONTRASEÑA = $_POST['pass'];
         $IMG = $img;
+        $targeta = $_POST['targeta'];
         //echo 'Imagen nueva : '.$IMG.'<br>';
-        $CATEGORIA = $_POST['categoria'][0];
+        $CATEGORIA = $CATEGORIA;
 
         //echo 'Categoria : '.$CATEGORIA;
         include '../conexiones/conexion.php';
         $consulta = "call update_user('" . $ID . "','" . $NOMBRE . "','" . $APELLIDOP . "','" . $APELLIDOM . "',
-        '" . $NUMEROC . "','" . $CORREO . "','" . $DIRECCION . "','" . $USER . "','" . $CONTRASEÑA . "','" . $IMG . "','" . $CATEGORIA . "');";
+        '" . $NUMEROC . "','" . $CORREO . "','" . $DIRECCION . "','" . $USER . "','" . $CONTRASEÑA . "','" . $IMG . "','" . $CATEGORIA . "','".$targeta."');";
         $conexion->query($consulta);
         //echo $conexion->errno . ' ';
         //echo $conexion->error;

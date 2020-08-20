@@ -1,6 +1,11 @@
 <?php
 include 'sessionIniciada.php';
-$IMGUSER = substr($IMGUSER, 3);
+if ($IMGUSER != 'user-default.jpg') {
+    $IMGUSER = substr($IMGUSER, 3);
+} else {
+    $IMGUSER = "uploads/" . $IMGUSER;
+}
+
 
 function imprimirMenu($menu, $CAT, $ADMIN)
 {
@@ -35,8 +40,12 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
-        tr td {
+        .tabla1 tr td {
             width: calc(100% / 4);
+        }
+
+        .tabla2 tr td {
+            width: calc(100% / 5);
         }
     </style>
 </head>
@@ -248,7 +257,6 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         <!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="main.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="main.php">Dashboard</a></li>
                             </ol>
 
@@ -279,7 +287,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                 <div class="card-body text-center" style="overflow:scroll ;">
                                     <p class="text-muted"><i class="fas fa-info-circle"></i> La columna de ventas reprecenta, las ventas hechas por los vendedores y la columna activos, representa el total de los abonos a esas cuentas </p>
                                     <div class="chart" style="width: 950px;">
-                                        <canvas id="barChart" style="min-height: 300px; height: 300px; max-height: 300px; width: 1200px;"></canvas>
+                                        <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 300px; width: 1200px;"></canvas>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
@@ -336,7 +344,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         $sql = "call getPorcentajes()";
                         $result = $conexion->query($sql);
                         $conexion->close();
-                        $usuarios="";
+                        $usuarios = "";
                         while ($mostrar = mysqli_fetch_array($result)) {
                             $usuarios = '<div class="col-12">
                             <!-- BAR CHART -->
@@ -352,7 +360,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                 </div>
                                 <div class="card-body text-center">
                                     <p class="text-muted"><i class="fas fa-info-circle"></i> El total es de los productos que ya se terminaron de pagar, no se incluyen los productos que no hayan sido pagados. </p>
-                                    <table id="example2" class="col-lg-10 col-sm-12 col-md-9 mx-auto table-hover  p-0 table-sm table table-bordered table-striped text-center table-responsive">
+                                    <table id="example2" class="tabla1 col-lg-10 col-sm-12 col-md-9 mx-auto table-hover  p-0 table-sm table table-bordered table-striped text-center table-responsive">
                                         <thead>
                                             <tr>
                                                 <th>Total <p class="text-muted d-inline">(100%)</p>
@@ -370,23 +378,24 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                         <tbody>
                                             <tr>
                                                     <td class="pt-3">
-                                                        <p class="h3">$'.number_format($mostrar["total"], 2) .'</p>
+                                                        <p class="h3">$' . number_format($mostrar["total"], 2) . '</p>
                                                     </td>
                                                     <td class="pt-3">
-                                                        <p class="h3">$'.number_format($mostrar["recompra"], 2) .'</p>
+                                                        <p class="h3">$' . number_format($mostrar["recompra"], 2) . '</p>
                                                     </td>
                                                     <td class="pt-3">
-                                                        <p class="h3">$'.number_format($mostrar["Vendedor"], 2) .'</p>
+                                                        <p class="h3">$' . number_format($mostrar["Vendedor"], 2) . '</p>
                                                     </td>
                                                     <td class="pt-3">
-                                                        <p class="h3">$'.number_format($mostrar["socio"], 2) .'</p>
+                                                        <p class="h3">$' . number_format($mostrar["socio"], 2) . '</p>
                                                     </td>
                                                     <td class="pt-3">
-                                                        <p class="h3">$'.number_format($mostrar["alexis"], 2) .'</p>
+                                                        <p class="h3">$' . number_format($mostrar["alexis"], 2) . '</p>
                                                     </td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <button type="button" class="btn btn-lg btn-outline-info col-4 m-2 p-1 "><h3>Registros de cobros <i class="fas fa-clipboard-list"></i></h3></button>
                                 </div>
                                 <!-- /.card-body -->
                             </div>
@@ -397,6 +406,79 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         echo imprimirMenu($usuarios, $CATEGORIA, 1);
                         ?>
 
+                        <div class="col-12">
+                            <!-- BAR CHART -->
+                            <div class="card card-info ">
+                                <div class="card-header">
+                                    <h3 class="card-title">Pagar</h3>
+
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                                
+                                <div class="card-body text-center">
+                                    <p class="text-muted"><i class="fas fa-info-circle"></i> El total es de los productos que ya se terminaron de pagar, no se incluyen los productos que no hayan sido pagados. </p>
+                                    <table id="example2" class="p-0 col-lg-11 mx-auto  col-sm-12 col-md-9 table-hover table-sm table table-bordered table-striped text-center table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Nombres</th>
+                                                <th>Vendido</th>
+                                                <th>Ganancia</th>
+                                                <th>N&#176; targeta</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            include 'conexiones/conexion.php';
+                                            $sqlpagosVendedores = "call getPagoVendedores()";
+                                            $resultado = $conexion->query($sqlpagosVendedores);
+                                            $conexion->close();
+                                            while ($mostrar = mysqli_fetch_array($resultado)) {
+
+                                                if ($mostrar['imgUsuario'] != 'user-default.jpg') {
+                                                    $img = substr($mostrar['imgUsuario'], 3);
+                                                } else {
+                                                    $img = "uploads/" . $mostrar['imgUsuario'];
+                                                }
+
+
+                                                echo '<tr>
+                                                <td class="pt-3">
+                                                    <p class="h5"><img class="img-rounded" src="' . $img . '" alt="" width="100"></p>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <p class="h5">' . $mostrar['nombre'] . '</p>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <p class="h5">$' . number_format($mostrar['total'], 2) . '</p>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <p class="h5">$' . number_format($mostrar['pago'], 2) . '</p>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <p class="h5">' . $mostrar['targeta'] . '</p>
+                                                </td>
+                                                <td class="pt-3">
+                                                    <button type="button" class="btn  btn-outline-danger">Pagado <i class="fas fa-credit-card"></i></button>
+                                                </td>
+                                            </tr>';
+                                            }
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+
                     </div>
                 </div>
         </div><!-- /.container-fluid -->
@@ -405,11 +487,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     </div>
     <!--                 /.content-wrapper -->
     <footer class=" main-footer ">
-        <strong>Copyright &copy; 2020 <a href="#">AdminLTE.io</a>.</strong> Todos los derecho reservados.
-        <div class=" float-right d-none d-sm-inline-block ">
-            <b>Version</b> 3.0.5
-
-        </div>
+        
     </footer>
     <!-- /.control-sidebar -->
     </div>
@@ -468,6 +546,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         pointStrokeColor: '#c1c7d1',
                         pointHighlightFill: '#fff',
                         pointHighlightStroke: 'rgba(220,220,220,1)',
+
                         data: [<?php include 'conexiones/conexion.php';
                                 $sqlusuarios = "call ventaPorUsuario(" . $_SESSION['idusuario'] .
                                     ")";

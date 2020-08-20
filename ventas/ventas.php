@@ -1,5 +1,6 @@
 <?php
 include '../sessionIniciada.php';
+
 function imprimirMenu($menu, $CAT, $ADMIN)
 {
     if ($CAT == $ADMIN) {
@@ -7,6 +8,12 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     }
     return '';
 }
+if ($IMGUSER != 'user-default.jpg') {
+
+} else {
+    $IMGUSER = "../uploads/" . $IMGUSER;
+}
+
 ?>
 <!DOCTYPE html>
 <html>

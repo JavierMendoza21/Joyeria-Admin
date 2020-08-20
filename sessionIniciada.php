@@ -13,9 +13,8 @@ if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {
 
     $result = $conexion->query($sql);
     $mostrar = mysqli_fetch_array($result);
-
+    $conexion->close();
     if (empty($mostrar['idusuarios'])) {
-        //echo $mostrar['idusuarios'];
         session_destroy();
         $host  = $_SERVER['HTTP_HOST'];
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
@@ -26,7 +25,6 @@ if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {
     $CATEGORIA = $mostrar['categoria_usuario'];
     $IMGUSER = $mostrar['imgUsuario'];
     $NOMBREUSER = $mostrar['nombre'] . ' ' . $mostrar['apellidoP'];
-    $conexion->close();
 } else {
     $host  = $_SERVER['HTTP_HOST'];
     $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');

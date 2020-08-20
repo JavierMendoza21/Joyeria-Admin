@@ -1,15 +1,16 @@
 <?php
 include '../sessionIniciada.php';
+
 $message = -1;
 //Accion inicial///
 if (
     !empty($_POST['nombre']) && !empty($_POST['apellidoP'])
     && !empty($_POST['apellidoM']) && !empty($_POST['numeroC'])
     && !empty($_POST['email']) && !empty($_POST['user'])
-    && !empty($_POST['pass']) && !empty($_POST['categoria'][0])
+    && !empty($_POST['pass']) 
 ) {
     //echo 'Voy a hacer el insert con el procedimiento almacenado.  ';
-    $conexion = new mysqli('127.0.0.1', 'root', '100%Alexis', 'Joyeria');
+    include '../conexiones/conexion.php';
     $direccion = $_POST['direccion'];
     if (empty($direccion)) {
         $direccion = "";
@@ -65,14 +66,6 @@ if (
         $img = 'user-default.jpg';
     }
 
-    $sql = "INSERT INTO usuarios(
-    idusuarios,nombre,
-    apellidoP,apellidoM,
-    numeroCelular,correoElectronico,
-    direccion,estado,
-    usuario,contraseña,
-    imgUsuario,categoria_usuario)
-    VALUES (NULL,?,?,?,?,?,?,1,?,?,?,?);";
     $sql = "CALL insert_usuarios(?,?,?,?,?,?,?,?,?,?)";
 
     if ($stmt = $conexion->prepare($sql)) {
@@ -83,10 +76,10 @@ if (
         $numeroC = $_POST['numeroC'];
         $email = $_POST['email'];
         $direccionP = $direccion;
-        $user = $_POST['user'];
         $pas = sha1($_POST['pass']);
+        $targeta=$_POST['targeta'];
         $img_S = $img;
-        $cate = 1;
+        $cate = $CATEGORIA;
         $stmt->bind_param(
             "sssssssssi",
             $nombre,
@@ -140,14 +133,6 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bbootstrap 4 -->
     <link rel="stylesheet" href="../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <!-- SweetAlert2 -->
-    <link rel="stylesheet" href="../../plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
-    <!-- Toastr -->
-    <link rel="stylesheet" href="../../plugins/toastr/toastr.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="../plugins/jqvmap/jqvmap.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../dist/css/adminlte.min.css">
     <!-- overlayScrollbars -->
@@ -220,7 +205,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="<?= $IMGUSER ?>" class="img-circle elevation-2" alt="User Image">
+                        <img src="../uploads/<?= $IMGUSER ?>" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
                         <a href="#" class="d-block"><?php echo $NOMBREUSER ?></a>
@@ -410,7 +395,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
 
                     <div class="row justify-content-center">
 
-                        <div class="col-sm-12 col-lg-7 col-md-8 mt-3">
+                        <div class="col-sm-12 col-lg-8 col-md-10 mt-3">
                             <div class="card card-primary">
                                 <div class="card-header">
                                     <h3 class="card-title">Datos del usuario</h3>
@@ -423,7 +408,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                 if ((isset($_GET['acc']) && $_GET['acc'] != '')
                                     && (isset($_GET['id']) && $_GET['id'] != '')
                                 ) {
-                                    $conexion = new mysqli('127.0.0.1', 'root', '100%Alexis', 'Joyeria');
+                                    include '../conexiones/conexion.php';
                                     if ($conexion->connect_errno) {
                                         //echo 'error de conexion';
                                     }
@@ -435,7 +420,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                             $imagen = "../uploads/user-default.jpg";
                                         }
                                 ?>
-                                        <form role="form" action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>&img=<?= $mostrarCambio['imgUsuario'] ?>" method="post" enctype="multipart/form-data">
+                                        <form role="form" action="actualizarUsuario.php?acc=<?= $ACCION ?>&id=<?= $_GET['id'] ?>" method="post" enctype="multipart/form-data">
                                             <div class="card-body">
                                                 <div class="mb-3 text-center">
                                                     <img src="<?= $imagen ?>" class="img-circle elevation-2" width="95" alt="<?= $mostrarCambio['imgUsuario'] ?>">
@@ -478,32 +463,9 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <?php
-                                                include '../conexiones/conexion.php';
-                                                $sql = 'SELECT * FROM categoria_usuario';
-                                                $result = $conexion->query($sql);
-                                                ?>
                                                 <div class="form-group">
-                                                    <label>Seleciona una categoria</label>
-                                                    <select class="form-control" name="categoria[]" id="categoria" require>
-                                                        <option disabled selected value="0">Selecciona una categoria</option>
-                                                        <?php while ($mostrar = mysqli_fetch_array($result)) {
-
-                                                            echo "<option value='" . $mostrar['idcategoria_usuario'] . "' ";
-
-                                                            if ($mostrarCambio['categoria_usuario'] === $mostrar['idcategoria_usuario']) {
-                                                                echo 'selected';
-                                                            }
-                                                            echo "  >" . $mostrar['categoria_usuario'] . "</option>";
-                                                        ?>
-
-                                                        <?php
-                                                        }
-                                                        $conexion->close();
-                                                        ?>
-
-                                                    </select>
+                                                    <label for="targeta">Targeta de credito <i class="fab fa-cc-visa"></i> <i class="fab fa-cc-mastercard"></i> <i class="fab fa-cc-amex"></i></label>
+                                                    <input type="text" name="targeta" value="<?= $mostrarCambio['targeta'] ?>" id="targeta" class="form-control" id="exampleInputPassword1" placeholder="Numero de targeta" require>
                                                 </div>
 
                                                 <div class="form-group">
