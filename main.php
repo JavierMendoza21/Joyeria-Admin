@@ -41,11 +41,11 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <style>
         .tabla1 tr td {
-            width: calc(100% / 4);
+            width: calc(100% / 5);
         }
 
         .tabla2 tr td {
-            width: calc(100% / 5);
+            width: calc(100% / 3);
         }
     </style>
 </head>
@@ -358,11 +358,11 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                         <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div class="card-body text-center">
+                                <div class="card-body">
                                     <p class="text-muted"><i class="fas fa-info-circle"></i> El total es de los productos que ya se terminaron de pagar, no se incluyen los productos que no hayan sido pagados. </p>
-                                    <table id="example2" class="tabla1 col-lg-10 col-sm-12 col-md-9 mx-auto table-hover  p-0 table-sm table table-bordered table-striped text-center table-responsive">
+                                    <table id="example2" class="tabla1 col-lg-12  table-hover  p-0 table-sm table table-bordered table-striped text-center table-responsive">
                                         <thead>
-                                            <tr>
+                                            <tr class="">
                                                 <th>Total <p class="text-muted d-inline">(100%)</p>
                                                 </th>
                                                 <th>Recompra <p class="text-muted d-inline">(10%)</p>
@@ -395,8 +395,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <button type="button" class="btn btn-lg btn-outline-info col-4 m-2 p-1 "><h3>Registros de cobros <i class="fas fa-clipboard-list"></i></h3></button>
-                                </div>
+                                    </div>
                                 <!-- /.card-body -->
                             </div>
                             <!-- /.card -->
@@ -404,80 +403,12 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                         }
 
                         echo imprimirMenu($usuarios, $CATEGORIA, 1);
+                        if($CATEGORIA==1){
+                            include 'apartadoAdmin.php';
+                        }
                         ?>
 
-                        <div class="col-12">
-                            <!-- BAR CHART -->
-                            <div class="card card-info ">
-                                <div class="card-header">
-                                    <h3 class="card-title">Pagar</h3>
-
-                                    <div class="card-tools">
-                                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
-                                    </div>
-                                </div>
-                                
-                                <div class="card-body text-center">
-                                    <p class="text-muted"><i class="fas fa-info-circle"></i> El total es de los productos que ya se terminaron de pagar, no se incluyen los productos que no hayan sido pagados. </p>
-                                    <table id="example2" class="p-0 col-lg-11 mx-auto  col-sm-12 col-md-9 table-hover table-sm table table-bordered table-striped text-center table-responsive">
-                                        <thead>
-                                            <tr>
-                                                <th></th>
-                                                <th>Nombres</th>
-                                                <th>Vendido</th>
-                                                <th>Ganancia</th>
-                                                <th>N&#176; targeta</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-                                            include 'conexiones/conexion.php';
-                                            $sqlpagosVendedores = "call getPagoVendedores()";
-                                            $resultado = $conexion->query($sqlpagosVendedores);
-                                            $conexion->close();
-                                            while ($mostrar = mysqli_fetch_array($resultado)) {
-
-                                                if ($mostrar['imgUsuario'] != 'user-default.jpg') {
-                                                    $img = substr($mostrar['imgUsuario'], 3);
-                                                } else {
-                                                    $img = "uploads/" . $mostrar['imgUsuario'];
-                                                }
-
-
-                                                echo '<tr>
-                                                <td class="pt-3">
-                                                    <p class="h5"><img class="img-rounded" src="' . $img . '" alt="" width="100"></p>
-                                                </td>
-                                                <td class="pt-3">
-                                                    <p class="h5">' . $mostrar['nombre'] . '</p>
-                                                </td>
-                                                <td class="pt-3">
-                                                    <p class="h5">$' . number_format($mostrar['total'], 2) . '</p>
-                                                </td>
-                                                <td class="pt-3">
-                                                    <p class="h5">$' . number_format($mostrar['pago'], 2) . '</p>
-                                                </td>
-                                                <td class="pt-3">
-                                                    <p class="h5">' . $mostrar['targeta'] . '</p>
-                                                </td>
-                                                <td class="pt-3">
-                                                    <button type="button" class="btn  btn-outline-danger">Pagado <i class="fas fa-credit-card"></i></button>
-                                                </td>
-                                            </tr>';
-                                            }
-                                            ?>
-
-                                        </tbody>
-                                    </table>
-
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
+                        
 
                     </div>
                 </div>
@@ -487,7 +418,7 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     </div>
     <!--                 /.content-wrapper -->
     <footer class=" main-footer ">
-        
+
     </footer>
     <!-- /.control-sidebar -->
     </div>
@@ -502,6 +433,8 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     <script src="dist/js/adminlte.js "></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
+    <!--sweetalert2-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script>
         $(function() {
             /* ChartJS
@@ -693,6 +626,77 @@ function imprimirMenu($menu, $CAT, $ADMIN)
                 options: barChartOptions
             })
         })
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#pagar").click(function(id) {
+                Swal.fire({
+                    title: 'Ya pago a todos los vendedores?',
+                    text: 'Esta acción ya no se va a poder deshacer',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, ya page!',
+                    cancelButtonText: "Cancelar"
+                }).then((result) => {
+                    if (result.value) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Se reinicio la tabla',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                        }).then((result) => {
+                            if (result.value) {
+                                /** Guardar registro de pagos y cambiar estado **/
+                                //document.forms[0].submit();
+
+                                pagarVendedores();
+                            }
+                        })
+                    }
+                })
+            });
+
+
+        })
+
+        function pagarVendedores() {
+            $.ajax({
+                type: "POST",
+                url: "pagarVendedores.php",
+                success: function(response) {
+                    location.reload();
+
+                    //$('#lblDatos').text(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //if(textStatus === 'timeout'){alert('Failed from timeout');}   
+                    if (jqXHR.status === 0) {
+                        alert('Not connect: Verify Network: ' + textStatus);
+                    } else if (jqXHR.status == 404) {
+                        alert('Requested page not found [404]');
+                    } else if (jqXHR.status == 500) {
+                        alert('Internal Server Error [500].');
+                    } else if (textStatus === 'parsererror') {
+                        alert('Requested JSON parse failed.');
+                    } else if (textStatus === 'timeout') {
+                        alert('Time out error.');
+                    } else if (textStatus === 'abort') {
+                        alert('Ajax request aborted.');
+                    } else {
+                        alert('Uncaught Error: ' + jqXHR.responseText);
+                    }
+                    //location.reload();
+                },
+                timeout: 5000
+                //timeout: 1000//para probar timeout
+            }).always(function() {
+                /** Al finalizar la consulta del servidor **/
+
+            });
+        }
     </script>
 </body>
 

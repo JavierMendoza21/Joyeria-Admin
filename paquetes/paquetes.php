@@ -218,7 +218,7 @@ if ($CATEGORIA != 1) {
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="../categorias/agregarCategoria.php" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Agregar categorias</p>
                                     </a>

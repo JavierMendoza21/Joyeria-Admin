@@ -175,6 +175,29 @@ if ((isset($_GET['msj']) && $_GET['msj'] != '')) {
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview ">
+                            <a href="#" class="nav-link ">
+                            <i class="fas fa-cubes mx-1"></i>
+                                <p>
+                                    Paquetes
+                                    <i class="fas fa-angle-left right"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview ">
+                                <li class="nav-item ">
+                                    <a href="../paquetes/paquetes.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Ver paquetes</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../paquetes/accionesPaquetes/agregarPaquete.php" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Agregar paquete</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
                         <li class="nav-item has-treeview menu-open">
                             <a href="#" class="nav-link active">
                                 <i class="fas fa-boxes nav-icon"></i>

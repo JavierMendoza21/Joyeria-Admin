@@ -18,6 +18,7 @@ if (
         $host  = $_SERVER['HTTP_HOST'];
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
         $extra = 'vendedores/vendedores.php';
+        //echo 'se elimino';
         header("Location: http://$host/Admin_joyeria/$extra");
     } elseif ($ACCION == 'editar') {
         //echo 'Actualizar';

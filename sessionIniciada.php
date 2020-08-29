@@ -18,7 +18,7 @@ if ((isset($_SESSION['idusuario']) && $_SESSION['idusuario'] != '')) {
         session_destroy();
         $host  = $_SERVER['HTTP_HOST'];
         $uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-        $extra = 'vendedores/vendedores.php';
+        $extra = 'index.php';
         header("Location: http://$host/Admin_joyeria/$extra");
     }
     $IDUSER = $mostrar['idusuarios'];

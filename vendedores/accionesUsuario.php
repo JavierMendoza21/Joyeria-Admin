@@ -138,7 +138,6 @@ if (
     <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
     <!-- iCheck -->
     <link rel="stylesheet" href="../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
     <!-- JQVMap -->
@@ -500,8 +499,10 @@ if (
                                                 </div>
 
 
-
+                                                <p class="text-center" style=""><i class="fas fa-info-circle"></i> Si no se elimina el vendedor, es por que existe un registro que lo impide 
+                                                    (ejemplo: tiene producto en su stock), podria optar por dar de baja el usuario</p>
                                             </div>
+
                                             <!-- /.card-body -->
                                             <div class="card-footer text-center  ">
                                                 <button id="enviar" onclick="" type="button" class="cambiar-tamanio btn btn-lg <?= $_GET['acc'] == 'eliminar' ? 'btn-danger' : 'btn-warning d-none'; ?>"><?php echo $_GET['acc'] == 'eliminar' ? 'Eliminar' : '<i class="fas fa-pen-fancy"></i>'; ?></button>
@@ -564,6 +565,7 @@ if (
     <!-- bs-custom-file-input -->
     <script src="../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
     <script src="comprobarCampos.js"></script>
+    <!--sweetalert2-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -581,7 +583,7 @@ if (
                     if (result.value) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Usuario creado',
+                            title: 'Usuario eliminado',
                             confirmButtonColor: '#3085d6',
                             confirmButtonText: 'OK',
                         }).then((result) => {

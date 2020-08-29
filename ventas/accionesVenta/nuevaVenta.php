@@ -267,7 +267,7 @@ if ($IMGUSER != 'user-default.jpg') {
                     <!-- Main row -->
                     <div class="row justify-content-center">
                         <div class="col-lg-9 col-md-10 col-sm-12 mb-3 justify-content-center">
-                            <a href="verCarrito.php" class="col-lg-3 col-md-4 d-block btn btn-lg btn-outline-primary">
+                            <a href="verCarrito.php" class="col-lg-4 col-md-4 d-block btn btn-lg btn-outline-primary">
                                 <i class="fas fa-shopping-cart px-2"></i> Ver carrito
                             </a>
                         </div>

@@ -9,7 +9,6 @@ function imprimirMenu($menu, $CAT, $ADMIN)
     return '';
 }
 if ($IMGUSER != 'user-default.jpg') {
-
 } else {
     $IMGUSER = "../uploads/" . $IMGUSER;
 }
@@ -269,7 +268,7 @@ if ($IMGUSER != 'user-default.jpg') {
                     <!-- Main row -->
                     <div class="row justify-content-center mb-3">
                         <div class="col-sm-12 col-md-10 col-lg-9">
-                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-3 col-md-4 btn-lg btn btn-success"><i class="ion ion-bag nav-icon"></i> Nueva venta</a>
+                            <a href="accionesVenta/nuevaVenta.php" class="col-lg-4 col-md-5 btn-lg btn btn-success"><i class="ion ion-bag nav-icon"></i> Nueva venta</a>
                         </div>
                     </div>
                     <?php
@@ -410,16 +409,10 @@ if ($IMGUSER != 'user-default.jpg') {
     </script>
     <!-- Bootstrap 4 -->
     <script src=" ../plugins/bootstrap/js/bootstrap.bundle.min.js "></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src=" ../plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js "></script>
-    <!-- Summernote -->
-    <script src=" ../plugins/summernote/summernote-bs4.min.js "></script>
     <!-- overlayScrollbars -->
     <script src=" ../plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js "></script>
     <!-- AdminLTE App -->
     <script src=" ../dist/js/adminlte.js "></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src=" ../dist/js/pages/dashboard.js "></script>
     <!-- AdminLTE for demo purposes -->
     <script src=" ../dist/js/demo.js "></script>
     <!-- DataTables -->
@@ -432,6 +425,7 @@ if ($IMGUSER != 'user-default.jpg') {
         function abonar(btnid) {
             var idcompra = btnid.id;
             var total = document.getElementById("inputCantidad" + idcompra).value;
+            total = parseFloat(total);
             //alert("Total : " + total);
             $.ajax({
                 type: "POST",
@@ -441,9 +435,7 @@ if ($IMGUSER != 'user-default.jpg') {
                 },
                 url: "accionesVenta/abonar.php",
                 success: function(response) {
-                    location.reload();
-                    //console.log(response);
-                    //$('#lblDatos').text(response);
+                    location.reload(true);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     //if(textStatus === 'timeout'){alert('Failed from timeout');}   
@@ -470,6 +462,7 @@ if ($IMGUSER != 'user-default.jpg') {
                 /** Al finalizar la consulta del servidor **/
 
             });
+
         }
         $.extend(true, $.fn.dataTable.defaults, {
             "searching": true,
